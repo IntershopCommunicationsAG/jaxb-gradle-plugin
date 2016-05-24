@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model" targetNamespace="http://customer.com/gcdm/controller/v3/model"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	jxb:version="2.1" >
+	<xs:simpleType name="languageType">
+   		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+			<xs:minLength value="2"/>
+		</xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="currencyType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+			<xs:minLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="countryType">
+   		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+			<xs:minLength value="2"/>
+		</xs:restriction>
+   </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- Mit XMLSpy v2012 rel. 2 sp1 (http://www.altova.com) von Siegfried Ertl 
+	(customer AG) bearbeitet -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1" 
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	version="1.0">
+	<xs:simpleType name="CommunicationTypeRestrictionList">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EMAIL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>email</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PHONE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>phone</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MOBILEPHONE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>mobilePhone</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FAX">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>fax</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LETTER">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>letter</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

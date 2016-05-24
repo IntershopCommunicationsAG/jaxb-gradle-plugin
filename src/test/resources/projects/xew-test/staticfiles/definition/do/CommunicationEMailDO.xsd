@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- Mit XMLSpy v2013 (http://www.altova.com) von Siegfried Ertl (customer AG) 
+	bearbeitet -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:enh="http://customer.com/gcdm/controller/v3/model" xmlns:enum="http://customer.com/gcdm/controller/v3/model/businessPartner/enums" xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner" targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner" elementFormDefault="qualified" attributeFormDefault="unqualified" jxb:version="2.1">
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model" schemaLocation="enhancements/ExtensionDO.xsd"/>
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums" schemaLocation="../valueLists/EnumsBusinessPartner.xsd"/>
+	<xs:complexType name="communicationEMail">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Communication phone data which is used to communicate
+						with the user
+						@jsonEntity @mdm.partialUpdate
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="consGUID" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The Globally Unique Identifier of the email contact.
+								@mdm.stored</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="36"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="communicationStatus" type="enum:CommunicationStatusList" minOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The eMail usage: private,business
+								@mdm.stored</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="preferred" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Indicates if this email is chosen as the default out of a list of emails for email communication.
+								Only a single email can be preferred. If multiple email are marked as preferred in a request, a validation
+								exception occurs. Upon updating a business partner with sending an email entry with preferred set to true, 
+								an eventually existing preferred email is changed so preferred is set to false.
+								@mdm.stored</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="value" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The eMail address
+								@mdm.stored</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="241"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="communicationType" type="enum:CommunicationEMailTypeList" minOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The type of eMail (eMail, ePost).
+								@mdm.stored</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="delete" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Only update: if true this existing entity is to be
+								deleted.</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customExtension" type="enh:extension" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

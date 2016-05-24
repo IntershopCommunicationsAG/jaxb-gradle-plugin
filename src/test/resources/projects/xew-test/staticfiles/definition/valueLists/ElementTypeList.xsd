@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- Mit XMLSpy v2012 rel. 2 sp1 (http://www.altova.com) von Siegfried Ertl 
+	(customer AG) bearbeitet -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1" 
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	version="1.0">
+	<xs:simpleType name="ElementTypeList">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="xs:integer">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>xs:integer</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="xs:string">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>xs:string</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="xs:date">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>xs:date</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="xs:time">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>xs:time</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="xs:datetime">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>xs:datetime</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="xs:decimal">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>xs:decimal</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="xs:float">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>xs:float</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>xs:boolean</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

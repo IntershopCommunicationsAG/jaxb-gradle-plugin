@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- Mit XMLSpy v2013 (http://www.altova.com) von Siegfried Ertl (customer AG) 
+	bearbeitet -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" 
+	xmlns:enh="http://customer.com/gcdm/controller/v3/model"
+	xmlns:bp="http://customer.com/gcdm/controller/v3/model/businessPartner"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	jxb:version="2.1">
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model" schemaLocation="enhancements/ExtensionDO.xsd"/>
+	<xs:include schemaLocation="VatGroupDO.xsd" />
+	
+	<xs:complexType name="taxData">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Tax data of a customer within common GCDM interface
+						structure
+						@jsonEntity @mdm.partialUpdate
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="taxDataGUID" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The Globally Unique Identifier of the tax data.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="36" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="delete" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Only update: if true this existing entity is to be
+								deleted.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxId" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The identification number issued by the tax
+								authorities to the customer.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="vatRegNo" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The VAT registration number (VAT reg.no.) of the
+								customer. The VAT registration number is used within the EU for
+								tax-exempt deliveries.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="customExtension" type="enh:extension" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="vatGroups" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="vatGroups" type="bp:vatGroup" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:appinfo>
+									<jxb:property>
+										<jxb:javadoc>
+											@mdm.stored
+										</jxb:javadoc>
+									</jxb:property>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:ns1="http://customer.com/gcdm/v3/metadata"
+	targetNamespace="http://customer.com/gcdm/v3/metadata" elementFormDefault="qualified"
+	attributeFormDefault="unqualified" jxb:version="2.1" >
+	<xs:simpleType name="EnumUsecases">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CREATE" />
+			<xs:enumeration value="RFID" />
+			<xs:enumeration value="RFX" />
+			<xs:enumeration value="RFO" />
+			<xs:enumeration value="RFI" />
+			<xs:enumeration value="TDA" />
+			<xs:enumeration value="VCO" />
+			<xs:enumeration value="RFP" />
+			<xs:enumeration value="CR" />
+			<xs:enumeration value="ESP" />
+			<!-- 
+			<xs:enumeration value="RFA" />
+			<xs:enumeration value="RFC" />
+			<xs:enumeration value="RFS" />
+			 -->
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

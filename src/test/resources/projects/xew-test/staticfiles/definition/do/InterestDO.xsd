@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- Mit XMLSpy v2013 (http://www.altova.com) von Siegfried Ertl (customer AG) 
+	bearbeitet -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:enh="http://customer.com/gcdm/controller/v3/model"
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner/customerProfile"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner/customerProfile"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	jxb:version="2.1" >
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model"
+		schemaLocation="enhancements/ExtensionDO.xsd" />
+	<xs:complexType name="interest">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Customer hobby data for marketing purpose within
+						common GCDM interface structure
+						@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The identifier of the customer´s interest.
+								@mdm.stored</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customExtension" type="enh:extension"
+				minOccurs="0" />
+			<xs:element name="delete" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Only update: if true this existing entity is to be
+								deleted.</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

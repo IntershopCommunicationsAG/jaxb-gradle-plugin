@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:enh="http://customer.com/gcdm/controller/v3/model"
+	xmlns:enum="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	xmlns:tns="http://customer.com/gcdm/controller/v3/model/policy/consent"
+	xmlns:plcy="http://customer.com/gcdm/controller/v3/model/policy"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/policy/consent" version="1.0"
+	jxb:version="2.1">
+
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/policy"
+		schemaLocation="PolicyVersionDO.xsd"/>
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model"
+		schemaLocation="enhancements/ExtensionDO.xsd"/>
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model"
+		schemaLocation="types/UtilityTypes.xsd"/>
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+		schemaLocation="../valueLists/EnumsBusinessPartner.xsd"/>
+
+	<xs:element name="policyConsent" type="tns:policyConsent"/>
+
+	<xs:complexType name="policyConsent">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Policy Consent
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="interfaceSchemaVersion" type="xs:integer" minOccurs="0" maxOccurs="1" default="1"/>
+			<xs:element name="timeStamp" type="xs:dateTime" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="policyId" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="majorVersion" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="minorVersion" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="policyVersion" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="policyLanguage" type = "enh:languageType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The language code in uppercase of the policy text / document the user gave his consent to (corresponds to 2-alpha ISO 639-1 code but in uppercase).</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="usageConsent" type="tns:usageConsent" minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xs:element name="customExtension" type="enh:extension" minOccurs="0"/>
+
+			<xs:element name="policyVersionCurrent" type="plcy:policyVersion" minOccurs="0"
+				maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="usageConsent">
+		<xs:sequence>
+			<xs:element name="usageId" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="value" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="policyConsentList">
+		<xs:sequence>
+			<xs:element name="policyConsent" type="tns:policyConsent" minOccurs="0"
+				maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+</xs:schema>

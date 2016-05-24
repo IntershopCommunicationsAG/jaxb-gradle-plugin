@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:enh="http://customer.com/gcdm/controller/v3/model"
+	xmlns:enum="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	xmlns:enumPolicy="http://customer.com/gcdm/controller/v3/model/policy/enums"
+	xmlns:tns="http://customer.com/gcdm/controller/v3/model/policy"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/policy" version="1.0" jxb:version="2.1">
+
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+		schemaLocation="../valueLists/EnumsBusinessPartner.xsd"/>
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/policy/enums"
+		schemaLocation="../valueLists/PolicyDocumentFormatList.xsd"/>
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model"
+		schemaLocation="types/UtilityTypes.xsd"/>
+
+	<xs:complexType name="policyVersion">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Policy consents of users are always referencing a specific policy version.
+					    The policy consent targets a policy text in the responsibility of the GCDM client.
+					    The policy text for a policy version may not be changed after the version becomes valid.
+					    Only one version can be valid at an instant in time which is determined by the valid from date.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element default="1" maxOccurs="1" minOccurs="0" name="interfaceSchemaVersion"
+				type="xs:integer"/>
+			<xs:element name="policyReferenceId" type="xs:long" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The synthetic primary key, assigned by GCDM only
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="policyId" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The policy identifier
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="minorVersion" type="xs:integer" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Minor version of the policy
+								@jsonEntity
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="majorVersion" type="xs:integer" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Major version of the policy
+								@jsonEntity
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newMajorVersion" type="xs:boolean" minOccurs="1" maxOccurs="1" nillable="true">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Indicates if a new major version should be set
+								@jsonEntity
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="validFrom" type="xs:dateTime">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The policy version becomes valid at the this date and time.
+								Can only be changed if the current value is a future date and time.  
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="languageElement"
+				type="tns:languageElementType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="languageElementType">
+		<xs:sequence>
+			<xs:element type="enh:languageType" name="language">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The language code in uppercase (corresponds to 2-alpha ISO 639-1 code but in uppercase).</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="policyElement" type="tns:policyElementType" maxOccurs="unbounded"
+				minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="policyElementType">
+		<xs:annotation>
+			<xs:documentation>SequencePosition: Define text block order for rendering at client side</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="sequencePosition" type="xs:integer"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="usageBlock" type="tns:usageBlockType">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="usageBlockType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>The text for a certain data usage (e.g. phone calls for marketing) in a specific language.
+						When a user gives his consent to a policy, he is asked to optionally give consent to additional data usages.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="policyText">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string"/>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="usageID" type="xs:string" maxOccurs="unbounded" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>E.g. phone, email, data usage</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="policyVersionDocumentListEntry">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Policy consents of users are always referencing a specific policy version.
+					    The policy consent targets a policy text in the responsibility of the GCDM client.
+					    The policy text for a policy version may not be changed after the version becomes valid.
+					    Only one version can be valid at an instant in time which is determined by the valid from date.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="format" type="enumPolicy:policyDocumentFormatList">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The format of the policy version document (eg. pdf)
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element type="enh:languageType" name="language">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The 2-alpha ISO 639-1 language code</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

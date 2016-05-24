@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- Mit XMLSpy v2013 (http://www.altova.com) von Siegfried Ertl (customer AG) 
+	bearbeitet -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:enh="http://customer.com/gcdm/controller/v3/model" xmlns:enum="http://customer.com/gcdm/controller/v3/model/businessPartner/enums" xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner" xmlns:cp="http://customer.com/gcdm/controller/v3/model/businessPartner/customerProfile" targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner/customerProfile" elementFormDefault="qualified" attributeFormDefault="unqualified" jxb:version="2.1">
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model" schemaLocation="enhancements/ExtensionDO.xsd"/>
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums" schemaLocation="../valueLists/EnumsBusinessPartner.xsd"/>
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model" schemaLocation="types/UtilityTypes.xsd"/>
+	<xs:include schemaLocation="PersonalIdentificationDO.xsd"/>
+	<xs:include schemaLocation="HobbyDO.xsd"/>
+	<xs:include schemaLocation="InterestDO.xsd"/>
+	<xs:include schemaLocation="VehicleInterestDO.xsd"/>
+	<xs:include schemaLocation="SubscriptionDO.xsd"/>
+	<xs:include schemaLocation="DrivingLicenseDO.xsd"/>
+	<xs:complexType name="profile">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Customer profile data for marketing purpose within
+						common GCDM interface structure
+						@jsonEntity @mdm.partialUpdate
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="personalIdentifications" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The Business Partner's personal identifications.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="personalIdentification" type="cp:personalIdentification" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:appinfo>
+									<jxb:property>
+										<jxb:javadoc>A Business Partner's personal identification.
+											@mdm.stored
+											@mdm.personOnly
+										</jxb:javadoc>
+									</jxb:property>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="plannedPurchaseScheduled" type="enum:PlannedPurchaseScheduledList" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="numberOfCarsInHousehold" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Numerical value indicationg the number of cars in
+								the household
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="numberOfCarsInHouseholdDelete" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Only update: if true the existing value for the
+								corresponding attribute of this entity is to be deleted.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="numberOfFamilyMembers" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Numerical value indicationg the number of family
+								members in the household
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="numberOfFamilyMembersDelete" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Only update: if true the existing value for the
+								corresponding attribute of this entity is to be deleted.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="plannedPurchase" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The date of the planned purchase.
+								@mdm.deletable
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="plannedPurchaseDelete" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Only update: if true the existing value for the
+								corresponding attribute of this entity is to be deleted.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="income" type="xs:double" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The annual income of the customer (truncated after
+								the decimal point)
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="incomeDelete" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Only update: if true the existing value for the
+								corresponding attribute of this entity is to be deleted.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="incomeCurrency" type="enh:currencyType" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The ISO 4217 currency code of the annual income of the
+								customer.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ageRangeChildren" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Indicates the age of children in the
+								household
+							    @mdm.stored	
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ageRangeChildrenDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc> Date when the customer set / changed the value of ageRangeChildren. 
+								The information is relevant because the age range o children changes more frequently 
+								over the years than adults. This is not simply the date when the ageRangeChildren value
+								was last sent by the client.
+								@mdm.deletable
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ageRangeChildrenDateDelete" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Only update: if true the existing value for the
+								corresponding attribute of this entity is to be deleted.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eReadiness" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>This flag is TRUE, if the customer is prepared
+								regarding e-vehicles, depending on identified needs and customer
+								insights.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="preferredSalesChannel" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The customer's preferences regarding sales channel.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="communicationTypePreferred" type="enum:CommunicationTypePreferredList" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The medium through which the customer wishes to
+								communicate with the (customer) sales person.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lifestyle" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Attidude to life and representation of values could
+								lead to information about: convertible, X-Models, accessories,
+								customer treatment, delivery method etc.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="300"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sustainability" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Attitude regarding environment could give a
+								indication to smaller engines, diesel, hybrids,
+								EfficientDynamics etc.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="300"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="outstanding" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The way to stand out and be unconventional in
+								customer’s environment. Leads to information about model,
+								engine, color, M packages etc.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="300"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="perspectives" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Expected perspectives in job and career could give a
+								hint to model, customer treatment etc.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="300"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="position" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The customer's career level
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="300"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="highestDegree" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The customer's highest academic award.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="300"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="jobTitle" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The customer's specific profession title.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="300"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="branch" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The industrial sector in which the customer works.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="300"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="maritalStatus" type="enum:MaritalStatusList" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The marital status of the customer.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hobbies" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="hobby" type="cp:hobby" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:appinfo>
+									<jxb:property>
+										<jxb:javadoc>The Business Partner's hobby(s).
+											@mdm.stored
+										</jxb:javadoc>
+									</jxb:property>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="interests" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="interest" type="cp:interest" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:appinfo>
+									<jxb:property>
+										<jxb:javadoc>The Business Partner's interest(s).
+											@mdm.stored
+										</jxb:javadoc>
+									</jxb:property>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vehicleInterests" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="vehicleInterest" type="cp:vehicleInterest" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:appinfo>
+									<jxb:property>
+										<jxb:javadoc>The Business Partner's vehicle interests(s).
+											@mdm.stored
+										</jxb:javadoc>
+									</jxb:property>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="subscriptions" minOccurs="0">
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="subscription" type="cp:subscription" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="drivingLicenses" minOccurs="0">
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="drivingLicense" type="cp:drivingLicense" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:appinfo>
+									<jxb:property>
+										<jxb:javadoc>The Business Partner's driving license(s).
+											@mdm.stored
+										</jxb:javadoc>
+									</jxb:property>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="customExtension" type="enh:extension" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

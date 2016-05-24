@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- $Id: BusinessPartnerExtensionDO.xsd 20509 2012-12-11 11:28:26Z qxb2675 
+	$ -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:enum="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model" targetNamespace="http://customer.com/gcdm/controller/v3/model"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	jxb:version="2.1" >
+	<xs:import
+		namespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+		schemaLocation="../../valueLists/EnumsBusinessPartner.xsd" />
+	<xs:complexType name="extension">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Extends an object with additional parameters
+						@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="parameter" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="key" minOccurs="0" type="xs:string" />
+						<xs:element name="value" minOccurs="0" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

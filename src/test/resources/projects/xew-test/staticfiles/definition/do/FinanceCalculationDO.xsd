@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- Mit XMLSpy v2012 rel. 2 sp1 (http://www.altova.com) von Siegfried Ertl 
+	(customer AG) bearbeitet -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:enh="http://customer.com/gcdm/controller/v3/model"
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/request/vehicleConfiguration"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/request/vehicleConfiguration"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	jxb:version="2.1" >
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model"
+		schemaLocation="enhancements/ExtensionDO.xsd" />
+	<xs:include schemaLocation="ParameterValueDO.xsd" />
+	<xs:include schemaLocation="NameDO.xsd" />
+	<xs:include schemaLocation="PaymentTermDO.xsd" />
+	<xs:include schemaLocation="ServiceCalculationDO.xsd" />
+	<xs:include schemaLocation="InsuranceCalculationsDO.xsd" />
+	<xs:complexType name="financeCalculation">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Financial calculation of insurance
+						@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="parameterValues" type="ns1:parameterValue"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="serviceCalculation" type="ns1:serviceCalculation"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="calculationType" type="xs:string" />
+			<xs:element name="code" type="xs:string" minOccurs="0" />
+			<xs:element name="financePayment" type="xs:double"
+				minOccurs="0" />
+			<xs:element name="insuranceCalculations" type="ns1:insuranceCalculations"
+				minOccurs="0" />
+			<xs:element name="lastChange" type="xs:dateTime"
+				minOccurs="0" />
+			<xs:element name="maxConfigurationPrice" type="xs:double"
+				minOccurs="0" />
+			<xs:element name="minConfigurationPrice" type="xs:double"
+				minOccurs="0" />
+			<xs:element name="modelPayment" type="xs:double"
+				minOccurs="0" />
+			<xs:element name="names" type="ns1:name" minOccurs="0" />
+			<xs:element name="optionsFactor" type="xs:double"
+				minOccurs="0" />
+			<xs:element name="paymentTerms" type="ns1:paymentTerm"
+				minOccurs="0" />
+			<xs:element name="totalPayment" type="xs:double"
+				minOccurs="0" />
+			<xs:element name="validFrom" type="xs:dateTime" minOccurs="0" />
+			<xs:element name="validTo" type="xs:dateTime" minOccurs="0" />
+			<xs:element name="version" type="xs:string" minOccurs="0" />
+			<xs:element name="customExtension" type="enh:extension"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

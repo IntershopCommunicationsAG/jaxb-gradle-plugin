@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" 
+	xmlns:enum="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	xmlns:enumc="http://customer.com/gcdm/controller/v3/model/enums" 
+	xmlns:enh="http://customer.com/gcdm/controller/v3/model"
+	xmlns:metadata="http://customer.com/gcdm/v3/metadata"
+	targetNamespace="http://customer.com/gcdm/v3/metadata" elementFormDefault="qualified"
+	attributeFormDefault="unqualified" jxb:version="2.1" >
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/enums" schemaLocation="valueLists/EnumsCommon.xsd"/>
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model" schemaLocation="do/types/UtilityTypes.xsd"/>
+	<xs:complexType name="InformationMaterials">
+	    <xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Information materials
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="informationMaterialEntries" minOccurs="0">
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="informationMaterialEntry" type="metadata:InformationMaterialEntry" minOccurs="0" maxOccurs="unbounded">
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InformationMaterialEntry">
+	    <xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Information material.
+					@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="informationMaterialCode">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The identifier of the Information material. Set by the CRM systems. See {@link com.customer.gcdm.controller.v3.model.request.information.Information#getInformationId()}</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="brand" type="enumc:BrandTypeList">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The brand </jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="series" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The vehicle´s series name.</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="80"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="informationType">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The type. See {@link com.customer.gcdm.controller.v3.model.request.information.Information#getInformationType()}</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="15"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>		
+			<xs:element name="languageISO" type="enh:languageType" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The language code in uppercase (corresponds to 2-alpha ISO 639-1 code but in uppercase).
+					The following constraints must hold true for all MaterialEntries with the same informationMaterialCode:
+					If there is more than one entry for material code all languages must not be null and no two entries can have the same language.
+					If there is exactly one entry for a material code it may have language set to null, in this case the entry is meant to be used for all languages.
+								@mdm.stored								
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The label</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>				
+	</xs:complexType>
+</xs:schema>

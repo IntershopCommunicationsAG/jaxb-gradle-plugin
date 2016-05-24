@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:enh="http://customer.com/gcdm/controller/v3/model"
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/request/vehicleConfiguration"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/request/vehicleConfiguration"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	jxb:version="2.1" >
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model"
+		schemaLocation="enhancements/ExtensionDO.xsd" />
+	<xs:include schemaLocation="OptionalEquipmentDO.xsd" />
+	<xs:include schemaLocation="PackageDO.xsd" />
+	<xs:include schemaLocation="FinanceCalculationDO.xsd" />
+	<xs:complexType name="vehicleConfiguration">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Vehicle configuration
+						@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="requestVehicle" type="xs:boolean"
+				minOccurs="0" />
+			<xs:element name="bodyCode" type="xs:string" minOccurs="0" />
+			<xs:element name="bodyName" type="xs:string" minOccurs="0" />
+			<xs:element name="circulationConsent" type="xs:boolean"
+				minOccurs="0" />
+			<xs:element name="configId" type="xs:string" minOccurs="0" />
+			<xs:element name="configUrl" type="xs:string" minOccurs="0" />
+			<xs:element name="lastChange" type="xs:dateTime"
+				minOccurs="0" />
+			<xs:element name="modelBaseCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="modelCode" type="xs:string" minOccurs="0" />
+			<xs:element name="modelName" type="xs:string" minOccurs="0" />
+			<xs:element name="modelPrice" type="xs:double" minOccurs="0" />
+			<xs:element name="notInterestedInFinance" type="xs:boolean"
+				minOccurs="0" />
+			<xs:element name="seriesCode" type="xs:string" minOccurs="0" />
+			<xs:element name="seriesName" type="xs:string" minOccurs="0" />
+			<xs:element name="totalEquipmentPrice" type="xs:double"
+				minOccurs="0" />
+			<xs:element name="totalPrice" type="xs:double" minOccurs="0" />
+			<xs:element name="optionalEquipments" minOccurs="0"
+				type="ns1:optionalEquipmentList" />
+			<xs:element name="packages" minOccurs="0" type="ns1:packageList" />
+			<xs:element name="financeCalculation" type="ns1:financeCalculation"
+				minOccurs="0" />
+			<xs:element name="customExtension" type="enh:extension"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="vehicleConfigurationList">
+		<xs:sequence>
+			<xs:element name="vehicleConfiguration" type="ns1:vehicleConfiguration"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- Mit XMLSpy v2013 (http://www.altova.com) von Siegfried Ertl (customer AG) 
+	bearbeitet -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" 
+	xmlns:enh="http://customer.com/gcdm/controller/v3/model" 
+	xmlns:deal="http://customer.com/gcdm/controller/v3/model" 
+	xmlns:enum="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	xmlns:vehi="http://customer.com/gcdm/controller/v3/model" 
+	xmlns:cupr="http://customer.com/gcdm/controller/v3/model/businessPartner/customerProfile"
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner" 
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner" 
+	elementFormDefault="qualified" attributeFormDefault="unqualified" jxb:version="2.1">
+
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model" schemaLocation="enhancements/ExtensionDO.xsd"/>
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model" schemaLocation="DealerDO.xsd"/>
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model" schemaLocation="types/UtilityTypes.xsd"/>
+	<xs:include schemaLocation="AddressDO.xsd"/>
+	<xs:include schemaLocation="AlternativeCustomerIdDO.xsd"/>
+	<xs:include schemaLocation="BusinessPartnerRoleDO.xsd"/>
+	<xs:include schemaLocation="BusinessDataDO.xsd"/>
+	<xs:include schemaLocation="CommunicationPhoneDO.xsd"/>
+	<xs:include schemaLocation="CommunicationEMailDO.xsd"/>
+	<xs:include schemaLocation="TaxDataDO.xsd"/>
+	<xs:include schemaLocation="InitialContactDO.xsd"/>
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model" schemaLocation="VehicleDO.xsd"/>
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/businessPartner/customerProfile" schemaLocation="CustomerProfileDO.xsd"/>
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums" schemaLocation="../valueLists/EnumsBusinessPartner.xsd"/>
+	<xs:complexType name="businessPartner">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>User data within common GCDM interface structure.
+						When business partner structure is used for storing / updating: 
+						Depending on attribute partnerCategory certain fields can be used or can not be used, otherwise an validation exception is raised.
+						Attributes only usable with partnerCategory PERSON 
+						are marked with annotation "@MdmPersonOnly" e.g. businessPartner.profile.
+						Attributes only usable with partnerCategory ORGANISATION 
+						are marked with annotation "@MdmOrganisationOnly" e.g. businessPartner.businessData.
+												
+						List resources (e.g. Address) can be uniquely identified by the corresponding GUID (e.g. address.addressGUID)
+						When creating / updating a business partner, the client is allowed to define the first four digits of a GUID. 
+						If the client does not pass these four digits the GUID is completely generated within GCDM. 
+						If the client specifies four starting digits GCDM generates the corresponding GUID based on these four digits, 
+						i.e., completes the GUID by extending the GUID from 4 to 36 digits. The four digits must be compliant to the following rules:
+						The first digit must be the "#".
+						The next three digits must be lower-case characters.
+
+						@jsonEntity @mdm.partialUpdate
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="gcid" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The Global Customer Identifier. UUID text-format with hyphen-formatting.
+								Immutable once the business partner exists. When a GCID value is present upon updating an existing business partner,
+								then the GCID value must match the GCID value of the existing business partner. 
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="36"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ucid" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The Universal Customer Identifier. UUID text-format
+								with hyphen-formatting.
+								Immutable once the business partner
+								exists.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="employeeOf" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The UCID of the customer´s employer
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="36"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="partnerType" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The business partner type
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="partnerCategory" type="enum:PartnerCategoryList" minOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The category of the Customer (private or
+								organization).
+								Immutable once the business partner exists.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="surname" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The family name of the customer
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="givenName" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The given name of the customer
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="middleName" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The second given name of the customer
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="additionalFamilyName" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The additional familiy name of the customer
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="salutation" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The code of the salutation of the customer
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="title" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The academic title of the customer
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="additionalAcademicTitleCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The additional academic title of the customer
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nameSupplementCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The name affix of the customer, for example, a title
+								of nobility
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="namePrefixCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The name prefix for the name of the customer, for
+								example 'Van der"
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="additionalNamePrefixCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The additional prefix for the name of the customer
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="initialsName" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The middle Initial or personal initials of the
+								customer
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="birthday" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The date of birth of the customer
+								@mdm.deletable
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthdayDelete" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Only update: if true the existing value for the
+								corresponding attribute of this entity is to be deleted.
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthPlaceName" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The birth place of the customer
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="gender" type="enum:GenderCodeList" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The sex of the customer
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="correspondLanguageISO" type="enh:languageType" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The code of the customer´s correspondence language in uppercase
+								letters (corresponds to 2-alpha ISO 639-1 code but in uppercase).
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="occupationCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The code of the name of the occupation of the
+								customer
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nationalityISO" type="enh:countryType" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The 2-alpha ISO-3166 country code of the customer´s nationality
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="initialContact" minOccurs="0" type="ns1:initialContact">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Identifies the legal entity that made the first contact to the customer.
+								@mdm.stored</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customerStatus" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The customer's status (e.g. "active", "inactive"
+								or"dead")
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="enum:CustomerStatusList"/>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="nameSuffixGeneration" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The customer's name generation suffix ("Jr.", "Sr.")
+								@mdm.stored
+								@mdm.personOnly
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="enum:NameSuffixGenerationList"/>
+				</xs:simpleType>
+			</xs:element>
+			<xs:sequence>
+				<xs:element name="profile" type="cupr:profile" minOccurs="0">
+					<xs:annotation>
+						<xs:appinfo>
+							<jxb:property>
+								<jxb:javadoc> The Business Partner's profile.
+								@mdm.stored
+								@mdm.personOnly	
+							</jxb:javadoc>
+							</jxb:property>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="addresses" minOccurs="0">
+					<xs:annotation>
+						<xs:appinfo>
+							<jxb:property>
+								<jxb:javadoc>The Business Partner's addresses.
+								@mdm.stored</jxb:javadoc>
+							</jxb:property>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:choice>
+							<xs:element name="address" type="ns1:address" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:appinfo>
+										<jxb:property>
+											<jxb:javadoc>The Business Partner's address.
+								@mdm.stored</jxb:javadoc>
+										</jxb:property>
+									</xs:appinfo>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="businessData" type="ns1:businessData" minOccurs="0">
+					<xs:annotation>
+						<xs:appinfo>
+							<jxb:property>
+								<jxb:javadoc>Business Partner's (in case of category "Organisation") business data.
+								@mdm.stored
+								@mdm.organisationOnly
+							</jxb:javadoc>
+							</jxb:property>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="communications" minOccurs="0">
+					<xs:annotation>
+						<xs:appinfo>
+							<jxb:property>
+								<jxb:javadoc>Business Partner's communication(s), phone and/or email.
+								@mdm.stored</jxb:javadoc>
+							</jxb:property>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:choice>
+							<xs:sequence>
+								<xs:sequence>
+									<xs:element name="communicationPhone" type="ns1:communicationPhone" minOccurs="0" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:appinfo>
+												<jxb:property>
+													<jxb:javadoc>Business Partner's phone communication(s).
+								@mdm.stored</jxb:javadoc>
+												</jxb:property>
+											</xs:appinfo>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="communicationEMail" type="ns1:communicationEMail" minOccurs="0" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:appinfo>
+												<jxb:property>
+													<jxb:javadoc>Business Partner's email communication(s).
+								@mdm.stored</jxb:javadoc>
+												</jxb:property>
+											</xs:appinfo>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+								<xs:element name="availability" minOccurs="0">
+									<xs:annotation>
+										<xs:appinfo>
+											<jxb:property>
+												<jxb:javadoc>The availability description.
+													@mdm.stored
+												</jxb:javadoc>
+											</jxb:property>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="300"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+							</xs:sequence>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dealers" minOccurs="0">
+					<xs:annotation>
+						<xs:appinfo>
+							<jxb:property>
+								<jxb:javadoc>
+									@mdm.stored
+								</jxb:javadoc>
+							</jxb:property>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:choice>
+							<xs:element name="dealer" type="deal:dealer" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:appinfo>
+										<jxb:property>
+											<jxb:javadoc>The Business Partner's dealer(s).
+								@mdm.stored</jxb:javadoc>
+										</jxb:property>
+									</xs:appinfo>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="role" type="ns1:businessPartnerRole" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:appinfo>
+							<jxb:property>
+								<jxb:javadoc>
+									@mdm.stored
+								</jxb:javadoc>
+							</jxb:property>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="vehicles" minOccurs="0">
+					<xs:annotation>
+						<xs:appinfo>
+							<jxb:property>
+								<jxb:javadoc>
+									@mdm.stored
+								</jxb:javadoc>
+							</jxb:property>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:choice>
+							<xs:element name="vehicle" type="vehi:vehicle" nillable="true" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:appinfo>
+										<jxb:property>
+											<jxb:javadoc>The Business Partner's vehicle(s).
+								@mdm.stored</jxb:javadoc>
+										</jxb:property>
+									</xs:appinfo>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="taxData" type="ns1:taxData" minOccurs="0">
+					<xs:annotation>
+						<xs:appinfo>
+							<jxb:property>
+								<jxb:javadoc> The Business Partner's tax data.
+								@mdm.stored
+							</jxb:javadoc>
+							</jxb:property>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="alternativeCustomerIds" minOccurs="0">
+					<xs:annotation>
+						<xs:appinfo>
+							<jxb:property>
+								<jxb:javadoc>
+									@mdm.stored
+								</jxb:javadoc>
+							</jxb:property>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:choice>
+							<xs:element name="alternativeCustomerId" type="ns1:alternativeCustomerId" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:appinfo>
+										<jxb:property>
+											<jxb:javadoc>Alternative ids of the customer e.g. in other systems.
+								@mdm.stored</jxb:javadoc>
+										</jxb:property>
+									</xs:appinfo>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:element name="customExtension" type="enh:extension" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

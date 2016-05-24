@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:dqs="http://customer.com/gcdm/controller/v3/model/dataquality"
+	xmlns:adr="http://customer.com/gcdm/controller/v3/model/businessPartner"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/dataquality"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	jxb:version="2.1" >
+
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/businessPartner"
+		schemaLocation="do/AddressDO.xsd" />
+
+	<xs:element name="dataQualityResponse" type="dqs:dataQualityResponse" />
+
+	<xs:complexType name="dataQualityResponse">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="addressFastCompleteResponse" type="dqs:addressFastCompleteResponse" />
+			<xs:element name="addressInteractiveResponse" type="dqs:addressInteractiveResponse" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="addressFastCompleteResponse">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="dqs:dqsServiceResult">
+				<xs:sequence>
+					<xs:element name="data"
+						type="dqs:addressCheckFastCompleteResponseDO" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="addressInteractiveResponse">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="dqs:dqsServiceResult">
+				<xs:sequence>
+					<xs:element name="data" type="dqs:addressCheckInteractiveResponseDO"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="dqsServiceResult">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="status" type="dqs:dqsServiceStatus"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="addressCheckFastCompleteResponseDO">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="resultCount" type="xs:int" minOccurs="1" />
+			<xs:element name="addresses" type="dqs:adresses"
+				minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="adresses">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="address" type="adr:address" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="addressCheckInteractiveResponseDO">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="resultCount" type="xs:int" minOccurs="1" />
+			<xs:element name="results" type="dqs:interactiveAddressResults"
+				minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="interactiveAddressResults">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="result" type="dqs:interactiveAddressResult"
+				nillable="true" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="interactiveAddressResult">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="address" type="adr:address" minOccurs="1" />
+			<xs:element name="responseCode" type="xs:int" minOccurs="1" />
+			<xs:element name="responseCodeZipCityMatch" type="xs:int"
+				minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="dqsServiceStatus">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="detail" type="xs:string" minOccurs="0" />
+			<xs:element name="key" type="xs:string" minOccurs="0" />
+			<xs:element name="logKey" type="xs:string" minOccurs="0" />
+			<xs:element name="subKey" type="xs:string" minOccurs="0" />
+			<xs:element name="subsystem" type="xs:string" minOccurs="0" />
+			<xs:element name="type" type="dqs:dqsServiceStatusType"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="dqsServiceStatusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OK" />
+			<xs:enumeration value="ERROR" />
+			<xs:enumeration value="WARNING" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

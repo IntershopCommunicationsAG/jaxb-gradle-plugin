@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: EnumsBusinessPartner.xsd 44588 2014-02-25 12:44:59Z qxe3031 $ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns="http://customer.com/gcdm/controller/v3/model/businessPartner/enums" targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums" elementFormDefault="unqualified" version="1.0" jxb:version="2.1">
+	<xs:include schemaLocation="AddressStatusList.xsd"/>
+	<xs:include schemaLocation="CommunicationStatusList.xsd"/>
+	<xs:include schemaLocation="CommunicationTypeList.xsd"/>
+	<xs:include schemaLocation="CommunicationEMailTypeList.xsd"/>
+	<xs:include schemaLocation="CommunicationTypePreferredList.xsd"/>
+	<xs:include schemaLocation="CustomerStatusList.xsd"/>
+	<xs:include schemaLocation="ElementTypeList.xsd"/>
+	<xs:include schemaLocation="GenderCodeList.xsd"/>
+	<xs:include schemaLocation="MaritalStatusList.xsd"/>
+	<xs:include schemaLocation="NameSuffixGenerationList.xsd"/>
+	<xs:include schemaLocation="PartnerCategoryList.xsd"/>
+	<xs:include schemaLocation="PlannedPurchaseScheduledList.xsd"/>
+</xs:schema>

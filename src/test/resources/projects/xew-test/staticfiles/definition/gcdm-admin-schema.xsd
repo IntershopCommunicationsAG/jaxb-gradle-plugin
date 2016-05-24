@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:admin="http://customer.com/gcdm/controller/v3/model/admin" targetNamespace="http://customer.com/gcdm/controller/v3/model/admin"
+	elementFormDefault="qualified" attributeFormDefault="unqualified" jxb:version="2.1">
+
+	<xs:element name="kpiStatistics" type="admin:kpiStatistics" />
+	<xs:complexType name="kpiStatistics">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>
+						Contains a KPI (Key Performance Indicator)
+						statistics report. If KPI statistics have no time
+						information then statistics are from the invocation
+						time of the service generating the statistics.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>
+								ID of the KPI.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="title" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>
+								Short description of the KPI.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="header" type="admin:stringValueList" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>
+								Header as list of strings. Each string will not
+								contain whitespace. The header at position i in the
+								list defines which values are contained in
+								position i of the row values in the report rows.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="date" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>
+								Date when the KPI was generated.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reportRows" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>
+								The rows of the KPI statistics report.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="reportRow" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:appinfo>
+									<jxb:property>
+										<jxb:javadoc>
+											A row of the KPI statistic report (element is needed
+											because of XML/JSON compatibility issues when
+											generating Java classes with XJC)
+										</jxb:javadoc>
+									</jxb:property>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="rowValues" type="admin:stringValueList" minOccurs="0">
+										<xs:annotation>
+											<xs:appinfo>
+												<jxb:property>
+													<jxb:javadoc>
+														The values of a KPI statistics report row as
+														list of strings. Each string will not contain
+														whitespace.
+													</jxb:javadoc>
+												</jxb:property>
+											</xs:appinfo>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="stringValueList">
+		<xs:list itemType="xs:string" />
+	</xs:simpleType>
+
+</xs:schema>

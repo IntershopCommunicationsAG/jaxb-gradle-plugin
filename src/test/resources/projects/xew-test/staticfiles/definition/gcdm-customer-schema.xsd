@@ -1,0 +1,1207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- Mit XMLSpy v2013 (http://www.altova.com) von Siegfried Ertl (customer AG) 
+	bearbeitet -->
+<!-- $Id: gcdm-customer-schema.xsd 47960 2014-04-29 15:14:25Z qxg1996 $ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:plcy="http://customer.com/gcdm/controller/v3/model/policy"
+	xmlns:cons="http://customer.com/gcdm/controller/v3/model/policy/consent"
+	xmlns:bupa="http://customer.com/gcdm/controller/v3/model/businessPartner"
+	xmlns:cmp="http://customer.com/gcdm/controller/v3/model/campaignResponse"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model" xmlns="http://customer.com/gcdm/controller/v3/model"
+	version="1.0" jxb:version="2.1">
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/businessPartner"
+		schemaLocation="do/BusinessPartnerDO.xsd" />
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/businessPartner"
+		schemaLocation="do/BusinessPartnerSearchResultDO.xsd" />
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/businessPartner"
+		schemaLocation="do/DeleteCustomerResultDO.xsd" />
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/businessPartner"
+		schemaLocation="do/BusinessPartnerAssociationDO.xsd" />
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/businessPartner"
+		schemaLocation="do/GenericCustomerEntityDO.xsd" />
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/campaignResponse"
+		schemaLocation="do/CampaignDO.xsd" />
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/policy"
+		schemaLocation="do/PolicyVersionDO.xsd" />
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/policy/enums"
+		schemaLocation="valueLists/PolicyDocumentFormatList.xsd" />
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/policy/consent"
+		schemaLocation="do/PolicyConsentDO.xsd" />
+	<xs:element name="authentication" type="authentication" />
+	<xs:complexType name="authentication">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Object used for customer authentication. Only one of
+						gcid or loginId must be provided to identify the customer. Only
+						one of password, pin or secret knowledge must be provided as
+						credentials.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="gcid" type="gcid" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Global customer id</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="loginId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>GCDM login ID</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="password" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The password</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pin" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The personal identifier number</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="secretKnowledge" type="LongStringList" minOccurs="0" />
+            <xs:element name="sessionId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>A GCDM (Siteminder) session id</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LongStringList">
+		<xs:sequence>
+			<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="key" type="xs:long" minOccurs="0">
+							<xs:annotation>
+								<xs:appinfo>
+									<jxb:property>
+										<jxb:javadoc>
+
+										</jxb:javadoc>
+									</jxb:property>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="value" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:appinfo>
+									<jxb:property>
+										<jxb:javadoc>
+
+										</jxb:javadoc>
+									</jxb:property>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="salutation" type="salutation" />
+	<xs:complexType name="baseCustomer" abstract="true">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>This is the base class for customer objects.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="policyConsent" type="cons:policyConsent"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element ref="salutation" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The customer's saluation.</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="salutation">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>This is the a salutation object. It contains data that
+						should be used to address a customer in the front end.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="firstName" type="firstname" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The customer's first name. Maximum length is 40
+								letters.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+					<xs:documentation>The customer's first name. Maximum length is 40
+						letters.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="honorific" type="honorific" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The customer's honorific (title)</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+					<xs:documentation>The customer's honorific (title)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastName" type="lastname" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The customer's last name. Contains up to 40 letters.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+					<xs:documentation>The customer's last name. Contains up to 40
+						letters.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nickname" type="nickname" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The customer's nickname. Maximum length is 40
+								letters.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+					<xs:documentation>The customer's nick name. Maximum length is 40
+						letters.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="honorific">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass>
+					<jxb:javadoc>
+					</jxb:javadoc>
+				</jxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MS" />
+			<xs:enumeration value="MR" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="linkedAccount" type="linkedAccount" />
+	<xs:complexType name="baseUserAccount" abstract="true">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>This is the base object for user accounts.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="alias" type="alias" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The alias login ID. This is an optional login ID in
+								addition to the primary mail or mobile login ID.
+								Minimum length
+								is 6. Maximum length is 30.
+								Alias can contain letters, digits and
+								some special characters ("-",
+								"_", ".") but must start with a
+								letter.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="linkedAccounts" type="linkedAccount"
+				nillable="true" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The UserAccount's links to external (i.e. non-GCDM)
+								accounts such as TSS or BIP
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mail" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The email login ID. Only one of mail or mobile can
+								be set at any given time.
+								Email syntax should be RFC 2822
+								compliant with valid domain names
+								valid domain names (RFC 1035,
+								x.y.z.com, etc.)
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mobile" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The mobile login ID. Only one of mail or mobile can
+								be set at any given time.
+								Minimum length is 3. Maximum length is
+								15.
+								Mobile can contain digits only.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="alias">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="[a-zA-Z]{1}[a-zA-Z0-9\._]{5,29}" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="gcid">
+		<xs:restriction base="xs:token">
+			<xs:pattern
+				value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="linkedAccount">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>This object describes a reference to an external
+						system where the customer.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="accountId" type="accountId" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The external account's id. Depends on its type.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="type" type="LinkedAccountType"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The external account's type such as BIP or TSS.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="accountId">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="40" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="safestring">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[\P{Cc}]*" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="firstname">
+		<xs:restriction base="safestring">
+			<xs:maxLength value="40" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="lastname">
+		<xs:restriction base="safestring">
+			<xs:maxLength value="40" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="nickname">
+		<xs:restriction base="safestring">
+			<xs:maxLength value="40" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="answer">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="[a-zA-Z0-9]*" />
+			<xs:minLength value="3" />
+			<xs:maxLength value="32" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LinkedAccountType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass>
+					<jxb:javadoc>This object describes a reference to an external
+						system where the customer is also registered.
+					</jxb:javadoc>
+					<jxb:typesafeEnumMember name="TSS" value="TSS">
+						<jxb:javadoc>TSS Account such as q, qx, qq...</jxb:javadoc>
+					</jxb:typesafeEnumMember>
+					<jxb:typesafeEnumMember name="BIP" value="BIP">
+						<jxb:javadoc>ConnectedDrive (BIP) readable customer ID
+						</jxb:javadoc>
+					</jxb:typesafeEnumMember>
+					<jxb:typesafeEnumMember name="CD_LEGACY_ID"
+						value="CD_LEGACY_ID">
+						<jxb:javadoc>Legacy-ConnectedDrive-ID (TAMS, CASA, ESA...)
+						</jxb:javadoc>
+					</jxb:typesafeEnumMember>
+					<jxb:typesafeEnumMember name="TID" value="TID">
+						<jxb:javadoc>Telematics-ID (New ConnectedDrive-ID)</jxb:javadoc>
+					</jxb:typesafeEnumMember>
+				</jxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="TSS" />
+			<xs:enumeration value="BIP" />
+			<xs:enumeration value="CD_LEGACY_ID" />
+			<xs:enumeration value="TID" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TokenType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass>
+					<jxb:javadoc>This object describes a type of token or mTAN
+					</jxb:javadoc>
+					<jxb:typesafeEnumMember name="REGISTER"
+						value="REGISTER">
+						<jxb:javadoc>Token or mTAN sent after registration</jxb:javadoc>
+					</jxb:typesafeEnumMember>
+					<jxb:typesafeEnumMember name="RESET" value="RESET">
+						<jxb:javadoc>Token or mTAN sent after password reset</jxb:javadoc>
+					</jxb:typesafeEnumMember>
+					<jxb:typesafeEnumMember name="CHANGE" value="CHANGE">
+						<jxb:javadoc>Token or mTAN sent after mail or mobile change
+						</jxb:javadoc>
+					</jxb:typesafeEnumMember>
+				</jxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="REGISTER" />
+			<xs:enumeration value="RESET" />
+			<xs:enumeration value="CHANGE" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OAuthConnector">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass>
+					<jxb:javadoc>This object describes OAuth connectors
+					</jxb:javadoc>
+					<jxb:typesafeEnumMember name="FACEBOOK" value="FACEBOOK">
+						<jxb:javadoc>Facebook connector</jxb:javadoc>
+					</jxb:typesafeEnumMember>
+					<jxb:typesafeEnumMember name="TWITTER" value="TWITTER">
+						<jxb:javadoc>Twitter connector</jxb:javadoc>
+					</jxb:typesafeEnumMember>
+					<jxb:typesafeEnumMember name="GOOGLE" value="GOOGLE">
+						<jxb:javadoc>Google connector</jxb:javadoc>
+					</jxb:typesafeEnumMember>
+					<jxb:typesafeEnumMember name="XING" value="XING">
+						<jxb:javadoc>Xing connector</jxb:javadoc>
+					</jxb:typesafeEnumMember>
+					<jxb:typesafeEnumMember name="MICROSOFT" value="MICROSOFT">
+						<jxb:javadoc>Microsoft connector</jxb:javadoc>
+					</jxb:typesafeEnumMember>
+					<jxb:typesafeEnumMember name="LINKEDIN" value="LINKEDIN">
+						<jxb:javadoc>Linkedin connector</jxb:javadoc>
+					</jxb:typesafeEnumMember>
+				</jxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="FACEBOOK" />
+			<xs:enumeration value="TWITTER" />
+			<xs:enumeration value="GOOGLE" />
+			<xs:enumeration value="XING" />
+			<xs:enumeration value="MICROSOFT" />
+			<xs:enumeration value="LINKEDIN" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="customer" type="customer" />
+	<xs:element name="role" type="role" />
+	<xs:element name="userAccount" type="userAccount" />
+	<xs:complexType name="customer">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>his is the GCDM Customer object that can be retried
+						via the API.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="baseCustomer">
+				<xs:sequence>
+					<xs:choice>
+						<xs:element name="businessPartner" type="bupa:businessPartner"
+							minOccurs="0">
+							<xs:annotation>
+								<xs:appinfo>
+									<jxb:property>
+										<jxb:javadoc>The customer's business partner.
+											@mdm.stored
+										</jxb:javadoc>
+									</jxb:property>
+
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:element ref="userAccount" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:property>
+									<jxb:javadoc>The customer's user account</jxb:javadoc>
+								</jxb:property>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="userAccount" final="extension restriction">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>This is the UserAccount that can be retrieved via the
+						API.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="baseUserAccount">
+				<xs:sequence>
+					<xs:element name="gcid" type="gcid" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:property>
+									<jxb:javadoc>The Global Customer Identifier. UUID text-format
+										with hyphen-formatting.
+									</jxb:javadoc>
+								</jxb:property>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="passwordLockedOut" type="xs:dateTime"
+						minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:property>
+									<jxb:javadoc>When set, the UserAccount has been locked because
+										of too many failed password authentication attempts.
+									</jxb:javadoc>
+								</jxb:property>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="pinLockedOut" type="xs:dateTime"
+						minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:property>
+									<jxb:javadoc>When set, the UserAccount has been locked because
+										of too many failed PIN authentication attempts.
+									</jxb:javadoc>
+								</jxb:property>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="roles" type="role" nillable="true"
+						minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:property>
+									<jxb:javadoc>The UserAccount's assigned roles.</jxb:javadoc>
+								</jxb:property>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="secretKnowledge" type="secretKnowledge"
+						nillable="true" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:property>
+									<jxb:javadoc>The UserAccount's assigned secred knowledges.
+									</jxb:javadoc>
+								</jxb:property>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="secretKnowledgeLegacy" type="xs:long"
+						nillable="true" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:property name="secretKnowledge">
+									<jxb:javadoc>The UserAccount's assigned secred knowledges
+										(deprecated Q1/2013 format).</jxb:javadoc>
+								</jxb:property>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="secretKnowledgeActivated" type="xs:boolean"
+						minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:property>
+									<jxb:javadoc>A value of false means that no activated secret
+										knowledge is available for authentication. A value of true
+										means that activated secret knowledge is available.
+									</jxb:javadoc>
+								</jxb:property>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="secretKnowledgeLockedOut" type="xs:dateTime"
+						minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:property>
+									<jxb:javadoc>When set, the UserAccount has been locked because
+										of too many failed secret knowledge authentication attempts.
+									</jxb:javadoc>
+								</jxb:property>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="status" type="status" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:property>
+									<jxb:javadoc>The user account's activation status.
+									</jxb:javadoc>
+								</jxb:property>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="role">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>This is a GCDM role. Roles are arbitrary objects that
+						may describe a customer or can be used for authorization purposes
+						(RBAC).
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The role's unique identifier</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The role's name</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="status">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass>
+					<jxb:javadoc>Describes the activation status of a user account. It
+						does not describe the user account's credentials' (pin, password,
+						secret knowledge) status.
+					</jxb:javadoc>
+				</jxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UNCONFIRMED" />
+			<xs:enumeration value="REMINDED" />
+			<xs:enumeration value="EXPIRED" />
+			<xs:enumeration value="ACTIVATED" />
+			<xs:enumeration value="ADMIN_LOCKED" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="newCustomer" type="newCustomer" />
+	<xs:element name="newUserAccount" type="newUserAccount" />
+	<xs:complexType name="newCustomer" final="extension restriction">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>This is the customer object used at creation time.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="baseCustomer">
+				<xs:sequence>
+					<xs:element name="businessPartner" type="bupa:businessPartner"
+						minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:property>
+									<jxb:javadoc>The customer's business partner</jxb:javadoc>
+								</jxb:property>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="userAccount" type="newUserAccount"
+						minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:property>
+									<jxb:javadoc>The customer's user account</jxb:javadoc>
+								</jxb:property>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="campaignResponse" type="cmp:campaign"
+						minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:property>
+									<jxb:javadoc>The customer's user account</jxb:javadoc>
+								</jxb:property>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="updatedCustomer" type="updatedCustomer" />
+	<xs:complexType name="updatedCustomer" final="extension restriction">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Used as input to update information related to a customer.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="policyConsent" type="cons:policyConsent" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Policy consents to be added for the customer.</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="businessPartner" type="bupa:businessPartner" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Used to update the existing business partner.</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salutation" type="salutation" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Used to update the existing accounts salutation.</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="newUserAccount" final="extension restriction">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>This object is used for user account creation and does
+						therefore contain attributes such as password that are otherwise
+						hidden. It does not contain attributes that cannot be set at
+						creation time.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="baseUserAccount">
+				<xs:sequence>
+					<xs:element name="password" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:property>
+									<jxb:javadoc>The customer's chosen password. Must conform to
+										the password policy.
+									</jxb:javadoc>
+								</jxb:property>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="pin" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:property>
+									<jxb:javadoc>The customer's chosen pin. Must conform to the pin
+										policy.
+									</jxb:javadoc>
+								</jxb:property>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="secretKnowledge" type="secretKnowledge" />
+	<xs:complexType name="secretKnowledge">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Customer's answer to a secret knowledge question.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="answer" type="answer" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The customer's answer to the question. Minimum
+								length is 3 letters, maximum 32 letters.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="questionId" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The question's unique identifier.</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="secretKnowledgeQuestion" type="secretKnowledgeQuestion" />
+	<xs:complexType name="secretKnowledgeQuestion">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>This object describes a question that customers may
+						answer to create their secret knowledge.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The question's unique identifier</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="question" type="StringStringList"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StringStringList">
+		<xs:sequence>
+			<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="key" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:appinfo>
+									<jxb:property>
+										<jxb:javadoc>
+
+										</jxb:javadoc>
+									</jxb:property>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="value" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:appinfo>
+									<jxb:property>
+										<jxb:javadoc>
+
+										</jxb:javadoc>
+									</jxb:property>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="session" type="session" />
+	<xs:complexType name="session">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>A customer session object.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="sessionId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The GCDM (Siteminder) session id</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salutation" type="salutation" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The Salutation object that belongs to the
+								authenticated user
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="userAccount" type="userAccount"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The UserAccount object that belongs to the
+								authenticated user
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="credentials" type="credentials" />
+	<xs:complexType name="credentials">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>A credential object stores all user account
+						credentials that can be used for authentication.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="answers" type="secretKnowledge"
+				nillable="true" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>A list of answers to referenced secret knowledge
+								questions.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="password" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>A password that must comply to the password policy.
+								Minimum length is 8 characters. Maximum length is 40 characters.
+								The password must contain at least 2 of 3 groups: letters,
+								digits, special characters.
+								List of special characters and not
+								allowed characters can be found
+								in password policy.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pin" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>A PIN that must comply to the PIN policy.
+								Minimum
+								length is 6. Maximum length is 12.
+								PIN contains digits only.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="smsTan" type="smsTan" />
+	<xs:complexType name="smsTan">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Used as input for generating a TAN and sending it to the given mobile number.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="iniTan" type="iniTan" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The knowledge and data to be used for the TAN to be generated.</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mobile" type="xs:string" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The mobile phone number where to send the SMS to. 
+							    Must be in format ITU-T Recommendation E. 123 INTERNATIONAL e.g. +4917512345678.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="message" type="xs:string" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The message to send. Use template variable placeholder ${tan} in the message, 
+							so the generated TAN replaces this variable in the sent SMS. The message must not exceed 60 characters
+							(see http://en.wikipedia.org/wiki/Short_Message_Service#Message_size, 16-bit UCS-2 alphabet is used).
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="iniTan" type="iniTan" />
+	<xs:complexType name="iniTan">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>iniTans are used to store arbitrary application data
+						that can be used upon TAN consumation.
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="tan" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The generated TAN</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="knowledge" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>A knowlegde known only to the user that receives the
+								TAN.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="data" type="iniTanData" nillable="false"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Arbritary data stored with the TAN that is retrieved
+								upon successfull TAN usage (requires the tan and the knowledge).
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="iniTanData">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="tokenInfo" type="tokenInfo" />
+	<xs:complexType name="tokenInfo">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Info about activation tokens
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="expiryDate" type="xs:dateTime" nillable="false"
+				minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>When does/did token expire</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expired" type="xs:boolean" nillable="false"
+				minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Is the token already expired</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="OAuthToken" type="OAuthToken" />
+	<xs:complexType name="OAuthToken">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>OAuth Token data object including token itself and optional secret
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="token" type="xs:string" nillable="false"
+				minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>OAuth token</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="secret" type="xs:string" nillable="false"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>OAuth optional secret</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="businessPartnerAssociation" type="bupa:businessPartnerAssociation" />
+	<xs:element name="businessPartnerAssociations" type="businessPartnerAssociations" />
+	<xs:complexType name="businessPartnerAssociations">
+		<xs:sequence>
+			<xs:element name="businessPartnerAssociation" type="bupa:businessPartnerAssociation"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="policyVersionDocumentListEntry"  type="plcy:policyVersionDocumentListEntry" />
+	<xs:element name="policyVersion" type="plcy:policyVersion" />
+
+	<xs:element name="genericCustomerEntity" type="bupa:genericCustomerEntity" />
+	<xs:element name="genericCustomerEntities" type="genericCustomerEntities" />
+	<xs:complexType name="genericCustomerEntities">
+		<xs:sequence>
+			<xs:element name="genericCustomerEntity" type="bupa:genericCustomerEntity"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

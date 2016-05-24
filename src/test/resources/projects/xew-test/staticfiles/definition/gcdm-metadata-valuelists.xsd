@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:metadata="http://customer.com/gcdm/v3/metadata"
+	targetNamespace="http://customer.com/gcdm/v3/metadata" elementFormDefault="qualified"
+	attributeFormDefault="unqualified" jxb:version="2.1" >
+	<xs:include schemaLocation="gcdm-metadata-usecaseEnumerations.xsd" />
+	<xs:element name="valueLists" type="metadata:ValueLists" />
+	<xs:complexType name="ValueLists">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Valuelist relevant metadata (Note: usecase specific overrides are currently not supported!)
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="valueListEntry" type="metadata:ValueListEntry"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ValueListEntry">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Metadata for one valuelist attribute
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="attribute" type="xs:string" minOccurs="1"
+				maxOccurs="1" />
+			<xs:element name="list" type="metadata:KeyValueList"
+				minOccurs="1" maxOccurs="1" />
+			<xs:element name="overrides" type="metadata:Overrides"
+				minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KeyValueList">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>key
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="keyValueListEntry" type="metadata:KeyValueListEntry" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KeyValueListEntry">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>key/value pair
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="key" type="xs:string" minOccurs="1"
+				maxOccurs="1" />
+			<xs:element name="value" type="xs:string" minOccurs="1"
+				maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Overrides">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Usecase specific overriding
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="usecase" type="metadata:Usecase" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Usecase">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>override
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="usecase" type="metadata:EnumUsecases"
+				minOccurs="1" maxOccurs="1" />
+			<xs:element name="type" type="metadata:OverrideType"
+				minOccurs="1" maxOccurs="1" />
+			<xs:element name="key" type="xs:string" minOccurs="1"
+				maxOccurs="1" />
+			<xs:element name="value" type="xs:string" minOccurs="0"
+				maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="OverrideType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="add" />
+			<xs:enumeration value="remove" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

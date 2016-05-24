@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" 
+	xmlns:enh="http://customer.com/gcdm/controller/v3/model" 
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner" 
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner" 
+	elementFormDefault="qualified" attributeFormDefault="unqualified" jxb:version="2.1">
+	
+	<xs:complexType name="genericCustomerEntity">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>An entity related to the customer (by GCID) and stored in the configured MDM context.
+						@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="guid" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Generated upon entity creation by GCDM. Unique within all generic customer entities.
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="36"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="type">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Client defined type for the entity. E.g. type 'frameagr' for a frame agreement.
+								@mdm.stored</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="attribute" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:annotation>
+						<xs:documentation>Allows storing attributes at an entity.
+							The key is mandatory and must be unique within the attributes of a single entity. 
+							An attribute is removed, if the value of the attribute is empty upon updating the entity.
+							If key is there and the value of the attribute is null then the attribute is ignored.
+							@mdm.stored
+						</xs:documentation>
+					</xs:annotation>
+					<xs:all>
+						<xs:element name="key" minOccurs="1" maxOccurs="1">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="30"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="value" minOccurs="0" maxOccurs="1">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="200"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:all>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

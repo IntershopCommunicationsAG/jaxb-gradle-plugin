@@ -1,0 +1,2 @@
+com.customer.gcdm.controller.v3.model.dataquality.Adresses
+com.customer.gcdm.controller.v3.model.dataquality.InteractiveAddressResults

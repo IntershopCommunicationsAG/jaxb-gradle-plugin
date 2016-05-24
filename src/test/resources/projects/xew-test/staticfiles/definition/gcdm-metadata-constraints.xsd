@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:metadata="http://customer.com/gcdm/v3/metadata"
+	targetNamespace="http://customer.com/gcdm/v3/metadata" elementFormDefault="qualified"
+	attributeFormDefault="unqualified" jxb:version="2.1" >
+	<xs:include schemaLocation="gcdm-metadata-usecaseEnumerations.xsd" />
+	<xs:element name="constraints" type="metadata:MetadataConstraints" />
+	<xs:complexType name="MetadataConstraints">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Attribute specific metadata 
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="constraintEntry" type="metadata:ConstraintEntry"
+				minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConstraintEntry">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Metadata (i.e., constraint information) for one
+						attribute (dependent on the current Business Context)
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="attribute" type="xs:string" minOccurs="1"
+				maxOccurs="1" />
+			<xs:element name="constraints" type="metadata:Constraints"
+				minOccurs="1" maxOccurs="1" />
+			<xs:element name="overrides" type="metadata:UsecaseSpecificConstraintList"
+				minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Constraints">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Attribute specific constraints
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="usage" type="metadata:Usage" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="lengthMax" type="xs:integer" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="regExp" type="xs:string" minOccurs="0"
+				maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Usage">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Mandatory" />
+			<xs:enumeration value="Optional" />
+			<xs:enumeration value="Forbidden" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="UsecaseSpecificConstraintList">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Usecase specific overriding of constraints
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="usecase" type="metadata:UsecaseSpecificConstraintEntry" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UsecaseSpecificConstraintEntry">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>override
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="usecase" type="metadata:EnumUsecases"
+				minOccurs="1" maxOccurs="1" />
+			<xs:element name="constraints" type="metadata:Constraints"
+				minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

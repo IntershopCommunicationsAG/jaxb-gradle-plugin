@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:enh="http://customer.com/gcdm/controller/v3/model" xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner" targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner" elementFormDefault="qualified" attributeFormDefault="unqualified" jxb:version="2.1">
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model" schemaLocation="enhancements/ExtensionDO.xsd"/>
+	<xs:complexType name="businessPartnerRole">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>A role possessed by the business partner.
+						Every business partner can have none, one or multiple roles.
+						Roles were introduced to support the Impulse sub portal in the customer
+						website of market DE.
+						@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Roles were introduced to support the Impulse sub portal in the customer website of market DE.   Every business partner can have none, one or multiple roles.
+								@mdm.stored</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="status" type="xs:string" maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The status of a role, from applied over granted to expired.
+								@mdm.stored</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="attribute" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:annotation>
+						<xs:documentation>Allows storing attributes at the relationship
+							from business partner to role.
+							Attributes must only be sent and
+							are only updated as a whole and can thus
+							not be set individually
+							(partially)
+							in order to reduce implementation complexity. There
+							must not be
+							more than one attribute with the
+							same key.
+							@mdm.stored
+						</xs:documentation>
+					</xs:annotation>
+					<xs:all>
+						<xs:element name="key" type="xs:string" minOccurs="1"/>
+						<xs:element name="value" type="xs:string" minOccurs="1"/>
+					</xs:all>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="delete" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>Only update: if true this existing entity is to be
+								deleted.</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customExtension" type="enh:extension" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>
+								@mdm.stored
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- Mit XMLSpy v2006 sp2 U bearbeitet (http://www.altova.com) von Softlab 
+	GmbH (Softlab GmbH) -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1" 
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	version="1.0">
+	<xs:simpleType name="PartnerCategoryList">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PERSON">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Person</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ORGANISATION">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Organisation</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

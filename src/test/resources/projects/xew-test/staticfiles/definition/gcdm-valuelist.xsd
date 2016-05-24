@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:metadata="http://customer.com/gcdm/controller/v3/model/metadata"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/metadata"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ValueList" type="metadata:ValueList" />
+	<xs:complexType name="ValueList">
+		<xs:sequence>
+			<xs:element name="valueListElement" type="metadata:ValueListElement"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ValueListElement">
+		<xs:sequence>
+			<xs:element name="key" type="xs:string" minOccurs="1"
+				maxOccurs="1" />
+			<xs:element name="text" type="xs:string" minOccurs="1"
+				maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

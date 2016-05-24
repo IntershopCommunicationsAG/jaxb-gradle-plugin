@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/request/vehicleConfiguration"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/request/vehicleConfiguration"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	jxb:version="2.1" >
+	<xs:include schemaLocation="InsuranceCalculationDO.xsd" />
+	<xs:complexType name="insuranceCalculations">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Insurance calculation for Financial calculation of
+						vehicle config
+						@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="insuranceCalculation" type="ns1:insuranceCalculation"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="isDisplayInsurancePayment" type="xs:boolean"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

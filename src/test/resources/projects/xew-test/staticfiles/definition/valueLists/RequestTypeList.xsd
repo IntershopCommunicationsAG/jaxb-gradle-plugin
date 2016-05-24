@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Mit XMLSpy v2006 sp2 U bearbeitet (http://www.altova.com) von Softlab 
+	GmbH (Softlab GmbH) -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:ns1="http://customer.com/gcdm/controller/v3/model/request/enums" targetNamespace="http://customer.com/gcdm/controller/v3/model/request/enums" version="1.0" jxb:version="2.1">
+	<xs:simpleType name="RequestTypeList">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RFI">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Request for Information</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RFO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Request for Offer</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TDA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Test drive appointment</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RFS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Request for Service</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RFA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Request for Accessories</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RFC">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Request for Contact</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RFP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Request for Purchase</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VCO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Vehicle Configuration</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RFID">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Request for Information Download</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ESP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Extended Sales Process</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

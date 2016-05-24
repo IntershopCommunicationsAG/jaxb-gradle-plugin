@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- Mit XMLSpy v2013 (http://www.altova.com) von Siegfried Ertl (customer AG) 
+	bearbeitet -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:root="http://customer.com/gcdm/controller/v3/model"
+	xmlns:bupa="http://customer.com/gcdm/controller/v3/model/businessPartner"
+	xmlns:cmp="http://customer.com/gcdm/controller/v3/model/campaignResponse"
+	xmlns:req="http://customer.com/gcdm/controller/v3/model/request" 
+	targetNamespace="http://customer.com/gcdm/controller/v3/model"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	jxb:version="2.1" >
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/businessPartner"
+		schemaLocation="do/BusinessPartnerDO.xsd" />
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/request"
+		schemaLocation="do/RequestRFODO.xsd" />
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/campaignResponse"
+		schemaLocation="do/CampaignDO.xsd" />
+	<xs:element name="vco">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Vehicle configuration.
+						@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="businessPartner" type="bupa:businessPartner"
+					minOccurs="0" />
+				<xs:element name="request" type="req:requestRFO"
+					minOccurs="0" />
+				<xs:element name="campaignResponse" type="cmp:campaign"
+					minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

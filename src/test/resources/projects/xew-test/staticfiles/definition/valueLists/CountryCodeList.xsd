@@ -1,0 +1,1730 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Mit XMLSpy v2012 rel. 2 sp1 (http://www.altova.com) von Siegfried Ertl 
+	(customer AG) bearbeitet -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1" 
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	version="1.0">
+	<xs:simpleType name="CountryCodeList">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Andorra</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>United Arab Emirates</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Afghanistan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Antigua and Barbuda</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AI">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Anguilla</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Albania</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Armenia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Dutch Antilles</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Angola</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AQ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Antarctica</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Argentina</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>American Samoa</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Austria</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Australia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AW">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Aruba</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AZ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Azerbaijan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Bosnia and Herzegovina</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BB">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Barbados</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Bangladesh</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Belgium</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Burkina Faso</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Bulgaria</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Bahrain</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BI">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Burundi</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BJ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Benin</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Blue</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Bermuda</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Brunei Darussalam</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Bolivia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Brazil</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Bahamas</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Bhutan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BV">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Bouvet Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BW">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Botswana</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BY">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Belarus</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BZ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Belize</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Canada</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CC">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Coconut Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Democratic Republic of the Congo</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Central African Republic</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Republic of the Congo</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Switzerland</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CI">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Cote d'Ivoire</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Cook Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Chile</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Cameroon</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>China</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Colombia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Costa Rica</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Serbia and Montenegro</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Cuba</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CV">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Cape Verde</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CX">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Christmas Islnd</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CY">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Cyprus</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CZ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Czech Republic</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Germany</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DJ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Djibouti</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Denmark</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Dominica</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Dominican Republic</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DZ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Algeria</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EC">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Ecuador</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Estonia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Egypt</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>West Sahara</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ER">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Eritrea</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ES">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Spain</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ET">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Ethiopia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>European Union</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FI">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Finland</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FJ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Fiji</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Falkland Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Micronesia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Faroe Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>France</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Gabon</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GB">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>United Kingdom</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Grenada</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Georgia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>French Guyana</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Ghana</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GI">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Gibraltar</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Greenland</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Gambia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Guinea</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Guadeloupe</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GQ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Equatorial Guinea</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Greece</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>South Georgia and the Southern Sandwich Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Guatemala</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Guam</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GW">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Guinea-Bissau</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GY">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Guyana</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Hong Kong</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Heard and McDonald Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Honduras</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Croatia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Haiti</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Hungary</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ID">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Indonesia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Ireland</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Israel</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>India</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>British Indian Ocean Territory</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IQ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Iraq</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Iran</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Iceland</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Italy</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Jamaica</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Jordan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Japan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Kenya</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Kyrgyzstan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Cambodia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KI">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Kiribati</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Comoros</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Saint Kitts and Nevis</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>North Korea</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>South Korea</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KW">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Kuwait</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KY">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Cayman Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KZ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Kazakhstan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Laos</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LB">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Lebanon</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LC">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>St. Lucia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LI">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Liechtenstein</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Sri Lanka</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Liberia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Lesotho</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Lithuania</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Luxembourg</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LV">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Latvia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LY">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Libya</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Morocco</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MC">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Monaco</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Moldova</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Madagascar</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Marshall Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Macedonia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ML">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Mali</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Burma</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Mongolia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Macau</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>North Mariana Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MQ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Martinique</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Mauretania</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Montserrat</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Malta</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Mauritius</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MV">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Maldives</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MW">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Malawi</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MX">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Mexico</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MY">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Malaysia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MZ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Mozambique</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Namibia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NC">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>New Caledonia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Niger</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Norfolk Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Nigeria</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NI">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Nicaragua</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Netherlands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Norway</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Nepal</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Nauru</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>NATO</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Niue</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NZ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>New Zealand</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Oman</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Orange</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Panama</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Peru</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>French Polynesia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Papua New Guinea</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Philippines</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Pakistan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Poland</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>St. Pierre and Miquelon</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Pitcairn Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Puerto Rico</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Palestine</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Portugal</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PW">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Palau</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PY">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Paraguay</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Qatar</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Reunion</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Romania</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Russian Federation</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RW">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Rwanda</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Saudi Arabia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SB">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Solomon Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SC">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Seychelles</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Sudan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Sweden</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Singapore</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Saint Helena</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SI">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Slovenia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SJ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Svalbard</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Slovakia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Sierra Leone</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>San Marino</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Senegal</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Somalia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Suriname</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ST">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Sao Tome and Principe</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SV">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>El Salvador</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SY">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Syria</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SZ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Swaziland</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TC">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Turks and Caicos Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Chad</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Togo</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Thailand</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TJ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Tajikistan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Tokelau Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>East Timor</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Turkmenistan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Tunisia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Tonga</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>East Timor</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Turkey</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Trinidad and Tobago</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TV">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Tuvalu</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TW">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Taiwan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TZ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Tanzania</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Ukraine</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Uganda</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>American Minor Outlying Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>United Nations</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="US">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>USA</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UY">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Uruguay</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UZ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Uzbekistan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Vatican City</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VC">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>St. Vincent and the Grenadines</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Venezuela</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>British Virgin Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VI">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>American Virgin Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Vietnam</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Vanuatu</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Wallis and Futuna Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Samoa</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Yemen</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Mayotte</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>South Africa</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Zambia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZW">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Zimbabwe</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

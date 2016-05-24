@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- Mit XMLSpy v2012 rel. 2 sp1 (http://www.altova.com) von Siegfried Ertl 
+	(customer AG) bearbeitet -->
+<!--$Id: AccountStatusList.xsd 20505 2012-12-11 11:19:34Z qxb2675 $ -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1" 
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/enums"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/enums"
+	version="1.0">
+	<xs:simpleType name="AccountStatusList">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UNCONFIRMED">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UNCONFIRMED</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="REMINDED">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>REMINDED</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EXPIRED">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>EXPIRED</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ACTIVATED">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>ACTIVATED</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ADMIN_LOCKED">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>ADMIN_LOCKED</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

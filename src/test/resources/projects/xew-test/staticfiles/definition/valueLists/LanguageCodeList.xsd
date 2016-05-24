@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Mit XMLSpy v2012 rel. 2 sp1 (http://www.altova.com) von Siegfried Ertl 
+	(customer AG) bearbeitet -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1" 
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	version="1.0">
+	<xs:simpleType name="LanguageCodeList">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Afrikaans</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Arabic</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Bulgarian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Catalan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Czech</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Danish</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>German</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Greek</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>English</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ES">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Spanish</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ET">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Estonian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FI">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Finnish</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>French</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Hebrew</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Croatian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Hungarian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ID">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Indonesian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Icelandic</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Italian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Japanese</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Korean</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Lithuanian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LV">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Latvian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Malaysian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Dutch</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Norwegian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Polish</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Portuguese</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Romanian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Russian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Serbian (Latin)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Slovakian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Slovenian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Serbian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SV">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Swedish</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Thai</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Turkish</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Ukrainian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Z1">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Customer reserve</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Chinese trad.</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Chinese</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Afrikaans</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Arabic</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Bulgarian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Catalan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Czech</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Danish</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>German</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Greek</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>English</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ES">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Spanish</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ET">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Estonian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FI">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Finnish</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>French</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Hebrew</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Croatian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Hungarian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ID">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Indonesian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Icelandic</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Italian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Japanese</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Korean</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Lithuanian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LV">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Latvian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Malaysian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Dutch</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Norwegian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Polish</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Portuguese</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Romanian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Russian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Serbian (Latin)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Slovakian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Slovenian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Serbian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SV">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Swedish</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Thai</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Turkish</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Ukrainian</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Z1">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Customer reserve</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Chinese trad.</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Chinese</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

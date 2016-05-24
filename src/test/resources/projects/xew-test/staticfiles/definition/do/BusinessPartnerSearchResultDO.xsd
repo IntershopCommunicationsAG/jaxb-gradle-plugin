@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:bupa="http://customer.com/gcdm/controller/v3/model/businessPartner"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	jxb:version="2.1" >
+	<xs:include schemaLocation="BusinessPartnerDO.xsd" />
+	<!-- <xs:import namespace="http://customer.com/gcdm/v3/businessPartner" schemaLocation="BusinessPartnerDO.xsd"/> -->
+	<xs:complexType name="businessPartnerSearchResult">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Result for find business partner services
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="businessPartner" type="bupa:businessPartner"
+				minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>The found business partners.
+							</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

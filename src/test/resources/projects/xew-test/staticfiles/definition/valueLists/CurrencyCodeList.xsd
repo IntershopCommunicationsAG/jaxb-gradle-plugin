@@ -1,0 +1,1310 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Mit XMLSpy v2012 rel. 2 sp1 (http://www.altova.com) von Siegfried Ertl 
+	(customer AG) bearbeitet -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	version="1.0" jxb:version="2.1" >
+	<xs:simpleType name="CurrencyCodeList">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AUD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Australian Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AWG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Aruban Guilder"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AZM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Azerbaijan Manat"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BAM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Bosnia and Herzegovina Convertible Mark"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BBD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Barbados Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BDT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Bangladesh Taka"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BEF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Belgian Franc"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BGN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Bulgarian Lev"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BHD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Bahrain Dinar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BIF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Burundi Franc"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BMD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Bermudan Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BND">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Brunei Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BOB">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Boliviano"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BRL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Brazilian Real"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BSD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Bahaman Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BTN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Bhutan Ngultrum"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BWP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Botswana Pula"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BYB">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Belorussian Ruble (Old)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BYR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Belorussian Ruble"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BZD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Belize Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CAD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Canadian Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CDF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Congolese Franc"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CFP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"French Franc (Pacific Islands)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Swiss Franc"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CLP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Chilean Peso"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CNY">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Chinesische Yuan (international)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Colombian Peso"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRC">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Costa Rica Colon"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CSD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Serbian Dinar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CUP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Cuban Peso"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CVE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Cape Verde Escudo"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CYP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Cyprus Pound"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CZK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Czech Krona"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DEM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"German Mark"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DEM3">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"(Internal) German Mark (3 dec.places)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DJF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Djibouti Franc"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DKK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Danish Krone"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DOP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Dominican Peso"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DZD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Algerian Dinar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ECS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Ecuadorian Sucre ( > USD)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EEK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Estonian Krone"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EGP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Egyptian Pound"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Eritrean Nafka"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ESP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Spanish Peseta"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ETB">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Ethiopian Birr"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EUR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"European Euro"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FIM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Finnish markka"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FJD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Fiji Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FKP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Falkland Pound"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FRF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"French Franc"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GBP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"British Pound"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GEL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Georgian Lari"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GHC">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Ghanian Cedi"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GIP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Gibraltar Pound"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GMD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Gambian Dalasi"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GNF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Guinean Franc"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GRD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Greek Drachma"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GTQ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Guatemalan Quetzal"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GWP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Guinea Peso"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GYD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Guyana Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HKD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Hong Kong Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HNL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Honduran Lempira"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HRK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Croatian Kuna"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HTG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Haitian Gourde"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HUF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Hungarian Forint"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IDR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Indonesian Rupiah"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IEP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Irish Punt"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ILS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Israeli Scheckel"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Indian Rupee"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IQD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Iraqui Dinar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IRR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Iranian Rial"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ISK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Iceland Krona"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ITL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Italian Lira"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JMD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Jamaican Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JOD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Jordanian Dinar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JPY">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Japanese Yen"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KES">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Kenyan Shilling"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KGS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Kyrgyzstan Som"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KHR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Cambodian Riel"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KMF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Comoros Franc"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KPW">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"North Korean Won"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KRW">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"South Korean Won"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KWD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Kuwaiti Dinar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KYD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Cayman Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KZT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Kazakstanian Tenge"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LAK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Laotian Kip"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LBP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Lebanese Pound"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LKR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Sri Lankan Rupee"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LRD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Liberian Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LSL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Lesotho Loti"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LTL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Lithuanian Lita"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LUF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Luxembourg Franc"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LVL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Latvian Lat"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LYD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Libyan Dinar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Moroccan Dirham"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MDL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Moldavian Leu"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MGA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Madagascan Ariary (New)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MGF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Madagascan Franc (Old"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MKD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Macedonian Denar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MMK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Myanmar Kyat"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MNT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Mongolian Tugrik"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MOP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Macao Pataca"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MRO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Mauritanian Ouguiya"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MTL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Maltese Lira"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MUR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Mauritian Rupee"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MVR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Maldive Rufiyaa"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MWK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Malawi Kwacha"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MXN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Mexican Pesos"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MYR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Malaysian Ringgit"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MZM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Mozambique Metical"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NAD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Namibian Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NGN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Nigerian Naira"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NIO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Nicaraguan Cordoba Oro"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NLG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Dutch Guilder"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NOK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Norwegian Krone"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NPR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Nepalese Rupee"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NZD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"New Zealand Dollars"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NZD5">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"New Zealand Dollars"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OMR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Omani Rial"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAB">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Panamanian Balboa"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PEN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Peruvian New Sol"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PGK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Papua New Guinea Kina"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PHP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Philippine Peso"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PKR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Pakistani Rupee"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PLN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Polish Zloty (new)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PTE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Portuguese Escudo"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PYG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Paraguayan Guarani"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QAR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Qatar Rial"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RMB">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Chinesische Renminbi (national)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ROL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Romanian Leu"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUB">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Russian Ruble"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RWF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Rwandan Franc"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SAR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Saudi Riyal"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SBD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Solomon Islands Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SCR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Seychelles Rupee"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SDD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Sudanese Dinar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SDP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Sudanese Pound"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SEK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Swedish Krona"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SGD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Singapore Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SHP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"St.Helena Pound"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SIT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Slovenian Tolar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SKK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Slovakian Krona"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SLL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Sierra Leone Leone"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SOS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Somalian Shilling"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SRD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Surinam Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SRG">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Surinam Guilder (Old)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="STD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Sao Tome / Principe Dobra"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SVC">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"El Salvador Colon"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SYP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Syrian Pound"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SZL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Swaziland Lilangeni"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="THB">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Thailand Baht"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TJR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Tajikistani Ruble (Old)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TJS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Tajikistani Somoni"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TMM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Turkmenistani Manat"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TND">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Tunisian Dinar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TOP">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Tongan Pa'anga"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TPE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Timor Escudo"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TRL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Turkish Lira (Old)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TRY">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Turkish Lira"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TTD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Trinidad and Tobago Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TWD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"New Taiwan Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TZS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Tanzanian Shilling"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UAH">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Ukraine Hryvnia"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UGX">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Ugandan Shilling"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"United States Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USDN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"(Internal) United States Dollar (5 Dec.)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UYU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Uruguayan Peso (new)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UZS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Uzbekistan Som"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VEB">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Venezuelan Bolivar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VEF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Venezuelan Bolivar Hard"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VND">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Vietnamese Dong"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VUV">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Vanuatu Vatu"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WST">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Samoan Tala"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XAF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Gabon CFA Franc BEAC"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XCD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"East Carribean Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XDS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"St. Christopher Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XEU">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"European Currency Unit (E.C.U.)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XOF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Benin CFA Franc BCEAO"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XPF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"CFP Franc"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YER">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Yemeni Ryal"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YUM">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"New Yugoslavian Dinar (Old)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZAR">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"South African Rand"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZMK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Zambian Kwacha"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZRN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Zaire (Old)"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZWD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>"Zimbabwean Dollar"</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

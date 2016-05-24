@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="RateV4Request">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Revision" type="xs:string"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" name="Package">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Service" type="xs:string"/>
+              <xs:element minOccurs="0" name="FirstClassMailType" type="xs:string"/>
+              <xs:element name="ZipOrigination" type="xs:string"/>
+              <xs:element name="ZipDestination" type="xs:string"/>
+              <xs:element name="Pounds" type="xs:string"/>
+              <xs:element name="Ounces" type="xs:string"/>
+              <xs:element name="Container" type="xs:string"/>
+              <xs:element name="Size" type="xs:string"/>
+              <xs:element minOccurs="0" name="Width" type="xs:string"/>
+              <xs:element minOccurs="0" name="Length" type="xs:string"/>
+              <xs:element minOccurs="0" name="Height" type="xs:string"/>
+              <xs:element minOccurs="0" name="Girth" type="xs:string"/>
+              <xs:element minOccurs="0" name="Machinable" type="xs:string"/>
+              <xs:element minOccurs="0" name="DropOffTime" type="xs:string"/>
+              <xs:element minOccurs="0" name="ShipDate" type="xs:string"/>
+            </xs:sequence>
+            <xs:attribute name="ID" type="xs:string" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="USERID" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

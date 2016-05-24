@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:enh="http://customer.com/gcdm/controller/v3/model"
+	xmlns:tns="http://customer.com/gcdm/controller/v3/model/policy/enums"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/policy/enums"
+	version="1.0" jxb:version="2.1">
+
+	<xs:simpleType name="policyDocumentFormatList">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PDF">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Portable Document Format</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HTML">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>W3C HTML</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:crmproxy="http://customer.com/gcdm/controller/v3/model/crmproxy"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/crmproxy"
+	version="1.0" jxb:version="2.1" >
+
+	<xs:element name="proxyCustomer" type="crmproxy:proxyCustomer" />
+	<xs:complexType name="proxyCustomer">
+		<xs:sequence>
+			<xs:element name="gcid" type="xs:string" minOccurs="1" />
+			<xs:element name="gender" type="xs:string" minOccurs="0" />
+			<xs:element name="academicTitle" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="dateOfBirth" type="xs:date" minOccurs="0" />
+			<xs:element name="maritalStatus" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="contactType" type="xs:string" minOccurs="0" />
+			<xs:element name="wmz" type="xs:date" minOccurs="0" />
+			<xs:element name="customerCard" type="xs:boolean" minOccurs="0" />
+			<xs:element name="vehicles" type="crmproxy:proxyVehicle"
+				minOccurs="0" maxOccurs="unbounded" nillable="true" />
+			<xs:element name="requests" type="crmproxy:proxyRequest"
+				minOccurs="0" maxOccurs="unbounded" nillable="true" />
+			<xs:element name="campaigns" type="crmproxy:proxyCampaign"
+				minOccurs="0" maxOccurs="unbounded" nillable="true" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="proxyVehicle">
+		<xs:sequence>
+			<xs:element name="vin" type="xs:string" minOccurs="0" />
+			<xs:element name="brand" type="xs:string" minOccurs="0" />
+			<xs:element name="series" type="xs:string" minOccurs="0" />
+			<xs:element name="model" type="xs:string" minOccurs="0" />
+			<xs:element name="body" type="xs:string" minOccurs="0" />
+			<xs:element name="purchaseDate" type="xs:date" minOccurs="0" />
+			<xs:element name="productionDate" type="xs:date"
+				minOccurs="0" />
+			<xs:element name="vehicleAge" type="xs:string" minOccurs="0" />
+			<xs:element name="fuelType" type="xs:string" minOccurs="0" />
+			<xs:element name="mileagePerYear" type="xs:integer"
+				minOccurs="0" />
+			<xs:element name="mileageAtLastService" type="xs:integer"
+				minOccurs="0" />
+			<xs:element name="lastServiceDate" type="xs:date"
+				minOccurs="0" />
+			<xs:element name="vehicleSAOptions" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="paymentType" type="xs:string" minOccurs="0" />
+			<xs:element name="endOfTerm" type="xs:date" minOccurs="0" />
+			<xs:element name="mainVehicle" type="xs:boolean"
+				minOccurs="0" />
+			<xs:element name="soldByDealer" type="crmproxy:proxyDealer"
+				minOccurs="0" />
+			<xs:element name="vehicleAdditionalProducts" type="crmproxy:proxyVehicleAdditionalProduct"
+				minOccurs="0" maxOccurs="unbounded" nillable="true" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="proxyRequest">
+		<xs:sequence>
+			<xs:element name="requestType" type="xs:string" minOccurs="0" />
+			<xs:element name="issueDate" type="xs:date" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="proxyCampaign">
+		<xs:sequence>
+			<xs:element name="brand" type="xs:string" minOccurs="0" />
+			<xs:element name="category" type="xs:string" minOccurs="0" />
+			<xs:element name="crmCode" type="xs:string" minOccurs="0" />
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			
+			<xs:element name="offers" type="xs:integer" minOccurs="0"
+				maxOccurs="unbounded" nillable="true" />
+			<xs:element name="reactions" type="crmproxy:proxyCampaignReaction"
+				minOccurs="0" maxOccurs="unbounded" nillable="true" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="proxyCampaignReaction">
+		<xs:sequence>
+			<xs:element name="offerId" type="xs:integer" minOccurs="0" />
+			<xs:element name="reactionDate" type="xs:date" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="proxyDealer">
+		<xs:sequence>
+			<xs:element name="distrPartnerId" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="outletId" type="xs:string" minOccurs="0" />
+			<xs:element name="type" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="proxyVehicleAdditionalProduct">
+		<xs:sequence>
+			<xs:element name="productName" type="xs:string" minOccurs="0" />
+			<xs:element name="startDate" type="xs:date" minOccurs="0" />
+			<xs:element name="endDate" type="xs:date" minOccurs="0" />
+			<xs:element name="extensions" type="xs:integer" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

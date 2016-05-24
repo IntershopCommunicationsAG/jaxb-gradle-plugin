@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- Mit XMLSpy v2013 (http://www.altova.com) von Siegfried Ertl (customer AG) 
+	bearbeitet -->
+<!-- $Id: RequestTDADO.xsd 44588 2014-02-25 12:44:59Z qxe3031 $ -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:enh="http://customer.com/gcdm/controller/v3/model"
+	xmlns:deal="http://customer.com/gcdm/controller/v3/model" xmlns:off="http://customer.com/gcdm/controller/v3/model"
+	xmlns:veco="http://customer.com/gcdm/controller/v3/model/request/vehicleConfiguration"
+	xmlns:app="http://customer.com/gcdm/controller/v3/model/request/appointment"
+	xmlns:cons="http://customer.com/gcdm/controller/v3/model/policy/consent"
+	xmlns:enum="http://customer.com/gcdm/controller/v3/model/request/enums"
+	xmlns:enumc="http://customer.com/gcdm/controller/v3/model/enums" xmlns:ns1="http://customer.com/gcdm/controller/v3/model/request"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/request"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	jxb:version="2.1" >
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model"
+		schemaLocation="enhancements/ExtensionDO.xsd" />
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model"
+		schemaLocation="DealerDO.xsd" />
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model"
+		schemaLocation="OfferDO.xsd" />
+	<xs:import
+		namespace="http://customer.com/gcdm/controller/v3/model/request/appointment"
+		schemaLocation="AppointmentDO.xsd" />
+	<xs:import
+		namespace="http://customer.com/gcdm/controller/v3/model/request/vehicleConfiguration"
+		schemaLocation="VehicleConfigurationDO.xsd" />
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/policy/consent"
+		schemaLocation="PolicyConsentDO.xsd" />
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/request/enums"
+		schemaLocation="../valueLists/EnumsRequest.xsd" />
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/enums"
+		schemaLocation="../valueLists/EnumsCommon.xsd" />
+	<xs:complexType name="requestTDA">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Defines the TDA
+						@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="requestType" type="enum:RequestTypeList" />
+			<xs:element name="requestID" type="xs:string" minOccurs="0" />
+			<xs:element name="preferredSalesChannel" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="comment" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2048" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="brand" type="enumc:BrandTypeList"
+				minOccurs="0" />
+			<xs:element name="vehicleConfigurations" type="veco:vehicleConfigurationList"
+				minOccurs="0" />
+			<xs:element name="appointments" type="app:appointmentList"
+				minOccurs="0" />
+			<xs:element name="policyConsents" type="cons:policyConsentList"
+				minOccurs="0" />
+			<xs:element name="offer" type="off:offer" minOccurs="0" />
+			<xs:element name="dealer" type="deal:dealer" minOccurs="0" />
+			<xs:element name="customExtension" type="enh:extension"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

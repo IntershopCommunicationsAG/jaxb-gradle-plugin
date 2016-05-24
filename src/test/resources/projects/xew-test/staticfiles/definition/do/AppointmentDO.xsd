@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
+<!-- $Id: AppointmentDO.xsd 44588 2014-02-25 12:44:59Z qxe3031 $ -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:enh="http://customer.com/gcdm/controller/v3/model"
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/request/appointment"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/request/appointment"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	jxb:version="2.1" >
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model"
+		schemaLocation="enhancements/ExtensionDO.xsd" />
+	<xs:complexType name="appointment">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>If the request is a CampaignResponse, this structure
+						needs to be filled
+						@jsonEntity</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="modelName" type="xs:string" minOccurs="0" />
+			<xs:element name="appointmentDate" type="xs:dateTime"
+				minOccurs="0" />
+			<xs:element name="customExtension" type="enh:extension"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="appointmentList">
+		<xs:sequence>
+			<xs:element name="appointment" type="ns1:appointment"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
+<!--xmlns:apex="http://customer.com/gcdm/extension" -->

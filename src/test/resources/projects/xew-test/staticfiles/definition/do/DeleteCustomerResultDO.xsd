@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:enum="http://customer.com/gcdm/controller/v3/model/enums"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	jxb:version="2.1">
+	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/enums"
+		schemaLocation="../valueLists/EnumsCommon.xsd" />
+	<xs:complexType name="deleteCustomerResult">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:class>
+					<jxb:javadoc>Result of of a call to delete customer
+						@jsonEntity
+					</jxb:javadoc>
+				</jxb:class>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="accountDeleted" minOccurs="1" maxOccurs="1" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>true if the user account (login, password etc.) has been deleted</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountNotDeletedReason" minOccurs="0" maxOccurs="1" type="enum:DeleteCustomerAccountNotDeletedReasonList">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>explains why the account has not been deleted</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountNotDeletedDetail" minOccurs="0" maxOccurs="1" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property>
+							<jxb:javadoc>additional explanatory text about the unsuccessful account deletion.</jxb:javadoc>
+						</jxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

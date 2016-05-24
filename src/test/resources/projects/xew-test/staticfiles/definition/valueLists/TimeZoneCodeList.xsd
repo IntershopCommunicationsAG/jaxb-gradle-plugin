@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Mit XMLSpy v2012 rel. 2 sp1 (http://www.altova.com) von Siegfried Ertl 
+	(customer AG) bearbeitet -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
+	Leasing GmbH) -->
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1" 
+	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
+	version="1.0">
+	<xs:simpleType name="TimeZoneCodeList">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AFGHAN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Afghanistan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Alaska (Anchorage)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALAW">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Alaska (Aleutian)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AST">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Atlantic Time (Halifax)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUSACT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Australia Capital Territories</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUSLHI">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Australia Lord Howe Island</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUSNSW">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Australia New South Wales</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUSNT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Australia Northern Territories</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUSQLD">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Australia Queensland</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUSSA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Australia South Australia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUSTAS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Australia Tasmania</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUSVIC">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Australia Victoria</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUSWA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Australia Western Australia</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AZOREN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Europe Azores</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BRAZIL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Brazil</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BRZLAN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Brazil Andes</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BRZLEA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Brazil East</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BRZLWE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Brazil West</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CAT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Central Africa</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CET">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Central Europe</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHILE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Chile</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHILEE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Chile Easter Island</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CST">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Central Time (Dallas)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CSTNO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Central Time No DST</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CYPRUS">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Cyprus</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EET">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Eastern Europe</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EGYPT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Egypt</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EST">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Eastern Time (New York)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EST_">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Eastern Time (Montréal)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ESTNO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Eastern Time (Indianapolis)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FLKLND">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Falkland Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GMTUK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Greenwich UK with DST</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GST">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Greenland</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GSTE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Eastern Greenland</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GSTW">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Western Greenland</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HAW">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Hawaii</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INDIA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>India</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IRAN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Iran</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IRAQ">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Iraq</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ISRAEL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Israel</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JAPAN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Japan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JORDAN">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Jordan</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LBANON">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Lebanon</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MST">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Mountain Time (Denver)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MSTNO">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Mountain Time (Phoenix)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NEPAL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Nepal</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NFDL">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Newfoundland</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NORFLK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Norfolk Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NST">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Newfoundland</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NZCHA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>New Zealand Chatham Islands</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NZST">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>New Zealand</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PARAGY">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Paraguay</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PIERRE">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>St Pierre and Miquelon</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PST">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Pacific Time (Los Angeles)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUS03">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Russia (Moscow) (UTC+03)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUS04">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Russia (UTC+04)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUS05">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Russia (UTC+05)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUS06">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Russia (UTC+06)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUS07">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Russia (UTC+07)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUS08">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Russia (UTC+08)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUS09">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Russia (UTC+09)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUS10">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Russia (UTC+10)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUS11">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Russia (UTC+11)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUS12">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Russia (UTC+12)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUS13">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Russia (UTC+13)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUS14">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Russia (UTC+14)</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SYRIA">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Syria</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UK">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>England, Ireland, Scotland</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+0</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+1">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+01</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+10">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+10</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+11">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+11</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+12">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+12</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+13">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+13</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+14">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+14</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+2">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+02</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+3">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+03</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+4">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+04</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+5">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+05</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+53">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+05:30</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+6">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+06</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+63">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+06:30</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+7">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+07</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+8">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+08</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC+9">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC+09</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC-1">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC-01</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC-10">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC-10</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC-11">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC-11</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC-12">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC-12</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC-2">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC-02</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC-3">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC-03</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC-4">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC-04</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC-5">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC-05</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC-6">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC-06</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC-7">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC-07</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC-8">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC-08</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC-83">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC-8:30</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UTC-9">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>UTC-09</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WAT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Western Africa</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WDFT">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Walldorf Time</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WET">
+				<xs:annotation>
+					<xs:appinfo>
+						<value_default>Western Europe</value_default>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
