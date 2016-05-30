@@ -6,7 +6,7 @@
 This plugin generates Java code from schema files (see https://jaxb.java.net/jaxb20-ea/docs/xjcTask.html[com.sun.tools.xjc.XJCTask]) or schema files from existing Java code (see https://jaxb.java.net/jaxb20-ea/docs/schemagenTask.html[com.sun.tools.jxc.SchemaGenTask]).
 
 == Usage
-To apply the Intershop JAXB Plugin to your Intershop projects, add the following in your build script:
+To apply the JAXB Gradle Plugin to your projects, add the following in your build script:
 
 [source,groovy]
 [subs=+attributes]
@@ -42,7 +42,7 @@ If the JavaBasePlugin is applied to the project, generated java sources will be 
 IMPORTANT: This plugin uses the version 2.2.11. It is possible to change this to 2.2.7 or 2.2.10. It will not work with older versions of JAXB. It is possible to overwrite the project dependency configuration 'jaxb', if you want use an other version of JAXB. The classpath of the xjc can be extended with a project configuration 'jaxb' and dependencies.
 
 == Tasks
-The Intershop JAXB plugin adds one task `jaxb` to the project. This task depends on all other plugin task. It is a task added for each configuration in schemaGen and javaGen.
+The JAXB Gradle plugin adds one task `jaxb` to the project. This task depends on all other plugin task. It is a task added for each configuration in schemaGen and javaGen.
 
 [cols="25%,30%,45%", width="95%, options="header"]
 |===
@@ -226,6 +226,15 @@ jaxb {
 }
 ----
 
+== License
+
+Copyright 2014-2016 Intershop Communications.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
 
 
