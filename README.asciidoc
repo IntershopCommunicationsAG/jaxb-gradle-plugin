@@ -70,7 +70,7 @@ This plugin adds an extension *`jaxb`* to the project.
 |*schemaGen*    |<<schemaGen, JavaToSchema>>| This contains all schema code generation configurations.
 |===
 
-==== [[schemaGen]]Object 'schemaGen' (SchemaToJava)
+==== [[javaGen]]Object 'javaGen' (SchemaToJava)
 
 ===== Properties
 
@@ -105,7 +105,7 @@ If this value is false '-nv' will be added to the command line parameter list.
 |*arg* | `String` | Add an additional command line arguments passed to the XJC
 |===
 
-==== [[javaGen]]Object 'javaGen' (JavaToSchema)
+==== [[schemaGen]]Object 'schemaGen' (JavaToSchema)
 
 [cols="17%,17%,15%,51%", width="90%, options="header"]
 |===
