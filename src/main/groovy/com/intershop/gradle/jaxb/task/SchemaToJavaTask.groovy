@@ -119,27 +119,31 @@ class SchemaToJavaTask extends DefaultTask {
             getParameters() << '-nv'
         }
 
-        ant.xjc(args) {
-            if(xjcConfiguration) {
-                xjcConfiguration.addToAntBuilder(ant, 'classpath', FileCollection.AntType.ResourceCollection)
-            }
-            if(getSchemaFiles()) {
-                getSchemaFiles().addToAntBuilder(ant, 'schema', FileCollection.AntType.FileSet)
-            }
-            if(getBindingFiles()) {
-                getBindingFiles().addToAntBuilder(ant, 'binding', FileCollection.AntType.FileSet)
-            }
-            if(getParameters()) {
-                getParameters()?.each {
-                    arg(value: it)
+        synchronized (SchemaToJavaTask.class) {
+            log.info(' -> Locked XJC Gradle Task to prevent the parallel execution!')
+            ant.xjc(args) {
+                if (xjcConfiguration) {
+                    xjcConfiguration.addToAntBuilder(ant, 'classpath', FileCollection.AntType.ResourceCollection)
+                }
+                if (getSchemaFiles()) {
+                    getSchemaFiles().addToAntBuilder(ant, 'schema', FileCollection.AntType.FileSet)
+                }
+                if (getBindingFiles()) {
+                    getBindingFiles().addToAntBuilder(ant, 'binding', FileCollection.AntType.FileSet)
+                }
+                if (getParameters()) {
+                    getParameters()?.each {
+                        arg(value: it)
+                    }
+                }
+                if (log.isDebugEnabled()) {
+                    arg(value: '-debug')
+                }
+                if (log.isInfoEnabled()) {
+                    arg(value: '-verbose')
                 }
             }
-            if (log.isDebugEnabled()) {
-                arg(value: '-debug')
-            }
-            if (log.isInfoEnabled()) {
-                arg(value: '-verbose')
-            }
+            log.info(' -> Unlocked XJC Gradle Task!')
         }
     }
 }
