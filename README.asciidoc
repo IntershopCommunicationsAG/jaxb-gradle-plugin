@@ -1,5 +1,5 @@
 = JAXB Gradle Plugin
-:latestRevision: 1.0.0
+:latestRevision: 2.0.0
 :toc:
 
 == Summary
