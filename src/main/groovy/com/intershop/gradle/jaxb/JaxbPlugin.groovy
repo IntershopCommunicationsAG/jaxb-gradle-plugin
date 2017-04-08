@@ -92,6 +92,7 @@ class JaxbPlugin implements Plugin<Project> {
             task.conventionMapping.extension = { javaGen.getExtension() }
             task.conventionMapping.language = { javaGen.getLanguage() }
             task.conventionMapping.parameters = { javaGen.getArgs() }
+            task.conventionMapping.antTaskClassName = { javaGen.getAntTaskClassName() }
 
             // identify sourceset configuration and add output to sourceset
             project.afterEvaluate {
