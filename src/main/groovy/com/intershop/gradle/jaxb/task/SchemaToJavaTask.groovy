@@ -82,13 +82,16 @@ class SchemaToJavaTask extends DefaultTask {
     @Input
     List<String> parameters
 
+    @Input
+    String antTaskClassName
+
     @TaskAction
     void generate() {
         FileCollection jaxbConfiguration = getProject().getConfigurations().getAt(JaxbExtension.JAXB_CONFIGURATION_NAME)
         FileCollection xjcConfiguration = getProject().getConfigurations().maybeCreate('xjc')
 
         ant.taskdef (name : 'xjc',
-                classname : 'com.sun.tools.xjc.XJCTask',
+                classname : getAntTaskClassName(),
                 classpath : jaxbConfiguration.asPath)
 
         def args = [destdir	        : getOutputDirectory(),

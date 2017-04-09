@@ -149,6 +149,19 @@ class SchemaToJava implements Named {
     }
 
     /**
+     * The class name of the Ant task backing the Gradle task.
+     */
+    String antTaskClassName;
+
+    String getAntTaskClassName() {
+        if(! this.antTaskClassName) {
+            return JaxbExtension.DEFAULT_ANT_TASK_CLASS_NAME;
+        } else {
+            return this.antTaskClassName;
+        }
+    }
+
+    /**
      * Calculates the task name
      *
      * @return task name with prefix jaxbJavaGen

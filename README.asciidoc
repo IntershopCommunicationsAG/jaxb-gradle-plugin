@@ -95,6 +95,7 @@ If this value is false '-nv' will be added to the command line parameter list.
 |*bindings*           | `FileCollection` | `null`    | To specify more than one external binding file at the same time, use this configuration.
 |*targetVersion*      | `String`    | `'2.2'`       | Specifies the runtime environment in which the generated code is supposed to run. Expects also 2.0 or 2.1 values. This allows more up-to-date versions of XJC to be used for developing applications that run on earlier JAXB versions.
 |*language*           | `String`    | `'XMLSCHEMA'` | Specifies the schema language to compile. Supported values are "WSDL", "XMLSCHEMA", and "WSDL." Case insensitive.
+|*antTaskClassName*   | `String`    | `'com.sun.tools.xjc.XJCTask'` | The JAXB tools (e.g. XJC) bundled with the JDK are relocated to a package not matching the JAXB-RI. There are a lot of XJC plugins around compiled against the JAXB-RI which cannot be used with the JAXB tools bundled with the JDK due to this. When configuring the plugin to use the JAXB-RI Ant task instead of the Ant task bundled with the JDK (e.g. com.sun.tools.xjc.XJC2Task), those plugins can be used.
 |===
 
 ===== Method

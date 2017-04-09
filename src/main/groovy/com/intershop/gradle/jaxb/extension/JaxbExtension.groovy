@@ -58,6 +58,11 @@ class JaxbExtension {
     final static String DEFAULT_SOURCESET_NAME = 'main'
 
     /**
+     * Default Ant task class name.
+     */
+    final static String DEFAULT_ANT_TASK_CLASS_NAME = 'com.sun.tools.xjc.XJCTask'
+
+    /**
      * Container for schema generation configurations
      */
     final NamedDomainObjectContainer<JavaToSchema> schemaGen
