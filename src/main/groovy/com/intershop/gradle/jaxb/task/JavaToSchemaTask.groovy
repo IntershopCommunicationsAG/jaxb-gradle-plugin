@@ -16,32 +16,94 @@
 package com.intershop.gradle.jaxb.task
 
 import com.intershop.gradle.jaxb.extension.JaxbExtension
+import groovy.transform.CompileStatic
+import groovy.transform.TypeCheckingMode
 import groovy.util.logging.Slf4j
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileTree
 import org.gradle.api.file.FileCollection
+import org.gradle.api.provider.PropertyState
+import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.*
 
 /**
  * Task for Java code generation
  */
+@CompileStatic
 @Slf4j
 class JavaToSchemaTask extends DefaultTask {
 
+    final PropertyState<File> outputDir = project.property(File)
+
     @OutputDirectory
-    File outputDirectory
+    File getOutputDir() {
+        return outputDir.get()
+    }
+
+    void setOutputDir(File outputDir) {
+        this.outputDir.set(outputDir)
+    }
+
+    void setOutputDir(Provider<File> outputDir) {
+        this.outputDir.set(outputDir)
+    }
+
+    final PropertyState<FileCollection> sources = project.property(FileCollection)
 
     @InputFiles
-    ConfigurableFileTree sources
+    FileCollection getSources() {
+        return sources.get()
+    }
+
+    void setSources(FileCollection sources) {
+        this.sources.set(sources)
+    }
+
+    void setSources(Provider<FileCollection> sources) {
+        this.sources.set(sources)
+    }
+
+    final PropertyState<Map<String, String>> namespaceConfigs = project.property(Map)
 
     @Optional
     @Input
-    Map<String,String> namespaceConfigs
+    Map<String,String> getNamespaceConfigs() {
+        try {
+            return namespaceConfigs.get()
+        }catch (IllegalStateException ex) {
+            return null
+        }
+    }
+
+    void setNamespaceConfigs(Map<String, String> namespaceConfigs) {
+        this.namespaceConfigs.set(namespaceConfigs)
+    }
+
+    void setNamespaceConfigs(Provider<Map<String, String>> namespaceConfigs) {
+        this.namespaceConfigs.set(namespaceConfigs)
+    }
+
+    final PropertyState<String> episode = project.property(String)
 
     @Optional
     @Input
-    String episode
+    String getEpisode() {
+        try {
+            return episode.get()
+        }catch (IllegalStateException ex) {
+            return null
+        }
+    }
 
+    void setEpisode(String episode) {
+        this.episode.set(episode)
+    }
+
+    void setEpisode(Provider<String> episode) {
+        this.episode.set(episode)
+    }
+
+    @CompileStatic(TypeCheckingMode.SKIP)
     @TaskAction
     void generate() {
         FileCollection jaxbConfiguration = project.configurations.getAt(JaxbExtension.JAXB_CONFIGURATION_NAME)
@@ -50,10 +112,10 @@ class JavaToSchemaTask extends DefaultTask {
                     classname: 'com.sun.tools.jxc.SchemaGenTask',
                     classpath: jaxbConfiguration.asPath)
 
-        def args = [destdir	 : getOutputDirectory(),
+        def args = [destdir	 : getOutputDir(),
                     srcdir   : getSources().getDir().absolutePath,
                     ]
-        if(episode) {
+        if(episode != null) {
             args << [episode : getEpisode()]
         }
 

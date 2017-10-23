@@ -20,10 +20,13 @@ import com.intershop.gradle.jaxb.extension.SchemaToJava
 import com.intershop.gradle.jaxb.task.JavaToSchemaTask
 import com.intershop.gradle.jaxb.task.SchemaToJavaTask
 import com.intershop.gradle.jaxb.extension.JaxbExtension
+import groovy.transform.CompileStatic
+import org.gradle.api.Action
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.artifacts.Configuration
+import org.gradle.api.artifacts.DependencySet
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.JavaBasePlugin
 import org.gradle.api.plugins.JavaPluginConvention
@@ -32,6 +35,7 @@ import org.gradle.api.tasks.SourceSet
 /**
  * Plugin implementation
  */
+@CompileStatic
 class JaxbPlugin implements Plugin<Project> {
 
     private JaxbExtension extension
@@ -70,37 +74,29 @@ class JaxbPlugin implements Plugin<Project> {
             SchemaToJavaTask task = project.getTasks().create(javaGen.getTaskName(), SchemaToJavaTask)
             task.group = JaxbExtension.JAXB_TASK_GROUP
 
-            task.conventionMapping.outputDirectory = {
-                javaGen.getOutputDir() ?: new File(project.getBuildDir(),
-                        "${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_JAVAGEN_OUTPUTPATH}/${javaGen.getName().replace(' ', '_')}")
-            }
-
-            task.conventionMapping.schemaFile = { javaGen.getSchema() }
-            task.conventionMapping.bindingFile = { javaGen.getBinding() }
-            task.conventionMapping.catalogFile = { javaGen.getCatalog() }
-
-            task.conventionMapping.schemaFiles = { javaGen.getSchemas() }
-            task.conventionMapping.bindingFiles = { javaGen.getBindings() }
-
-            task.conventionMapping.packageName = { javaGen.getPackageName() }
-
-            task.conventionMapping.strictValidation = { javaGen.getStrictValidation() }
-            task.conventionMapping.header = { javaGen.getHeader() }
-
-            task.conventionMapping.targetVersion = { javaGen.getTargetVersion() }
-            task.conventionMapping.encoding = { javaGen.getEncoding() }
-            task.conventionMapping.extension = { javaGen.getExtension() }
-            task.conventionMapping.language = { javaGen.getLanguage() }
-            task.conventionMapping.parameters = { javaGen.getArgs() }
-            task.conventionMapping.antTaskClassName = { javaGen.getAntTaskClassName() }
+            task.setOutputDir(javaGen.getOutputDirProvider())
+            task.setSchema(javaGen.getSchemaProvider())
+            task.setBinding(javaGen.getBindingProvider())
+            task.setCatalog(javaGen.getCatalogProvider())
+            task.setSchemas(javaGen.getSchemasProvider())
+            task.setBindings(javaGen.getBindingsProvider())
+            task.setPackageName(javaGen.getPackageNameProvider())
+            task.setStrictValidation(javaGen.getStrictValidationProvider())
+            task.setHeader(javaGen.getHeaderProvider())
+            task.setTargetVersion(javaGen.getTargetVersionProvider())
+            task.setEncoding(javaGen.getEncodingProvider())
+            task.setExtension(javaGen.getExtensionProvider())
+            task.setLanguage(javaGen.getLanguageProvider())
+            task.setParameters(javaGen.getArgsProvider())
+            task.setAntTaskClassName(javaGen.getAntTaskClassNameProvider())
 
             // identify sourceset configuration and add output to sourceset
             project.afterEvaluate {
                 if (javaGen.getSourceSetName() && project.plugins.hasPlugin(JavaBasePlugin) && ! project.convention.getPlugin(JavaPluginConvention.class).sourceSets.isEmpty()) {
                     SourceSet sourceSet = project.convention.getPlugin(JavaPluginConvention.class).sourceSets.findByName(javaGen.getSourceSetName())
                     if(sourceSet != null) {
-                        if(! sourceSet.java.srcDirs.contains(task.getOutputDirectory())) {
-                            sourceSet.java.srcDir(task.getOutputDirectory())
+                        if(! sourceSet.java.srcDirs.contains(task.getOutputDir())) {
+                            sourceSet.java.srcDir(task.getOutputDir())
                         }
                         project.tasks.getByName(sourceSet.compileJavaTaskName).dependsOn(task)
                     }
@@ -123,13 +119,10 @@ class JaxbPlugin implements Plugin<Project> {
             JavaToSchemaTask task = project.getTasks().create(schemaGen.getTaskName(), JavaToSchemaTask)
             task.group = JaxbExtension.JAXB_TASK_GROUP
 
-            task.conventionMapping.outputDirectory = {
-                schemaGen.getOutputDir() ?: new File(project.getBuildDir(),
-                        "${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_SCHEMAGEN_OUTPUTPATH}/${schemaGen.getName().replace(' ', '_')}")
-            }
-            task.conventionMapping.sources = { schemaGen.getJavaFiles() }
-            task.conventionMapping.namespaceConfigs = { schemaGen.getNamespaceconfigs() }
-            task.conventionMapping.episode = { schemaGen.getEpisode() }
+            task.setOutputDir(schemaGen.getOutputDirProvider())
+            task.setSources(schemaGen.getJavaFilesProvider())
+            task.setNamespaceConfigs(schemaGen.getNamespaceconfigsProvider())
+            task.setEpisode(schemaGen.getEpisodeProvider())
 
             // add task dependency for main task
             jaxbTask.dependsOn task
@@ -152,13 +145,17 @@ class JaxbPlugin implements Plugin<Project> {
                 .setVisible(false)
                 .setTransitive(false)
                 .setDescription("Jaxb configuration is used for code generation")
-                .defaultDependencies { dependencies  ->
-            DependencyHandler dependencyHandler = project.getDependencies()
-            dependencies.add(dependencyHandler.create('com.sun.xml.bind:jaxb-xjc:' + extension.getXjcVersion()))
-            dependencies.add(dependencyHandler.create('com.sun.xml.bind:jaxb-impl:' + extension.getXjcVersion()))
+                .defaultDependencies(new Action<DependencySet>() {
+            @Override
+            public void execute(DependencySet dependencies ) {
+                DependencyHandler dependencyHandler = project.getDependencies()
 
-            dependencies.add(dependencyHandler.create('com.sun.xml.bind:jaxb-jxc:' + extension.getXjcVersion()))
-            dependencies.add(dependencyHandler.create('com.sun.xml.bind:jaxb-core:' + extension.getXjcVersion()))
-        }
+                dependencies.add(dependencyHandler.create('com.sun.xml.bind:jaxb-xjc:' + extension.getXjcVersion()))
+                dependencies.add(dependencyHandler.create('com.sun.xml.bind:jaxb-impl:' + extension.getXjcVersion()))
+
+                dependencies.add(dependencyHandler.create('com.sun.xml.bind:jaxb-jxc:' + extension.getXjcVersion()))
+                dependencies.add(dependencyHandler.create('com.sun.xml.bind:jaxb-core:' + extension.getXjcVersion()))
+            }
+        })
     }
 }

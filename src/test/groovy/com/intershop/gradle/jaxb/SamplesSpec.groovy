@@ -41,7 +41,7 @@ class SamplesSpec extends AbstractIntegrationSpec {
                     test01 {
                         schema = file('test01/test.xsd')
                         catalog = file('test01/catalog.cat')
-                        packageName = ''
+                        packageName = 'test01'
                     }
                     test02 {
                         packageName = 'primer.po'
@@ -50,16 +50,18 @@ class SamplesSpec extends AbstractIntegrationSpec {
                     test03 {
                         binding = file('test03/binding.xjb')
                         schema = file('test03/po.xsd')
+                        packageName = 'test03'
                     }
                     test04 {
                         binding = file('test04/binding.xjb')
                         schema = file('test04/example.xsd')
+                        packageName = 'test04'
                     }
                     test05 {
                         schema = file('test05/po.xsd')
                         packageName = 'primer.test05.myPo'
                         extension = true
-                        arg('-Xsync-methods')
+                        args('-Xsync-methods')
                     }
                 }
             }
@@ -128,8 +130,8 @@ class SamplesSpec extends AbstractIntegrationSpec {
 
         fileExists('build/generated/jaxb/java/test/Foo.java')
         fileExists('build/generated/jaxb/java/test/ObjectFactory.java')
-        fileExists('build/classes/main/Foo.class')
-        fileExists('build/classes/main/ObjectFactory.class')
+        fileExists('build/classes/java/main/Foo.class')
+        fileExists('build/classes/java/main/ObjectFactory.class')
 
         where:
         gradleVersion << supportedGradleVersions
@@ -176,7 +178,7 @@ class SamplesSpec extends AbstractIntegrationSpec {
         result.task(':compileJava').outcome == SUCCESS
 
         fileExists('build/generated/jaxb/java/test/simple/ObjectFactory.java')
-        fileExists('build/classes/main/simple/ObjectFactory.class')
+        fileExists('build/classes/java/main/simple/ObjectFactory.class')
 
         where:
         gradleVersion << supportedGradleVersions
@@ -220,8 +222,8 @@ class SamplesSpec extends AbstractIntegrationSpec {
 
         fileExists('build/generated/jaxb/java/test/primer/po/PurchaseOrderType.java')
         fileExists('build/generated/jaxb/java/test/primer/po/USAddress.java')
-        fileExists('build/classes/main/primer/po/PurchaseOrderType.class')
-        fileExists('build/classes/main/primer/po/USAddress.class')
+        fileExists('build/classes/java/main/primer/po/PurchaseOrderType.class')
+        fileExists('build/classes/java/main/primer/po/USAddress.class')
 
         where:
         gradleVersion << supportedGradleVersions
@@ -239,10 +241,10 @@ class SamplesSpec extends AbstractIntegrationSpec {
 
             jaxb {
                 javaGen {
-                    test {
+                    testxjc {
                         schema = file('nameCard.dtd')
                         binding = file('nameCard.jaxb')
-                        arg('-dtd')
+                        args('-dtd')
                         packageName = ''
                     }
                 }
@@ -262,13 +264,13 @@ class SamplesSpec extends AbstractIntegrationSpec {
                 .build()
 
         then:
-        result.task(':jaxbJavaGenTest').outcome == SUCCESS
+        result.task(':jaxbJavaGenTestxjc').outcome == SUCCESS
         result.task(':compileJava').outcome == SUCCESS
 
-        fileExists('build/generated/jaxb/java/test/NameCard.java')
-        fileExists('build/generated/jaxb/java/test/NameCards.java')
-        fileExists('build/classes/main/NameCard.class')
-        fileExists('build/classes/main/NameCards.class')
+        fileExists('build/generated/jaxb/java/testxjc/NameCard.java')
+        fileExists('build/generated/jaxb/java/testxjc/NameCards.java')
+        fileExists('build/classes/java/main/NameCard.class')
+        fileExists('build/classes/java/main/NameCards.class')
 
         where:
         gradleVersion << supportedGradleVersions
@@ -313,9 +315,9 @@ class SamplesSpec extends AbstractIntegrationSpec {
         fileExists('build/generated/jaxb/java/test/primer/myPo/ObjectFactory.java')
         fileExists('build/generated/jaxb/java/test/primer/myPo/USAddress.java')
         fileExists('build/generated/jaxb/java/test/primer/myPo/USState.java')
-        fileExists('build/classes/main/primer/myPo/ObjectFactory.class')
-        fileExists('build/classes/main/primer/myPo/USAddress.class')
-        fileExists('build/classes/main/primer/myPo/USState.class')
+        fileExists('build/classes/java/main/primer/myPo/ObjectFactory.class')
+        fileExists('build/classes/java/main/primer/myPo/USAddress.class')
+        fileExists('build/classes/java/main/primer/myPo/USState.class')
 
         where:
         gradleVersion << supportedGradleVersions
@@ -333,7 +335,7 @@ class SamplesSpec extends AbstractIntegrationSpec {
 
             jaxb {
                 javaGen {
-                    test {
+                    testxjc {
                         binding = file('binding.xjb')
                         schema = file('example.xsd')
                     }
@@ -354,15 +356,15 @@ class SamplesSpec extends AbstractIntegrationSpec {
                 .build()
 
         then:
-        result.task(':jaxbJavaGenTest').outcome == SUCCESS
+        result.task(':jaxbJavaGenTestxjc').outcome == SUCCESS
         result.task(':compileJava').outcome == SUCCESS
 
-        fileExists('build/generated/jaxb/java/test/example/Clazz.java')
-        fileExists('build/generated/jaxb/java/test/example/FooBar.java')
-        fileExists('build/generated/jaxb/java/test/example/ObjectFactory.java')
-        fileExists('build/classes/main/example/Clazz.class')
-        fileExists('build/classes/main/example/FooBar.class')
-        fileExists('build/classes/main/example/ObjectFactory.class')
+        fileExists('build/generated/jaxb/java/testxjc/example/Clazz.java')
+        fileExists('build/generated/jaxb/java/testxjc/example/FooBar.java')
+        fileExists('build/generated/jaxb/java/testxjc/example/ObjectFactory.java')
+        fileExists('build/classes/java/main/example/Clazz.class')
+        fileExists('build/classes/java/main/example/FooBar.class')
+        fileExists('build/classes/java/main/example/ObjectFactory.class')
 
         where:
         gradleVersion << supportedGradleVersions
@@ -380,11 +382,11 @@ class SamplesSpec extends AbstractIntegrationSpec {
 
             jaxb {
                 javaGen {
-                    test {
+                    testxjc {
                         schema = file('po.xsd')
                         packageName = 'primer.myPo'
                         extension = true
-                        arg('-Xlocator')
+                        args('-Xlocator')
                     }
                 }
             }
@@ -407,17 +409,17 @@ class SamplesSpec extends AbstractIntegrationSpec {
                 .build()
 
         then:
-        result.task(':jaxbJavaGenTest').outcome == SUCCESS
+        result.task(':jaxbJavaGenTestxjc').outcome == SUCCESS
         result.task(':compileJava').outcome == SUCCESS
 
-        fileExists('build/generated/jaxb/java/test/primer/myPo/ObjectFactory.java')
-        fileExists('build/classes/main/primer/myPo/ObjectFactory.class')
-        fileExists('build/generated/jaxb/java/test/primer/myPo/Items.java')
-        fileExists('build/classes/main/primer/myPo/Items.class')
-        fileExists('build/generated/jaxb/java/test/primer/myPo/PurchaseOrderType.java')
-        fileExists('build/classes/main/primer/myPo/PurchaseOrderType.class')
-        fileExists('build/generated/jaxb/java/test/primer/myPo/USAddress.java')
-        fileExists('build/classes/main/primer/myPo/USAddress.class')
+        fileExists('build/generated/jaxb/java/testxjc/primer/myPo/ObjectFactory.java')
+        fileExists('build/classes/java/main/primer/myPo/ObjectFactory.class')
+        fileExists('build/generated/jaxb/java/testxjc/primer/myPo/Items.java')
+        fileExists('build/classes/java/main/primer/myPo/Items.class')
+        fileExists('build/generated/jaxb/java/testxjc/primer/myPo/PurchaseOrderType.java')
+        fileExists('build/classes/java/main/primer/myPo/PurchaseOrderType.class')
+        fileExists('build/generated/jaxb/java/testxjc/primer/myPo/USAddress.java')
+        fileExists('build/classes/java/main/primer/myPo/USAddress.class')
 
         where:
         gradleVersion << supportedGradleVersions
@@ -435,11 +437,11 @@ class SamplesSpec extends AbstractIntegrationSpec {
 
             jaxb {
                 javaGen {
-                    test {
+                    testxjc {
                         schema = file('po.xsd')
                         packageName = 'primer.myPo'
                         extension = true
-                        arg('-Xsync-methods')
+                        args('-Xsync-methods')
                     }
                 }
             }
@@ -458,17 +460,17 @@ class SamplesSpec extends AbstractIntegrationSpec {
                 .build()
 
         then:
-        result.task(':jaxbJavaGenTest').outcome == SUCCESS
+        result.task(':jaxbJavaGenTestxjc').outcome == SUCCESS
         result.task(':compileJava').outcome == SUCCESS
 
-        fileExists('build/generated/jaxb/java/test/primer/myPo/ObjectFactory.java')
-        fileExists('build/classes/main/primer/myPo/ObjectFactory.class')
-        fileExists('build/generated/jaxb/java/test/primer/myPo/Items.java')
-        fileExists('build/classes/main/primer/myPo/Items.class')
-        fileExists('build/generated/jaxb/java/test/primer/myPo/PurchaseOrderType.java')
-        fileExists('build/classes/main/primer/myPo/PurchaseOrderType.class')
-        fileExists('build/generated/jaxb/java/test/primer/myPo/USAddress.java')
-        fileExists('build/classes/main/primer/myPo/USAddress.class')
+        fileExists('build/generated/jaxb/java/testxjc/primer/myPo/ObjectFactory.java')
+        fileExists('build/classes/java/main/primer/myPo/ObjectFactory.class')
+        fileExists('build/generated/jaxb/java/testxjc/primer/myPo/Items.java')
+        fileExists('build/classes/java/main/primer/myPo/Items.class')
+        fileExists('build/generated/jaxb/java/testxjc/primer/myPo/PurchaseOrderType.java')
+        fileExists('build/classes/java/main/primer/myPo/PurchaseOrderType.class')
+        fileExists('build/generated/jaxb/java/testxjc/primer/myPo/USAddress.java')
+        fileExists('build/classes/java/main/primer/myPo/USAddress.class')
 
         where:
         gradleVersion << supportedGradleVersions
@@ -511,21 +513,21 @@ class SamplesSpec extends AbstractIntegrationSpec {
         result.task(':compileJava').outcome == SUCCESS
 
         fileExists('build/generated/jaxb/java/test/com/example/ipo/ObjectFactory.java')
-        fileExists('build/classes/main/com/example/ipo/ObjectFactory.class')
+        fileExists('build/classes/java/main/com/example/ipo/ObjectFactory.class')
         fileExists('build/generated/jaxb/java/test/com/example/ipo/Address.java')
-        fileExists('build/classes/main/com/example/ipo/Address.class')
+        fileExists('build/classes/java/main/com/example/ipo/Address.class')
         fileExists('build/generated/jaxb/java/test/com/example/ipo/Items.java')
-        fileExists('build/classes/main/com/example/ipo/Items.class')
+        fileExists('build/classes/java/main/com/example/ipo/Items.class')
         fileExists('build/generated/jaxb/java/test/com/example/ipo/PurchaseOrderType.java')
-        fileExists('build/classes/main/com/example/ipo/PurchaseOrderType.class')
+        fileExists('build/classes/java/main/com/example/ipo/PurchaseOrderType.class')
         fileExists('build/generated/jaxb/java/test/com/example/ipo/UKAddress.java')
-        fileExists('build/classes/main/com/example/ipo/UKAddress.class')
+        fileExists('build/classes/java/main/com/example/ipo/UKAddress.class')
         fileExists('build/generated/jaxb/java/test/com/example/ipo/USAddress.java')
-        fileExists('build/classes/main/com/example/ipo/USAddress.class')
+        fileExists('build/classes/java/main/com/example/ipo/USAddress.class')
         fileExists('build/generated/jaxb/java/test/com/example/ipo/USState.java')
-        fileExists('build/classes/main/com/example/ipo/USState.class')
+        fileExists('build/classes/java/main/com/example/ipo/USState.class')
         fileExists('build/generated/jaxb/java/test/com/example/ipo/USTaxExemptPurchaseOrderType.java')
-        fileExists('build/classes/main/com/example/ipo/USTaxExemptPurchaseOrderType.class')
+        fileExists('build/classes/java/main/com/example/ipo/USTaxExemptPurchaseOrderType.class')
 
         where:
         gradleVersion << supportedGradleVersions
@@ -568,11 +570,11 @@ class SamplesSpec extends AbstractIntegrationSpec {
         result.task(':compileJava').outcome == SUCCESS
 
         fileExists('build/generated/jaxb/java/test/org/oasis/ubl/order/ObjectFactory.java')
-        fileExists('build/classes/main/org/oasis/ubl/order/ObjectFactory.class')
+        fileExists('build/classes/java/main/org/oasis/ubl/order/ObjectFactory.class')
         dirExists('build/generated/jaxb/java/test/org/oasis/ubl/codelist')
-        dirExists('build/classes/main/org/oasis/ubl/codelist')
+        dirExists('build/classes/java/main/org/oasis/ubl/codelist')
         dirExists('build/generated/jaxb/java/test/org/oasis/ubl/orderchange')
-        dirExists('build/classes/main/org/oasis/ubl/orderchange')
+        dirExists('build/classes/java/main/org/oasis/ubl/orderchange')
 
         where:
         gradleVersion << supportedGradleVersions
@@ -616,13 +618,13 @@ class SamplesSpec extends AbstractIntegrationSpec {
         result.task(':compileJava').outcome == SUCCESS
 
         fileExists('build/generated/jaxb/java/test/primer/myPo/ObjectFactory.java')
-        fileExists('build/classes/main/primer/myPo/ObjectFactory.class')
+        fileExists('build/classes/java/main/primer/myPo/ObjectFactory.class')
         fileExists('build/generated/jaxb/java/test/primer/myPo/Items.java')
-        fileExists('build/classes/main/primer/myPo/Items.class')
+        fileExists('build/classes/java/main/primer/myPo/Items.class')
         fileExists('build/generated/jaxb/java/test/primer/myPo/PurchaseOrderType.java')
-        fileExists('build/classes/main/primer/myPo/PurchaseOrderType.class')
+        fileExists('build/classes/java/main/primer/myPo/PurchaseOrderType.class')
         fileExists('build/generated/jaxb/java/test/primer/myPo/USAddress.java')
-        fileExists('build/classes/main/primer/myPo/USAddress.class')
+        fileExists('build/classes/java/main/primer/myPo/USAddress.class')
 
         where:
         gradleVersion << supportedGradleVersions

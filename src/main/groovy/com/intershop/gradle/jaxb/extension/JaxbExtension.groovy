@@ -15,12 +15,14 @@
  */
 package com.intershop.gradle.jaxb.extension
 
+import groovy.transform.CompileStatic
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 
 /**
  * This extension provides the container for all jaxb related configurations.
  */
+@CompileStatic
 class JaxbExtension {
 
     /**
@@ -87,8 +89,8 @@ class JaxbExtension {
             xjcVersion = XJC_DEFAULT_VERSION
         }
 
-        schemaGen = project.container(JavaToSchema)
-        javaGen = project.container(SchemaToJava)
+        schemaGen = project.container(JavaToSchema, new JavaToSchemaFactory(project))
+        javaGen = project.container(SchemaToJava, new SchemaToJavaFactory(project))
     }
 
     /**

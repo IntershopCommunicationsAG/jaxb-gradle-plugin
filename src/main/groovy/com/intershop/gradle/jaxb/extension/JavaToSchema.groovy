@@ -15,46 +15,104 @@
  */
 package com.intershop.gradle.jaxb.extension
 
+import groovy.transform.CompileStatic
 import org.gradle.api.Named
+import org.gradle.api.Project
 import org.gradle.api.file.FileCollection
+import org.gradle.api.provider.PropertyState
+import org.gradle.api.provider.Provider
 import org.gradle.util.GUtil
 
 /**
  * Java to schema extension
  * This is the configuration for schema generation.
  */
+@CompileStatic
 class JavaToSchema implements Named {
 
-    JavaToSchema() {
-        this.name = "schemaGenConfig"
-    }
-
-    JavaToSchema(String name) {
-        this.name = name
-    }
-
+    final Project project
     String name
 
     /**
      * Java files are the base for the generation
      */
-    FileCollection javaFiles
+    private final PropertyState<FileCollection> javaFiles
+
+    Provider<FileCollection> getJavaFilesProvider() {
+        return javaFiles
+    }
+
+    FileCollection getJavaFiles() {
+        return javaFiles.get()
+    }
+
+    void setJavaFiles(FileCollection javaFiles) {
+        this.javaFiles.set(javaFiles)
+    }
 
     /**
      * A map of name space configurations
      */
-    Map<String, String> namespaceconfigs
+    private final PropertyState<Map<String, String>> namespaceconfigs
+
+    Provider<Map<String, String>> getNamespaceconfigsProvider() {
+        return namespaceconfigs
+    }
+
+    Map<String, String> getNamespaceconfigs() {
+        return namespaceconfigs.get()
+    }
+
+    void setNamespaceconfigs(Map<String, String> namespaceconfigs) {
+        this.namespaceconfigs.set(namespaceconfigs)
+    }
 
     /**
      * Special parameters see schemagen documentation
      */
-    String episode
+    private final PropertyState<String> episode
+
+    Provider<String> getEpisodeProvider() {
+        return episode
+    }
+
+    String getEpisode() {
+        return episode.get()
+    }
+
+    void setEpisode(String episode) {
+        this.episode.set(episode)
+    }
 
     /**
      * Output directory
      */
-    File outputDir
+    private final PropertyState<File> outputDir
 
+    Provider<File> getOutputDirProvider() {
+        return outputDir
+    }
+
+    File getOutputDir() {
+        return outputDir.get()
+    }
+
+    void setOutputDir(File outputDir) {
+        this.outputDir.set(outputDir)
+    }
+
+    JavaToSchema(Project project, String name) {
+        this.project = project
+        this.name = name
+
+        javaFiles = project.property(FileCollection)
+        namespaceconfigs = project.property(Map)
+        episode = project.property(String)
+        outputDir = project.property(File)
+
+        setOutputDir(new File(project.getBuildDir(),
+                "${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_SCHEMAGEN_OUTPUTPATH}/${name.replace(' ', '_')}"))
+    }
     /**
      * Calculates the task name
      *

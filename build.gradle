@@ -8,23 +8,20 @@ plugins {
     // ide plugin
     id 'idea'
 
-    // intershop test plugin
-    id 'com.intershop.gradle.test' version '2.1.0'
-
-    // plugin for documentation
-    id 'org.asciidoctor.convert' version '1.5.3'
-
     // publish plugin
     id 'maven-publish'
 
     // intershop version plugin
-    id 'com.intershop.gradle.scmversion' version '2.1.0'
+    id 'com.intershop.gradle.scmversion' version '3.0.0'
+
+    // plugin for documentation
+    id 'org.asciidoctor.convert' version '1.5.3'
 
     // plugin for publishing to Gradle Portal
-    id 'com.gradle.plugin-publish' version '0.9.5'
+    id 'com.gradle.plugin-publish' version '0.9.9'
 
     // plugin for publishing to jcenter
-    id 'com.jfrog.bintray' version '1.7.1'
+    id 'com.jfrog.bintray' version '1.7.3'
 }
 
 scm {
@@ -47,13 +44,13 @@ if (project.version.endsWith('-SNAPSHOT')) {
 }
 
 test {
-    if(project.hasProperty('nexusURL') && project.hasProperty('nexusUser') && project.hasProperty('nexusPasswd')) {
-        systemProperty 'nexus_url_config', project.nexusURL
-        systemProperty 'nexus_user_config', project.nexusUser
-        systemProperty 'nexus_passwd_config', project.nexusPasswd
+    if(project.hasProperty('repoURL') && project.hasProperty('repoUser') && project.hasProperty('repoPasswd')) {
+        systemProperty 'repo_url_config', project.nexusURL
+        systemProperty 'repo_user_config', project.nexusUser
+        systemProperty 'repo_passwd_config', project.nexusPasswd
     }
     // Gradle versions for test
-    systemProperty 'intershop.gradle.versions', '2.11, 3.1'
+    systemProperty 'intershop.gradle.versions', '4.2.1'
 }
 
 task copyAsciiDoc {
@@ -209,10 +206,9 @@ pluginBundle {
 }
 
 dependencies {
-    testCompile('org.spockframework:spock-core:1.0-groovy-2.4'){
-        exclude group: 'org.codehaus.groovy'
-    }
     testCompile 'commons-io:commons-io:2.2'
+    testCompile 'com.intershop.gradle.test:test-gradle-plugin:3.0.0'
+    testCompile gradleTestKit()
 }
 
 repositories {

@@ -15,150 +15,344 @@
  */
 package com.intershop.gradle.jaxb.extension
 
+import groovy.transform.CompileStatic
 import org.gradle.api.Named
+import org.gradle.api.Project
 import org.gradle.api.file.FileCollection
+import org.gradle.api.provider.PropertyState
+import org.gradle.api.provider.Provider
 import org.gradle.util.GUtil
+
 /**
  * Schema to extension
  * This is the configuration for java generation.
  */
+@CompileStatic
 class SchemaToJava implements Named {
 
-    SchemaToJava() {
-        this.name = "javaGenConfig"
-    }
-
-    SchemaToJava(String name) {
-        this.name = name
-    }
-
+    final Project project
     String name
 
     /**
      * Encoding configuration
+     * Default value is UTF-8
      */
-    String encoding
+    private final PropertyState<String> encoding
+
+    Provider<String> getEncodingProvider() {
+        return encoding
+    }
 
     String getEncoding() {
-        if(! this.encoding) {
-            return 'UTF-8'
-        } else {
-            this.encoding
-        }
+        return encoding.get()
+    }
+
+    void setEncoding(String encoding) {
+        this.encoding.set(encoding)
     }
 
     /**
      * Special configuration, see xjc configuration
+     * Default value is true
      */
-    boolean strictValidation = true
+    private final PropertyState<Boolean> strictValidation
+
+    Provider<Boolean> getStrictValidationProvider() {
+        return strictValidation
+    }
+
+    boolean getStrictValidation() {
+        return strictValidation.get()
+    }
+
+    void setStrictValidation(boolean strictValidation) {
+        this.strictValidation.set(strictValidation)
+    }
 
     /**
      * Special configuration, see xjc configuration
+     * Default value is false
      */
-    boolean extension = false
+    private final PropertyState<Boolean> extension
+
+    Provider<Boolean> getExtensionProvider() {
+        return extension
+    }
+
+    boolean getExtension() {
+        return extension.get()
+    }
+
+    void setExtension(boolean extension) {
+        this.extension.set(extension)
+    }
 
     /**
      * Special configuration, see xjc configuration
+     * Default value is true
      */
-    boolean header = true
+    private final PropertyState<Boolean> header
+
+    Provider<Boolean> getHeaderProvider() {
+        return header
+    }
+
+    boolean getHeader() {
+        return header.get()
+    }
+
+    void setHeader(boolean header) {
+        this.header.set(header)
+    }
 
     /**
      * Package name of the generated code
      */
-    String packageName
+    private final PropertyState<String> packageName
+
+    Provider<String> getPackageNameProvider() {
+        return packageName
+    }
+
+    String getPackageName() {
+        return packageName.get()
+    }
+
+    void setPackageName(String packageName) {
+        this.packageName.set(packageName)
+    }
 
     /**
      * Single schema file
      */
-    File schema
+    private final PropertyState<File> schema
+
+    Provider<File> getSchemaProvider() {
+        return schema
+    }
+
+    File getSchema() {
+        return schema.get()
+    }
+
+    void setSchema(File schema) {
+        this.schema.set(schema)
+    }
 
     /**
      * Single binding file
      */
-    File binding
+    private final PropertyState<File> binding
+
+    Provider<File> getBindingProvider() {
+        return binding
+    }
+
+    File getBinding() {
+        return binding.get()
+    }
+
+    void setBinding(File binding) {
+        this.binding.set(binding)
+    }
 
     /**
      * Single catalog file
      */
-    File catalog
+    private final PropertyState<File> catalog
+
+    Provider<File> getCatalogProvider() {
+        return catalog
+    }
+
+    File getCatalog() {
+        return catalog.get()
+    }
+
+    void setCatalog(File catalog) {
+        this.catalog.set(catalog)
+    }
 
     /**
      * Schema files
      */
-    FileCollection schemas
+    private final PropertyState<FileCollection> schemas
+
+    Provider<FileCollection> getSchemasProvider() {
+        return schemas
+    }
+
+    FileCollection getSchemas() {
+        return schemas.get()
+    }
+
+    void setSchemas(FileCollection schemas) {
+        this.schemas.set(schemas)
+    }
 
     /**
      * Binding files
      */
-    FileCollection bindings
+    private final PropertyState<FileCollection> bindings
+
+    Provider<FileCollection> getBindingsProvider() {
+        return bindings
+    }
+
+    FileCollection getBindings() {
+        return bindings.get()
+    }
+
+    void setBindings(FileCollection bindings) {
+        this.bindings.set(bindings)
+    }
 
     /**
      * Output path
      */
-    File outputDir
+    private final PropertyState<File> outputDir
+
+    Provider<File> getOutputDirProvider() {
+        return outputDir
+    }
+
+    File getOutputDir() {
+        return outputDir.get()
+    }
+
+    void setOutputDir(File outputDir) {
+        this.outputDir.set(outputDir)
+    }
 
     /**
      * Target version for code generatation, see xjc configuration
      * default value is 2.2
      */
-    String targetVersion
+    private final PropertyState<String> targetVersion
+
+    Provider<String> getTargetVersionProvider() {
+        return targetVersion
+    }
 
     String getTargetVersion() {
-        if(! this.targetVersion) {
-            return '2.2'
-        } else {
-            return this.targetVersion
-        }
+        return targetVersion.get()
+    }
+
+    void setTargetVersion(String targetVersion) {
+        this.targetVersion.set(targetVersion)
     }
 
     /**
      * Language version for code generatation, see xjc configuration
      * default value is XMLSCHEMA
      */
-    String language
+    private final PropertyState<String> language
+
+    Provider<String> getLanguageProvider() {
+        return language
+    }
 
     String getLanguage() {
-        if(! this.language) {
-            return 'XMLSCHEMA'
-        } else {
-            return this.language
-        }
+        return language.get()
+    }
+
+    void setLanguage(String language) {
+        this.language.set(language)
     }
 
     /**
      * Name of the source set for generated Java code
-     * default value is 'main'
+     * default value is 'main' (JaxbExtension.DEFAULT_SOURCESET_NAME)
      */
-    String sourceSetName
+    private final PropertyState<String> sourceSetName
+
+    Provider<String> getSourceSetNameProvider() {
+        return sourceSetName
+    }
 
     String getSourceSetName() {
-        if(! this.sourceSetName) {
-            return JaxbExtension.DEFAULT_SOURCESET_NAME
-        } else {
-            return this.sourceSetName
-        }
+        return sourceSetName.get()
+    }
+
+    void setSourceSetName(String sourceSetName) {
+        this.sourceSetName.set(sourceSetName)
     }
 
     /**
-     * Additional ars for xjc
+     * Additional args for xjc
      */
-    def args = []
+    private final PropertyState<List<String>> argsProvider
 
-    void arg(String parameter) {
-        args.add(parameter)
+    Provider<List<String>> getArgsProvider() {
+        return argsProvider
+    }
+
+    List<String> getArgs() {
+        return argsProvider.get()
+    }
+
+    void setArgs(List<String> args) {
+        this.argsProvider.set(args)
+    }
+
+    void args(String paramater) {
+        argsProvider.get().add(paramater)
     }
 
     /**
      * The class name of the Ant task backing the Gradle task.
+     * Default value is JaxbExtension.DEFAULT_ANT_TASK_CLASS_NAME
      */
-    String antTaskClassName;
+    private final PropertyState<String> antTaskClassName
+
+    Provider<String> getAntTaskClassNameProvider() {
+        return antTaskClassName
+    }
 
     String getAntTaskClassName() {
-        if(! this.antTaskClassName) {
-            return JaxbExtension.DEFAULT_ANT_TASK_CLASS_NAME;
-        } else {
-            return this.antTaskClassName;
-        }
+        return antTaskClassName.get()
+    }
+
+    void setAntTaskClassName(String antTaskClassName) {
+        this.antTaskClassName.set(antTaskClassName)
+    }
+
+    SchemaToJava(Project project, String name) {
+        this.project = project
+        this.name = name
+
+        encoding = project.property(String)
+        strictValidation = project.property(Boolean)
+        extension = project.property(Boolean)
+        header = project.property(Boolean)
+        packageName = project.property(String)
+        schema = project.property(File)
+        binding = project.property(File)
+        catalog = project.property(File)
+        schemas = project.property(FileCollection)
+        bindings = project.property(FileCollection)
+        outputDir = project.property(File)
+        targetVersion = project.property(String)
+        language = project.property(String)
+        sourceSetName = project.property(String)
+        argsProvider = project.property(List)
+        antTaskClassName = project.property(String)
+
+        setEncoding('UTF-8')
+
+        setStrictValidation(true)
+        setExtension(false)
+        setHeader(true)
+        setArgs([])
+
+        setOutputDir(new File(project.getBuildDir(),
+                "${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_JAVAGEN_OUTPUTPATH}/${name.replace(' ', '_')}"))
+
+        setTargetVersion('2.2')
+        setLanguage('XMLSCHEMA')
+        setSourceSetName(JaxbExtension.DEFAULT_SOURCESET_NAME)
+
+        setAntTaskClassName(JaxbExtension.DEFAULT_ANT_TASK_CLASS_NAME)
     }
 
     /**
