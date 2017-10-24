@@ -22,6 +22,7 @@ import groovy.util.logging.Slf4j
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileTree
 import org.gradle.api.file.FileCollection
+import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.PropertyState
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.*
@@ -33,18 +34,18 @@ import org.gradle.api.tasks.*
 @Slf4j
 class JavaToSchemaTask extends DefaultTask {
 
-    final PropertyState<File> outputDir = project.property(File)
+    final PropertyState<RegularFile> outputDir = project.property(RegularFile)
 
     @OutputDirectory
-    File getOutputDir() {
+    RegularFile getOutputDir() {
         return outputDir.get()
     }
 
-    void setOutputDir(File outputDir) {
+    void setOutputDir(RegularFile outputDir) {
         this.outputDir.set(outputDir)
     }
 
-    void setOutputDir(Provider<File> outputDir) {
+    void setOutputDir(Provider<RegularFile> outputDir) {
         this.outputDir.set(outputDir)
     }
 

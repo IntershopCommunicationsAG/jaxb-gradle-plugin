@@ -19,6 +19,7 @@ import com.intershop.gradle.jaxb.extension.JaxbExtension
 import com.intershop.gradle.test.AbstractIntegrationSpec
 
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS as SUCCESS
+import static org.gradle.testkit.runner.TaskOutcome.UP_TO_DATE as UP_TO_DATE
 
 class SamplesSpec extends AbstractIntegrationSpec {
 
@@ -87,6 +88,20 @@ class SamplesSpec extends AbstractIntegrationSpec {
         result.task(':jaxbJavaGenTest05').outcome == SUCCESS
         result.task(':compileJava').outcome == SUCCESS
 
+        when:
+        def resultSec = getPreparedGradleRunner()
+                .withArguments(args)
+                .withGradleVersion(gradleVersion)
+                .build()
+
+        then:
+        resultSec.task(':jaxbJavaGenTest01').outcome == UP_TO_DATE
+        resultSec.task(':jaxbJavaGenTest02').outcome == UP_TO_DATE
+        resultSec.task(':jaxbJavaGenTest03').outcome == UP_TO_DATE
+        resultSec.task(':jaxbJavaGenTest04').outcome == UP_TO_DATE
+        resultSec.task(':jaxbJavaGenTest05').outcome == UP_TO_DATE
+        resultSec.task(':compileJava').outcome == UP_TO_DATE
+
         where:
         gradleVersion << supportedGradleVersions
     }
@@ -132,6 +147,54 @@ class SamplesSpec extends AbstractIntegrationSpec {
         fileExists('build/generated/jaxb/java/test/ObjectFactory.java')
         fileExists('build/classes/java/main/Foo.class')
         fileExists('build/classes/java/main/ObjectFactory.class')
+
+        where:
+        gradleVersion << supportedGradleVersions
+    }
+
+    def 'Test catalog-resolver with different build dir - xjc'() {
+        given:
+        copyResources('samples/catalog-resolver')
+
+        buildFile << """
+            plugins {
+                id 'java'
+                id 'com.intershop.gradle.jaxb'
+            }
+            
+            buildDir =  file('target')
+
+            jaxb {
+                javaGen {
+                    test {
+                        schema = file('test.xsd')
+                        catalog = file('catalog.cat')
+                        packageName = ''
+                    }
+                }
+            }
+
+            repositories {
+                mavenCentral()
+            }
+        """.stripIndent()
+
+        when:
+        List<String> args = ['compileJava', '-s', '-i']
+
+        def result = getPreparedGradleRunner()
+                .withArguments(args)
+                .withGradleVersion(gradleVersion)
+                .build()
+
+        then:
+        result.task(':jaxbJavaGenTest').outcome == SUCCESS
+        result.task(':compileJava').outcome == SUCCESS
+
+        fileExists('target/generated/jaxb/java/test/Foo.java')
+        fileExists('target/generated/jaxb/java/test/ObjectFactory.java')
+        fileExists('target/classes/java/main/Foo.class')
+        fileExists('target/classes/java/main/ObjectFactory.class')
 
         where:
         gradleVersion << supportedGradleVersions

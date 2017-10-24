@@ -19,9 +19,12 @@ import groovy.transform.CompileStatic
 import org.gradle.api.Named
 import org.gradle.api.Project
 import org.gradle.api.file.FileCollection
+import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.PropertyState
 import org.gradle.api.provider.Provider
 import org.gradle.util.GUtil
+
+import javax.inject.Inject
 
 /**
  * Schema to extension
@@ -210,17 +213,17 @@ class SchemaToJava implements Named {
     /**
      * Output path
      */
-    private final PropertyState<File> outputDir
+    private final PropertyState<RegularFile> outputDir
 
-    Provider<File> getOutputDirProvider() {
+    Provider<RegularFile> getOutputDirProvider() {
         return outputDir
     }
 
-    File getOutputDir() {
+    RegularFile getOutputDir() {
         return outputDir.get()
     }
 
-    void setOutputDir(File outputDir) {
+    void setOutputDir(RegularFile outputDir) {
         this.outputDir.set(outputDir)
     }
 
@@ -331,7 +334,7 @@ class SchemaToJava implements Named {
         catalog = project.property(File)
         schemas = project.property(FileCollection)
         bindings = project.property(FileCollection)
-        outputDir = project.property(File)
+        outputDir = project.property(RegularFile)
         targetVersion = project.property(String)
         language = project.property(String)
         sourceSetName = project.property(String)
@@ -345,8 +348,7 @@ class SchemaToJava implements Named {
         setHeader(true)
         setArgs([])
 
-        setOutputDir(new File(project.getBuildDir(),
-                "${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_JAVAGEN_OUTPUTPATH}/${name.replace(' ', '_')}"))
+        outputDir.set(project.getLayout().getBuildDirectory().file("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_JAVAGEN_OUTPUTPATH}/${name.replace(' ', '_')}"))
 
         setTargetVersion('2.2')
         setLanguage('XMLSCHEMA')

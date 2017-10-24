@@ -21,6 +21,7 @@ import groovy.transform.TypeCheckingMode
 import groovy.util.logging.Slf4j
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.FileCollection
+import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.PropertyState
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.*
@@ -32,18 +33,18 @@ import org.gradle.api.tasks.*
 @Slf4j
 class SchemaToJavaTask extends DefaultTask {
 
-    final PropertyState<File> outputDir = project.property(File)
+    final PropertyState<RegularFile> outputDir = project.property(RegularFile)
 
     @OutputDirectory
-    File getOutputDir() {
+    RegularFile getOutputDir() {
         return outputDir.get()
     }
 
-    void setOutputDir(File outputDir) {
+    void setOutputDir(RegularFile outputDir) {
         this.outputDir.set(outputDir)
     }
 
-    void setOutputDir(Provider<File> outputDir) {
+    void setOutputDir(Provider<RegularFile> outputDir) {
         this.outputDir.set(outputDir)
     }
 
@@ -305,7 +306,7 @@ class SchemaToJavaTask extends DefaultTask {
                 classname : getAntTaskClassName(),
                 classpath : jaxbConfiguration.asPath)
 
-        def args = [destdir	        : getOutputDir(),
+        def args = [destdir	        : getOutputDir().asFile,
                     language        : getLanguage(),
                     encoding        : getEncoding(),
                     header	        : getHeader(),

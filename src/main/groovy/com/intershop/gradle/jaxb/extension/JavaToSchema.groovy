@@ -19,6 +19,7 @@ import groovy.transform.CompileStatic
 import org.gradle.api.Named
 import org.gradle.api.Project
 import org.gradle.api.file.FileCollection
+import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.PropertyState
 import org.gradle.api.provider.Provider
 import org.gradle.util.GUtil
@@ -85,19 +86,19 @@ class JavaToSchema implements Named {
     }
 
     /**
-     * Output directory
+     * Output path
      */
-    private final PropertyState<File> outputDir
+    private final PropertyState<RegularFile> outputDir
 
-    Provider<File> getOutputDirProvider() {
+    Provider<RegularFile> getOutputDirProvider() {
         return outputDir
     }
 
-    File getOutputDir() {
+    RegularFile getOutputDir() {
         return outputDir.get()
     }
 
-    void setOutputDir(File outputDir) {
+    void setOutputDir(RegularFile outputDir) {
         this.outputDir.set(outputDir)
     }
 
@@ -108,11 +109,12 @@ class JavaToSchema implements Named {
         javaFiles = project.property(FileCollection)
         namespaceconfigs = project.property(Map)
         episode = project.property(String)
-        outputDir = project.property(File)
+        outputDir = project.property(RegularFile)
 
-        setOutputDir(new File(project.getBuildDir(),
-                "${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_SCHEMAGEN_OUTPUTPATH}/${name.replace(' ', '_')}"))
+        outputDir.set(project.getLayout().getBuildDirectory().
+                file("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_SCHEMAGEN_OUTPUTPATH}/${name.replace(' ', '_')}"))
     }
+
     /**
      * Calculates the task name
      *
