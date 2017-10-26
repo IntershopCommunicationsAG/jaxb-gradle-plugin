@@ -15,9 +15,11 @@
  */
 package com.intershop.gradle.jaxb.extension
 
+import groovy.transform.CompileStatic
 import org.gradle.api.NamedDomainObjectFactory
 import org.gradle.api.Project
 
+@CompileStatic
 class SchemaToJavaFactory implements NamedDomainObjectFactory<SchemaToJava> {
 
     final Project project;
