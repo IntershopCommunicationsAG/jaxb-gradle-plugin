@@ -89,17 +89,17 @@ class JavaToSchema implements Named {
     /**
      * Output path
      */
-    private final Property<Directory> outputDir
+    private final Property<File> outputDir
 
-    Provider<Directory> getOutputDirProvider() {
+    Provider<File> getOutputDirProvider() {
         return outputDir
     }
 
-    Directory getOutputDir() {
+    File getOutputDir() {
         return outputDir.get()
     }
 
-    void setOutputDir(Directory outputDir) {
+    void setOutputDir(File outputDir) {
         this.outputDir.set(outputDir)
     }
 
@@ -110,10 +110,10 @@ class JavaToSchema implements Named {
         javaFiles = project.objects.property(FileCollection)
         namespaceconfigs = project.objects.property(Map)
         episode = project.objects.property(String)
-        outputDir = project.objects.property(Directory)
+        outputDir = project.objects.property(File)
 
         outputDir.set(project.getLayout().getBuildDirectory().
-                dir("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_SCHEMAGEN_OUTPUTPATH}/${name.replace(' ', '_')}"))
+                dir("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_SCHEMAGEN_OUTPUTPATH}/${name.replace(' ', '_')}").get().asFile)
     }
 
     /**

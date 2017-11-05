@@ -34,18 +34,18 @@ import org.gradle.api.tasks.*
 @Slf4j
 class SchemaToJavaTask extends DefaultTask {
 
-    final Property<Directory> outputDir = project.objects.property(Directory)
+    final Property<File> outputDir = project.objects.property(File)
 
     @OutputDirectory
-    Directory getOutputDir() {
+    File getOutputDir() {
         return outputDir.get()
     }
 
-    void setOutputDir(Directory outputDir) {
+    void setOutputDir(File outputDir) {
         this.outputDir.set(outputDir)
     }
 
-    void setOutputDir(Provider<Directory> outputDir) {
+    void setOutputDir(Provider<File> outputDir) {
         this.outputDir.set(outputDir)
     }
 
@@ -282,7 +282,7 @@ class SchemaToJavaTask extends DefaultTask {
                 classname : getAntTaskClassName(),
                 classpath : jaxbConfiguration.asPath)
 
-        def args = [destdir	        : getOutputDir().asFile,
+        def args = [destdir	        : getOutputDir(),
                     language        : getLanguage(),
                     encoding        : getEncoding(),
                     header	        : getHeader(),

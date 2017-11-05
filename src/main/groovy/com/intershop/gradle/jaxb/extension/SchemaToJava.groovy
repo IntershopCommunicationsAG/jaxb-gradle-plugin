@@ -215,17 +215,17 @@ class SchemaToJava implements Named {
     /**
      * Output path
      */
-    private final Property<Directory> outputDir
+    private final Property<File> outputDir
 
-    Provider<Directory> getOutputDirProvider() {
+    Provider<File> getOutputDirProvider() {
         return outputDir
     }
 
-    Directory getOutputDir() {
+    File getOutputDir() {
         return outputDir.get()
     }
 
-    void setOutputDir(Directory outputDir) {
+    void setOutputDir(File outputDir) {
         this.outputDir.set(outputDir)
     }
 
@@ -336,7 +336,7 @@ class SchemaToJava implements Named {
         catalog = project.objects.property(File)
         schemas = project.objects.property(FileCollection)
         bindings = project.objects.property(FileCollection)
-        outputDir = project.objects.property(Directory)
+        outputDir = project.objects.property(File)
         targetVersion = project.objects.property(String)
         language = project.objects.property(String)
         sourceSetName = project.objects.property(String)
@@ -350,7 +350,7 @@ class SchemaToJava implements Named {
         setHeader(true)
         setArgs([])
 
-        outputDir.set(project.getLayout().getBuildDirectory().dir("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_JAVAGEN_OUTPUTPATH}/${name.replace(' ', '_')}"))
+        outputDir.set(project.getLayout().getBuildDirectory().dir("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_JAVAGEN_OUTPUTPATH}/${name.replace(' ', '_')}").get().asFile)
 
         setTargetVersion('2.2')
         setLanguage('XMLSCHEMA')
