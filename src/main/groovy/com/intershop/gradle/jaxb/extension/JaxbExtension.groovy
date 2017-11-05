@@ -81,7 +81,7 @@ class JaxbExtension {
      *
      * @param project
      */
-    public JaxbExtension(Project project) {
+    JaxbExtension(Project project) {
 
         this.project = project
 

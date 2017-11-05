@@ -50,7 +50,7 @@ class JaxbPlugin implements Plugin<Project> {
         project.logger.info('Create extension {} for {}', JaxbExtension.JAXB_EXTENSION_NAME, project.name)
         extension = project.extensions.findByType(JaxbExtension) ?:  project.extensions.create(JaxbExtension.JAXB_EXTENSION_NAME, JaxbExtension, project)
 
-        addConfiguration(project, extension)
+        addConfiguration(project)
 
         Task jaxbTask = project.tasks.findByName('jaxb')
         if(! jaxbTask) {
@@ -136,7 +136,7 @@ class JaxbPlugin implements Plugin<Project> {
      * @param project
      * @param extension
      */
-    private void addConfiguration(final Project project, JaxbExtension extension) {
+    private void addConfiguration(final Project project) {
         final Configuration configuration =
                 project.getConfigurations().findByName(JaxbExtension.JAXB_CONFIGURATION_NAME) ?:
                 project.getConfigurations().create(JaxbExtension.JAXB_CONFIGURATION_NAME)
@@ -147,7 +147,7 @@ class JaxbPlugin implements Plugin<Project> {
                 .setDescription("Jaxb configuration is used for code generation")
                 .defaultDependencies(new Action<DependencySet>() {
             @Override
-            public void execute(DependencySet dependencies ) {
+            void execute(DependencySet dependencies ) {
                 DependencyHandler dependencyHandler = project.getDependencies()
 
                 dependencies.add(dependencyHandler.create('com.sun.xml.bind:jaxb-xjc:' + extension.getXjcVersion()))

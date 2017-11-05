@@ -18,9 +18,11 @@ package com.intershop.gradle.jaxb.extension
 import groovy.transform.CompileStatic
 import org.gradle.api.Named
 import org.gradle.api.Project
+import org.gradle.api.file.Directory
 import org.gradle.api.file.FileCollection
 import org.gradle.api.file.RegularFile
-import org.gradle.api.provider.PropertyState
+import org.gradle.api.provider.ListProperty
+import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.util.GUtil
 
@@ -40,7 +42,7 @@ class SchemaToJava implements Named {
      * Encoding configuration
      * Default value is UTF-8
      */
-    private final PropertyState<String> encoding
+    private final Property<String> encoding
 
     Provider<String> getEncodingProvider() {
         return encoding
@@ -58,7 +60,7 @@ class SchemaToJava implements Named {
      * Special configuration, see xjc configuration
      * Default value is true
      */
-    private final PropertyState<Boolean> strictValidation
+    private final Property<Boolean> strictValidation
 
     Provider<Boolean> getStrictValidationProvider() {
         return strictValidation
@@ -76,7 +78,7 @@ class SchemaToJava implements Named {
      * Special configuration, see xjc configuration
      * Default value is false
      */
-    private final PropertyState<Boolean> extension
+    private final Property<Boolean> extension
 
     Provider<Boolean> getExtensionProvider() {
         return extension
@@ -94,7 +96,7 @@ class SchemaToJava implements Named {
      * Special configuration, see xjc configuration
      * Default value is true
      */
-    private final PropertyState<Boolean> header
+    private final Property<Boolean> header
 
     Provider<Boolean> getHeaderProvider() {
         return header
@@ -111,7 +113,7 @@ class SchemaToJava implements Named {
     /**
      * Package name of the generated code
      */
-    private final PropertyState<String> packageName
+    private final Property<String> packageName
 
     Provider<String> getPackageNameProvider() {
         return packageName
@@ -128,7 +130,7 @@ class SchemaToJava implements Named {
     /**
      * Single schema file
      */
-    private final PropertyState<File> schema
+    private final Property<File> schema
 
     Provider<File> getSchemaProvider() {
         return schema
@@ -145,7 +147,7 @@ class SchemaToJava implements Named {
     /**
      * Single binding file
      */
-    private final PropertyState<File> binding
+    private final Property<File> binding
 
     Provider<File> getBindingProvider() {
         return binding
@@ -162,7 +164,7 @@ class SchemaToJava implements Named {
     /**
      * Single catalog file
      */
-    private final PropertyState<File> catalog
+    private final Property<File> catalog
 
     Provider<File> getCatalogProvider() {
         return catalog
@@ -179,7 +181,7 @@ class SchemaToJava implements Named {
     /**
      * Schema files
      */
-    private final PropertyState<FileCollection> schemas
+    private final Property<FileCollection> schemas
 
     Provider<FileCollection> getSchemasProvider() {
         return schemas
@@ -196,7 +198,7 @@ class SchemaToJava implements Named {
     /**
      * Binding files
      */
-    private final PropertyState<FileCollection> bindings
+    private final Property<FileCollection> bindings
 
     Provider<FileCollection> getBindingsProvider() {
         return bindings
@@ -213,17 +215,17 @@ class SchemaToJava implements Named {
     /**
      * Output path
      */
-    private final PropertyState<RegularFile> outputDir
+    private final Property<Directory> outputDir
 
-    Provider<RegularFile> getOutputDirProvider() {
+    Provider<Directory> getOutputDirProvider() {
         return outputDir
     }
 
-    RegularFile getOutputDir() {
+    Directory getOutputDir() {
         return outputDir.get()
     }
 
-    void setOutputDir(RegularFile outputDir) {
+    void setOutputDir(Directory outputDir) {
         this.outputDir.set(outputDir)
     }
 
@@ -231,7 +233,7 @@ class SchemaToJava implements Named {
      * Target version for code generatation, see xjc configuration
      * default value is 2.2
      */
-    private final PropertyState<String> targetVersion
+    private final Property<String> targetVersion
 
     Provider<String> getTargetVersionProvider() {
         return targetVersion
@@ -249,7 +251,7 @@ class SchemaToJava implements Named {
      * Language version for code generatation, see xjc configuration
      * default value is XMLSCHEMA
      */
-    private final PropertyState<String> language
+    private final Property<String> language
 
     Provider<String> getLanguageProvider() {
         return language
@@ -267,7 +269,7 @@ class SchemaToJava implements Named {
      * Name of the source set for generated Java code
      * default value is 'main' (JaxbExtension.DEFAULT_SOURCESET_NAME)
      */
-    private final PropertyState<String> sourceSetName
+    private final Property<String> sourceSetName
 
     Provider<String> getSourceSetNameProvider() {
         return sourceSetName
@@ -284,7 +286,7 @@ class SchemaToJava implements Named {
     /**
      * Additional args for xjc
      */
-    private final PropertyState<List<String>> argsProvider
+    private final Property<List<String>> argsProvider
 
     Provider<List<String>> getArgsProvider() {
         return argsProvider
@@ -306,7 +308,7 @@ class SchemaToJava implements Named {
      * The class name of the Ant task backing the Gradle task.
      * Default value is JaxbExtension.DEFAULT_ANT_TASK_CLASS_NAME
      */
-    private final PropertyState<String> antTaskClassName
+    private final Property<String> antTaskClassName
 
     Provider<String> getAntTaskClassNameProvider() {
         return antTaskClassName
@@ -324,22 +326,22 @@ class SchemaToJava implements Named {
         this.project = project
         this.name = name
 
-        encoding = project.property(String)
-        strictValidation = project.property(Boolean)
-        extension = project.property(Boolean)
-        header = project.property(Boolean)
-        packageName = project.property(String)
-        schema = project.property(File)
-        binding = project.property(File)
-        catalog = project.property(File)
-        schemas = project.property(FileCollection)
-        bindings = project.property(FileCollection)
-        outputDir = project.property(RegularFile)
-        targetVersion = project.property(String)
-        language = project.property(String)
-        sourceSetName = project.property(String)
-        argsProvider = project.property(List)
-        antTaskClassName = project.property(String)
+        encoding = project.objects.property(String)
+        strictValidation = project.objects.property(Boolean)
+        extension = project.objects.property(Boolean)
+        header = project.objects.property(Boolean)
+        packageName = project.objects.property(String)
+        schema = project.objects.property(File)
+        binding = project.objects.property(File)
+        catalog = project.objects.property(File)
+        schemas = project.objects.property(FileCollection)
+        bindings = project.objects.property(FileCollection)
+        outputDir = project.objects.property(Directory)
+        targetVersion = project.objects.property(String)
+        language = project.objects.property(String)
+        sourceSetName = project.objects.property(String)
+        argsProvider = project.objects.property(List)
+        antTaskClassName = project.objects.property(String)
 
         setEncoding('UTF-8')
 
@@ -348,7 +350,7 @@ class SchemaToJava implements Named {
         setHeader(true)
         setArgs([])
 
-        outputDir.set(project.getLayout().getBuildDirectory().file("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_JAVAGEN_OUTPUTPATH}/${name.replace(' ', '_')}"))
+        outputDir.set(project.getLayout().getBuildDirectory().dir("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_JAVAGEN_OUTPUTPATH}/${name.replace(' ', '_')}"))
 
         setTargetVersion('2.2')
         setLanguage('XMLSCHEMA')
@@ -363,6 +365,6 @@ class SchemaToJava implements Named {
      * @return task name with prefix jaxbJavaGen
      */
     String getTaskName() {
-        return "jaxbJavaGen" + GUtil.toCamelCase(name);
+        return "jaxbJavaGen" + GUtil.toCamelCase(name)
     }
 }

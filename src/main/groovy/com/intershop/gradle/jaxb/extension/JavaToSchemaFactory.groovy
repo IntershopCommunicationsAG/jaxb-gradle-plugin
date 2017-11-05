@@ -22,7 +22,7 @@ import org.gradle.api.Project
 @CompileStatic
 class JavaToSchemaFactory implements NamedDomainObjectFactory<JavaToSchema> {
 
-    final Project project;
+    final Project project
 
     JavaToSchemaFactory(Project project) {
         this.project = project

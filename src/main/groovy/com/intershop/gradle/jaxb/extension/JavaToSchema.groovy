@@ -18,9 +18,10 @@ package com.intershop.gradle.jaxb.extension
 import groovy.transform.CompileStatic
 import org.gradle.api.Named
 import org.gradle.api.Project
+import org.gradle.api.file.Directory
 import org.gradle.api.file.FileCollection
 import org.gradle.api.file.RegularFile
-import org.gradle.api.provider.PropertyState
+import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.util.GUtil
 
@@ -37,7 +38,7 @@ class JavaToSchema implements Named {
     /**
      * Java files are the base for the generation
      */
-    private final PropertyState<FileCollection> javaFiles
+    private final Property<FileCollection> javaFiles
 
     Provider<FileCollection> getJavaFilesProvider() {
         return javaFiles
@@ -54,7 +55,7 @@ class JavaToSchema implements Named {
     /**
      * A map of name space configurations
      */
-    private final PropertyState<Map<String, String>> namespaceconfigs
+    private final Property<Map<String, String>> namespaceconfigs
 
     Provider<Map<String, String>> getNamespaceconfigsProvider() {
         return namespaceconfigs
@@ -71,7 +72,7 @@ class JavaToSchema implements Named {
     /**
      * Special parameters see schemagen documentation
      */
-    private final PropertyState<String> episode
+    private final Property<String> episode
 
     Provider<String> getEpisodeProvider() {
         return episode
@@ -88,17 +89,17 @@ class JavaToSchema implements Named {
     /**
      * Output path
      */
-    private final PropertyState<RegularFile> outputDir
+    private final Property<Directory> outputDir
 
-    Provider<RegularFile> getOutputDirProvider() {
+    Provider<Directory> getOutputDirProvider() {
         return outputDir
     }
 
-    RegularFile getOutputDir() {
+    Directory getOutputDir() {
         return outputDir.get()
     }
 
-    void setOutputDir(RegularFile outputDir) {
+    void setOutputDir(Directory outputDir) {
         this.outputDir.set(outputDir)
     }
 
@@ -106,13 +107,13 @@ class JavaToSchema implements Named {
         this.project = project
         this.name = name
 
-        javaFiles = project.property(FileCollection)
-        namespaceconfigs = project.property(Map)
-        episode = project.property(String)
-        outputDir = project.property(RegularFile)
+        javaFiles = project.objects.property(FileCollection)
+        namespaceconfigs = project.objects.property(Map)
+        episode = project.objects.property(String)
+        outputDir = project.objects.property(Directory)
 
         outputDir.set(project.getLayout().getBuildDirectory().
-                file("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_SCHEMAGEN_OUTPUTPATH}/${name.replace(' ', '_')}"))
+                dir("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_SCHEMAGEN_OUTPUTPATH}/${name.replace(' ', '_')}"))
     }
 
     /**
@@ -121,6 +122,6 @@ class JavaToSchema implements Named {
      * @return task name with prefix jaxbSchemaGen
      */
     String getTaskName() {
-        return "jaxbSchemaGen" + GUtil.toCamelCase(name);
+        return "jaxbSchemaGen" + GUtil.toCamelCase(name)
     }
 }

@@ -20,9 +20,10 @@ import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import groovy.util.logging.Slf4j
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.Directory
 import org.gradle.api.file.FileCollection
-import org.gradle.api.file.RegularFile
-import org.gradle.api.provider.PropertyState
+import org.gradle.api.provider.ListProperty
+import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.*
 
@@ -33,31 +34,27 @@ import org.gradle.api.tasks.*
 @Slf4j
 class SchemaToJavaTask extends DefaultTask {
 
-    final PropertyState<RegularFile> outputDir = project.property(RegularFile)
+    final Property<Directory> outputDir = project.objects.property(Directory)
 
     @OutputDirectory
-    RegularFile getOutputDir() {
+    Directory getOutputDir() {
         return outputDir.get()
     }
 
-    void setOutputDir(RegularFile outputDir) {
+    void setOutputDir(Directory outputDir) {
         this.outputDir.set(outputDir)
     }
 
-    void setOutputDir(Provider<RegularFile> outputDir) {
+    void setOutputDir(Provider<Directory> outputDir) {
         this.outputDir.set(outputDir)
     }
 
-    final PropertyState<File> schema = project.property(File)
+    final Property<File> schema = project.objects.property(File)
 
     @Optional
     @InputFile
     File getSchema() {
-        try {
-            return schema.get()
-        } catch(IllegalStateException ex) {
-            return null
-        }
+        schema.getOrNull()
     }
 
     void setSchema(File schema) {
@@ -68,16 +65,12 @@ class SchemaToJavaTask extends DefaultTask {
         this.schema.set(schema)
     }
 
-    final PropertyState<File> binding = project.property(File)
+    final Property<File> binding = project.objects.property(File)
 
     @Optional
     @InputFile
     File getBinding() {
-        try {
-            return binding.get()
-        } catch(IllegalStateException ex) {
-            return null
-        }
+        binding.getOrNull()
     }
 
     void setBinding(File binding) {
@@ -88,16 +81,12 @@ class SchemaToJavaTask extends DefaultTask {
         this.binding.set(binding)
     }
 
-    final PropertyState<File> catalog = project.property(File)
+    final Property<File> catalog = project.objects.property(File)
 
     @Optional
     @InputFile
     File getCatalog() {
-        try {
-            return catalog.get()
-        } catch(IllegalStateException ex) {
-            return null
-        }
+        catalog.getOrNull()
     }
 
     void setCatalog(File catalog) {
@@ -108,16 +97,12 @@ class SchemaToJavaTask extends DefaultTask {
         this.catalog.set(catalog)
     }
 
-    final PropertyState<FileCollection> schemas = project.property(FileCollection)
+    final Property<FileCollection> schemas = project.objects.property(FileCollection)
 
     @Optional
     @InputFiles
     FileCollection getSchemas() {
-        try {
-            return schemas.get()
-        } catch(IllegalStateException ex) {
-            return null
-        }
+        schemas.getOrNull()
     }
 
     void setSchemas(FileCollection schemas) {
@@ -128,16 +113,12 @@ class SchemaToJavaTask extends DefaultTask {
         this.schemas.set(schemas)
     }
 
-    final PropertyState<FileCollection> bindings = project.property(FileCollection)
+    final Property<FileCollection> bindings = project.objects.property(FileCollection)
 
     @Optional
     @InputFiles
     FileCollection getBindings() {
-        try {
-            return bindings.get()
-        } catch(IllegalStateException ex) {
-            return null
-        }
+        bindings.getOrNull()
     }
 
     void setBindings(FileCollection bindings) {
@@ -148,17 +129,12 @@ class SchemaToJavaTask extends DefaultTask {
         this.bindings.set(bindings)
     }
 
-    final PropertyState<String> packageName = project.property(String)
+    final Property<String> packageName = project.objects.property(String)
 
     @Optional
     @Input
     String getPackageName() {
-        try {
-            return packageName.get()
-        } catch (IllegalStateException ex) {
-            return null
-        }
-
+        packageName.getOrNull()
     }
 
     void setPackageName(String packageName) {
@@ -169,7 +145,7 @@ class SchemaToJavaTask extends DefaultTask {
         this.packageName.set(packageName)
     }
 
-    final PropertyState<Boolean> strictValidation = project.property(Boolean)
+    final Property<Boolean> strictValidation = project.objects.property(Boolean)
 
     @Optional
     @Input
@@ -185,7 +161,7 @@ class SchemaToJavaTask extends DefaultTask {
         this.strictValidation.set(strictValidation)
     }
 
-    final PropertyState<String> targetVersion = project.property(String)
+    final Property<String> targetVersion = project.objects.property(String)
 
     @Optional
     @Input
@@ -201,7 +177,7 @@ class SchemaToJavaTask extends DefaultTask {
         this.targetVersion.set(targetVersion)
     }
 
-    final PropertyState<String> encoding = project.property(String)
+    final Property<String> encoding = project.objects.property(String)
 
     @Optional
     @Input
@@ -217,7 +193,7 @@ class SchemaToJavaTask extends DefaultTask {
         this.encoding.set(encoding)
     }
 
-    final PropertyState<Boolean> header = project.property(Boolean)
+    final Property<Boolean> header = project.objects.property(Boolean)
 
     @Optional
     @Input
@@ -233,7 +209,7 @@ class SchemaToJavaTask extends DefaultTask {
         this.header.set(header)
     }
 
-    final PropertyState<Boolean> extension = project.property(Boolean)
+    final Property<Boolean> extension = project.objects.property(Boolean)
 
     @Optional
     @Input
@@ -249,7 +225,7 @@ class SchemaToJavaTask extends DefaultTask {
         this.extension.set(extension)
     }
 
-    final PropertyState<String> language = project.property(String)
+    final Property<String> language = project.objects.property(String)
 
     @Optional
     @Input
@@ -265,7 +241,7 @@ class SchemaToJavaTask extends DefaultTask {
         this.language.set(language)
     }
 
-    final PropertyState<List<String>> parameters = project.property(List)
+    final ListProperty<String> parameters = project.objects.listProperty(String)
 
     @Optional
     @Input
@@ -281,7 +257,7 @@ class SchemaToJavaTask extends DefaultTask {
         this.parameters.set(parameters)
     }
 
-    final PropertyState<String> antTaskClassName = project.property(String)
+    final Property<String> antTaskClassName = project.objects.property(String)
 
     @Input
     String getAntTaskClassName() {
@@ -330,9 +306,6 @@ class SchemaToJavaTask extends DefaultTask {
             log.info('Arguments for xjc: {}', args)
         }
 
-        if(! getStrictValidation()) {
-            getParameters() << '-nv'
-        }
 
         synchronized (SchemaToJavaTask.class) {
             log.info(' -> Locked XJC Gradle Task to prevent the parallel execution!')
@@ -350,6 +323,9 @@ class SchemaToJavaTask extends DefaultTask {
                     getParameters()?.each {
                         arg(value: it)
                     }
+                }
+                if(! getStrictValidation()) {
+                    arg(value: '-nv')
                 }
                 if (log.isDebugEnabled()) {
                     arg(value: '-debug')

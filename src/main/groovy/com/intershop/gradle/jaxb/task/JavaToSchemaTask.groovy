@@ -21,9 +21,10 @@ import groovy.transform.TypeCheckingMode
 import groovy.util.logging.Slf4j
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileTree
+import org.gradle.api.file.Directory
 import org.gradle.api.file.FileCollection
 import org.gradle.api.file.RegularFile
-import org.gradle.api.provider.PropertyState
+import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.*
 
@@ -34,22 +35,22 @@ import org.gradle.api.tasks.*
 @Slf4j
 class JavaToSchemaTask extends DefaultTask {
 
-    final PropertyState<RegularFile> outputDir = project.property(RegularFile)
+    final Property<Directory> outputDir = project.objects.property(Directory)
 
     @OutputDirectory
-    RegularFile getOutputDir() {
+    Directory getOutputDir() {
         return outputDir.get()
     }
 
-    void setOutputDir(RegularFile outputDir) {
+    void setOutputDir(Directory outputDir) {
         this.outputDir.set(outputDir)
     }
 
-    void setOutputDir(Provider<RegularFile> outputDir) {
+    void setOutputDir(Provider<Directory> outputDir) {
         this.outputDir.set(outputDir)
     }
 
-    final PropertyState<FileCollection> sources = project.property(FileCollection)
+    final Property<FileCollection> sources = project.objects.property(FileCollection)
 
     @InputFiles
     FileCollection getSources() {
@@ -64,16 +65,12 @@ class JavaToSchemaTask extends DefaultTask {
         this.sources.set(sources)
     }
 
-    final PropertyState<Map<String, String>> namespaceConfigs = project.property(Map)
+    final Property<Map<String, String>> namespaceConfigs = project.objects.property(Map)
 
     @Optional
     @Input
     Map<String,String> getNamespaceConfigs() {
-        try {
-            return namespaceConfigs.get()
-        }catch (IllegalStateException ex) {
-            return null
-        }
+        namespaceConfigs.getOrNull()
     }
 
     void setNamespaceConfigs(Map<String, String> namespaceConfigs) {
@@ -84,16 +81,12 @@ class JavaToSchemaTask extends DefaultTask {
         this.namespaceConfigs.set(namespaceConfigs)
     }
 
-    final PropertyState<String> episode = project.property(String)
+    final Property<String> episode = project.objects.property(String)
 
     @Optional
     @Input
     String getEpisode() {
-        try {
-            return episode.get()
-        }catch (IllegalStateException ex) {
-            return null
-        }
+        episode.getOrNull()
     }
 
     void setEpisode(String episode) {
