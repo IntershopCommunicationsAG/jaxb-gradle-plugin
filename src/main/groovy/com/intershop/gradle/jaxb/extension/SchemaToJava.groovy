@@ -35,8 +35,8 @@ import javax.inject.Inject
 @CompileStatic
 class SchemaToJava implements Named {
 
-    final Project project
-    String name
+    private final Project project
+    final String name
 
     /**
      * Encoding configuration
@@ -285,7 +285,7 @@ class SchemaToJava implements Named {
 
     /**
      * Additional args for xjc
-     */
+    */
     private final Property<List<String>> argsProvider
 
     Provider<List<String>> getArgsProvider() {

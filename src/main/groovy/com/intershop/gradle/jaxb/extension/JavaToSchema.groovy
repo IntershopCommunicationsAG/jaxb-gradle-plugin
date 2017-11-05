@@ -32,8 +32,8 @@ import org.gradle.util.GUtil
 @CompileStatic
 class JavaToSchema implements Named {
 
-    final Project project
-    String name
+    private final Project project
+    final String name
 
     /**
      * Java files are the base for the generation
