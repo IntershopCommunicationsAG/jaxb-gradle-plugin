@@ -768,6 +768,57 @@ class SamplesSpec extends AbstractIntegrationSpec {
         gradleVersion << supportedGradleVersions
     }
 
+    def 'Test j2s-xmlAdapter - schemagen - change file name'() {
+        given:
+        copyResources('samples/j2s-xmlAdapter')
+
+        buildFile << """
+            plugins {
+                id 'java'
+                id 'com.intershop.gradle.jaxb'
+            }
+
+            jaxb {
+                schemaGen {
+                    test {
+                        javaFiles = fileTree(dir: 'src',
+                                             include: '**/**/*.java',
+                                             excludes: [ 'Main.java', 'shoppingCart/AdapterPurchaseListToHashMap.java'] )
+                        namespaceconfigs = [ '' : 'shoppingCart.xsd' ]
+                    }
+                }
+            }
+
+            repositories {
+                mavenCentral()
+            }
+        """.stripIndent()
+
+        when:
+        List<String> args = ['jaxb', '-s', '-d']
+
+        def result = getPreparedGradleRunner()
+                .withArguments(args)
+                .withGradleVersion(gradleVersion)
+                .build()
+
+        File schemaFile = new File(testProjectDir, 'build/generated/jaxb/schema/test/shoppingCart.xsd')
+
+        then:
+        result.task(':jaxbSchemaGenTest').outcome == SUCCESS
+
+        schemaFile.exists()
+        ! schemaFile.text.contains('name="main"')
+        schemaFile.text.contains('kitchenWorldBasket')
+        schemaFile.text.contains('purchaseList')
+        schemaFile.text.contains('KitchenWorldBasketType')
+        schemaFile.text.contains('PurchaseListType')
+
+        where:
+        gradleVersion << supportedGradleVersions
+    }
+
+
     def 'Test j2s-namespaceconfig - schemagen with extended configuration'() {
         given:
         copyResources('samples/j2c-namespaceconfig')
