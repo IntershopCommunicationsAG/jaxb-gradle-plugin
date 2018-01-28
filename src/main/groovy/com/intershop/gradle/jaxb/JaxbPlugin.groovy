@@ -16,10 +16,10 @@
 package com.intershop.gradle.jaxb
 
 import com.intershop.gradle.jaxb.extension.JavaToSchema
+import com.intershop.gradle.jaxb.extension.JaxbExtension
 import com.intershop.gradle.jaxb.extension.SchemaToJava
 import com.intershop.gradle.jaxb.task.JavaToSchemaTask
 import com.intershop.gradle.jaxb.task.SchemaToJavaTask
-import com.intershop.gradle.jaxb.extension.JaxbExtension
 import groovy.transform.CompileStatic
 import org.gradle.api.Action
 import org.gradle.api.Plugin

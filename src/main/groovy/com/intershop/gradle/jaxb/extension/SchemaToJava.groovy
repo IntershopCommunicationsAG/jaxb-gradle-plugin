@@ -18,18 +18,11 @@ package com.intershop.gradle.jaxb.extension
 import groovy.transform.CompileStatic
 import org.gradle.api.Named
 import org.gradle.api.Project
-import org.gradle.api.file.ConfigurableFileCollection
-import org.gradle.api.file.Directory
-import org.gradle.api.file.DirectoryProperty
-import org.gradle.api.file.FileCollection
-import org.gradle.api.file.RegularFile
-import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.file.*
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.util.GUtil
-
-import javax.inject.Inject
 
 /**
  * Schema to extension
