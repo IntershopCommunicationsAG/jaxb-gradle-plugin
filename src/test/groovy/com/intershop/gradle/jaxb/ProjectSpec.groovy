@@ -44,7 +44,7 @@ class ProjectSpec extends AbstractIntegrationSpec {
                         binding = file('staticfiles/definition/gcdm-customer-binding.xjb')
                         strictValidation = false
                         extension = true
-                        args.addAll(addArgs)
+                        args(addArgs)
                         schemas = fileTree(dir: 'staticfiles/definition', include: '**/**/*.xsd')
                     }
                 }

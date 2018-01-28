@@ -18,9 +18,11 @@ package com.intershop.gradle.jaxb.extension
 import groovy.transform.CompileStatic
 import org.gradle.api.Named
 import org.gradle.api.Project
+import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.Directory
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.FileCollection
-import org.gradle.api.file.RegularFile
+import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.util.GUtil
@@ -34,30 +36,66 @@ class JavaToSchema implements Named {
 
     private final Project project
     final String name
-
+    
     /**
-     * Java files are the base for the generation
+     * Input path
      */
-    private final Property<FileCollection> javaFiles
+    private final DirectoryProperty inputDir
 
-    Provider<FileCollection> getJavaFilesProvider() {
-        return javaFiles
+    Provider<Directory> getInputDirProvider() {
+        return inputDir
     }
 
-    FileCollection getJavaFiles() {
-        return javaFiles.get()
+    Directory getInputDir() {
+        return inputDir.get()
     }
 
-    void setJavaFiles(FileCollection javaFiles) {
-        this.javaFiles.set(javaFiles)
+    void setInputDir(File inputDir) {
+        this.inputDir.set(inputDir)
+    }
+    
+    private final ListProperty<String> excludes
+    
+    Provider<List<String>> getExcludesProvider() {
+        return excludes
+    }
+    
+    List<String> getExcludes() {
+        return excludes.get()
+    }
+    
+    void setExcludes(List<String> excludes) {
+        this.excludes.set(excludes)
+    }
+
+    void exclude(String exclude) {
+        excludes.add(exclude)
+    }
+
+    private final ListProperty<String> includes
+    
+    Provider<List<String>> getIncludesProvider() {
+        return includes
+    }
+    
+    List<String> getIncludes() {
+        return includes.get()
+    }
+    
+    void setIncludes(List<String> includes) {
+        this.includes.set(includes)
+    }
+
+    void include(String include) {
+        includes.add(include)
     }
 
     /**
      * A map of name space configurations
      */
-    private final Property<Map<String, String>> namespaceconfigs
+    private final Property<Map> namespaceconfigs
 
-    Provider<Map<String, String>> getNamespaceconfigsProvider() {
+    Provider<Map> getNamespaceconfigsProvider() {
         return namespaceconfigs
     }
 
@@ -65,7 +103,7 @@ class JavaToSchema implements Named {
         return namespaceconfigs.get()
     }
 
-    void setNamespaceconfigs(Map<String, String> namespaceconfigs) {
+    void setNamespaceconfigs(Map namespaceconfigs) {
         this.namespaceconfigs.set(namespaceconfigs)
     }
 
@@ -87,15 +125,32 @@ class JavaToSchema implements Named {
     }
 
     /**
+     * Special parameters for classpath calculation
+     */
+    private final ListProperty<String> configurationNames
+
+    Provider<List<String>> getConfigurationNamesProvider() {
+        return configurationNames
+    }
+
+    List<String> getConfigurationNames() {
+        return configurationNames.get()
+    }
+
+    void setConfigurationNames(List<String> configurations) {
+        configurationNames.set(configurations)
+    }
+
+    /**
      * Output path
      */
-    private final Property<File> outputDir
+    private final DirectoryProperty outputDir
 
-    Provider<File> getOutputDirProvider() {
+    Provider<Directory> getOutputDirProvider() {
         return outputDir
     }
 
-    File getOutputDir() {
+    Directory getOutputDir() {
         return outputDir.get()
     }
 
@@ -107,13 +162,22 @@ class JavaToSchema implements Named {
         this.project = project
         this.name = name
 
-        javaFiles = project.objects.property(FileCollection)
+        inputDir = project.layout.directoryProperty()
+        includes = project.objects.listProperty(String)
+        excludes = project.objects.listProperty(String)
+
         namespaceconfigs = project.objects.property(Map)
         episode = project.objects.property(String)
-        outputDir = project.objects.property(File)
+        outputDir = project.layout.directoryProperty()
+
+        configurationNames = project.objects.listProperty(String)
 
         outputDir.set(project.getLayout().getBuildDirectory().
-                dir("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_SCHEMAGEN_OUTPUTPATH}/${name.replace(' ', '_')}").get().asFile)
+                dir("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_SCHEMAGEN_OUTPUTPATH}/${name.replace(' ', '_')}").get())
+
+        includes.add( '**/**/*.java' )
+
+        configurationNames.set(['default'])
     }
 
     /**

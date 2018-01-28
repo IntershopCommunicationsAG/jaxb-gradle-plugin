@@ -12,7 +12,7 @@ plugins {
     id 'maven-publish'
 
     // intershop version plugin
-    id 'com.intershop.gradle.scmversion' version '3.2.0'
+    id 'com.intershop.gradle.scmversion' version '3.4.0'
 
     // plugin for documentation
     id 'org.asciidoctor.convert' version '1.5.3'
@@ -35,6 +35,15 @@ group 'com.intershop.gradle.jaxb'
 description 'Gradle JAXB code generation plugin'
 version = scm.version.version
 
+gradlePlugin {
+    plugins {
+        jaxbPlugin {
+            id = 'com.intershop.gradle.jaxb'
+            implementationClass = 'com.intershop.gradle.jaxb.JaxbPlugin'
+        }
+    }
+}
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -50,7 +59,7 @@ test {
         systemProperty 'repo_passwd_config', project.nexusPasswd
     }
     // Gradle versions for test
-    systemProperty 'intershop.gradle.versions', '4.3'
+    systemProperty 'intershop.gradle.versions', '4.4.1'
 }
 
 task copyAsciiDoc {
@@ -136,7 +145,7 @@ publishing {
             }
 
             pom.withXml {
-                def Node root = asNode()
+                Node root = asNode()
                 root.appendNode('name', project.name)
                 root.appendNode('description', project.description)
                 root.appendNode('url', "https:/gitlab.intershop.de/IntershopGradlePlugins/${project.name}")
@@ -198,14 +207,25 @@ pluginBundle {
     tags = ['intershop', 'gradle', 'plugin', 'jaxb', 'build', 'code', 'generator']
 
     plugins {
-        gradleTestPlugin {
-            id = 'com.intershop.gradle.jaxb'
+        jaxbPlugin {
+            id = gradlePlugin.plugins.jaxbPlugin.id
             displayName = project.description
         }
     }
 }
 
 dependencies {
+    // necessary for runneable development
+    compileOnly 'com.sun.xml.bind:jaxb-xjc:2.2.11'
+    compileOnly 'com.sun.xml.bind:jaxb-impl:2.2.11'
+    compileOnly 'com.sun.xml.bind:jaxb-jxc:2.2.11'
+    compileOnly 'com.sun.xml.bind:jaxb-core:2.2.11'
+
+    testCompile 'com.sun.xml.bind:jaxb-xjc:2.2.11'
+    testCompile 'com.sun.xml.bind:jaxb-impl:2.2.11'
+    testCompile 'com.sun.xml.bind:jaxb-jxc:2.2.11'
+    testCompile 'com.sun.xml.bind:jaxb-core:2.2.11'
+
     testCompile 'commons-io:commons-io:2.2'
     testCompile 'com.intershop.gradle.test:test-gradle-plugin:3.0.0'
     testCompile gradleTestKit()

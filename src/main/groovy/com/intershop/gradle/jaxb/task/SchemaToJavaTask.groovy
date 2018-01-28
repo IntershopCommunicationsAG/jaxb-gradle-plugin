@@ -15,13 +15,12 @@
  */
 package com.intershop.gradle.jaxb.task
 
-import com.intershop.gradle.jaxb.extension.JaxbExtension
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import groovy.util.logging.Slf4j
 import org.gradle.api.DefaultTask
-import org.gradle.api.file.Directory
-import org.gradle.api.file.FileCollection
+import org.gradle.api.artifacts.Configuration
+import org.gradle.api.file.*
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
@@ -34,10 +33,12 @@ import org.gradle.api.tasks.*
 @Slf4j
 class SchemaToJavaTask extends DefaultTask {
 
-    final Property<File> outputDir = project.objects.property(File)
+    private Configuration jaxbConfiguration
+
+    final DirectoryProperty outputDir = project.layout.directoryProperty()
 
     @OutputDirectory
-    File getOutputDir() {
+    Directory getOutputDir() {
         return outputDir.get()
     }
 
@@ -45,88 +46,103 @@ class SchemaToJavaTask extends DefaultTask {
         this.outputDir.set(outputDir)
     }
 
-    void setOutputDir(Provider<File> outputDir) {
+    void setOutputDir(Provider<Directory> outputDir) {
         this.outputDir.set(outputDir)
     }
 
-    final Property<File> schema = project.objects.property(File)
+    @Classpath
+    Configuration getJaxbConfiguration() {
+        return jaxbConfiguration
+    }
+
+    void setJaxbConfiguration(Configuration jaxbConfiguration) {
+        this.jaxbConfiguration = jaxbConfiguration
+    }
+
+    @Classpath
+    Configuration getClasspathConfiguration() {
+        return getProject().getConfigurations().maybeCreate('xjc')
+    }
+
+    final RegularFileProperty schema = project.layout.fileProperty()
 
     @Optional
     @InputFile
     File getSchema() {
-        schema.getOrNull()
+        if (schema.getOrNull()) {
+            return schema.get().getAsFile()
+        }
+        return null
     }
 
     void setSchema(File schema) {
         this.schema.set(schema)
     }
 
-    void setSchema(Provider<File> schema) {
+    void setSchema(Provider<RegularFile> schema) {
         this.schema.set(schema)
     }
 
-    final Property<File> binding = project.objects.property(File)
+    final RegularFileProperty binding = project.layout.fileProperty()
 
     @Optional
     @InputFile
     File getBinding() {
-        binding.getOrNull()
+        if (binding.getOrNull()) {
+            return binding.get().getAsFile()
+        }
+        return null
     }
 
     void setBinding(File binding) {
         this.binding.set(binding)
     }
 
-    void setBinding(Provider<File> binding) {
+    void setBinding(Provider<RegularFile> binding) {
         this.binding.set(binding)
     }
 
-    final Property<File> catalog = project.objects.property(File)
+    final RegularFileProperty catalog = project.layout.fileProperty()
 
     @Optional
     @InputFile
     File getCatalog() {
-        catalog.getOrNull()
+        if (catalog.getOrNull()) {
+            return catalog.get().getAsFile()
+        }
+        return null
     }
 
     void setCatalog(File catalog) {
         this.catalog.set(catalog)
     }
 
-    void setCatalog(Provider<File> catalog) {
+    void setCatalog(Provider<RegularFile> catalog) {
         this.catalog.set(catalog)
     }
 
-    final Property<FileCollection> schemas = project.objects.property(FileCollection)
+    final ConfigurableFileCollection schemas = project.files()
 
     @Optional
     @InputFiles
     FileCollection getSchemas() {
-        schemas.getOrNull()
+        return schemas
     }
 
     void setSchemas(FileCollection schemas) {
-        this.schemas.set(schemas)
+        this.schemas.from(schemas)
     }
 
-    void setSchemas(Provider<FileCollection> schemas) {
-        this.schemas.set(schemas)
-    }
-
-    final Property<FileCollection> bindings = project.objects.property(FileCollection)
+    final ConfigurableFileCollection bindings = project.files()
 
     @Optional
     @InputFiles
     FileCollection getBindings() {
-        bindings.getOrNull()
+        return bindings
     }
 
     void setBindings(FileCollection bindings) {
-        this.bindings.set(bindings)
-    }
-
-    void setBindings(Provider<FileCollection> bindings) {
-        this.bindings.set(bindings)
+        this.bindings.from(bindings)
     }
 
     final Property<String> packageName = project.objects.property(String)
@@ -134,7 +150,7 @@ class SchemaToJavaTask extends DefaultTask {
     @Optional
     @Input
     String getPackageName() {
-        packageName.getOrNull()
+        return packageName.getOrNull()
     }
 
     void setPackageName(String packageName) {
@@ -275,12 +291,9 @@ class SchemaToJavaTask extends DefaultTask {
     @CompileStatic(TypeCheckingMode.SKIP)
     @TaskAction
     void generate() {
-        FileCollection jaxbConfiguration = getProject().getConfigurations().getAt(JaxbExtension.JAXB_CONFIGURATION_NAME)
-        FileCollection xjcConfiguration = getProject().getConfigurations().maybeCreate('xjc')
-
         ant.taskdef (name : 'xjc',
                 classname : getAntTaskClassName(),
-                classpath : jaxbConfiguration.asPath)
+                classpath : getJaxbConfiguration().asPath)
 
         def args = [destdir	        : getOutputDir(),
                     language        : getLanguage(),
@@ -309,9 +322,10 @@ class SchemaToJavaTask extends DefaultTask {
 
         synchronized (SchemaToJavaTask.class) {
             log.info(' -> Locked XJC Gradle Task to prevent the parallel execution!')
+
             ant.xjc(args) {
-                if (xjcConfiguration) {
-                    xjcConfiguration.addToAntBuilder(ant, 'classpath', FileCollection.AntType.ResourceCollection)
+                if (getClasspathConfiguration()) {
+                    getClasspathConfiguration().addToAntBuilder(ant, 'classpath', FileCollection.AntType.ResourceCollection)
                 }
                 if (getSchemas()) {
                     getSchemas().addToAntBuilder(ant, 'schema', FileCollection.AntType.FileSet)

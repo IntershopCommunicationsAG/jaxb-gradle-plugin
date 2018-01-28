@@ -706,7 +706,8 @@ class SamplesSpec extends AbstractIntegrationSpec {
             jaxb {
                 schemaGen {
                     test {
-                        javaFiles = fileTree(dir: 'src', include: '**/**/*.java', exclude: 'Main.java')
+                        inputDir = file('src')
+                        excludes = [ 'Main.java' ]
                     }
                 }
             }
@@ -717,7 +718,7 @@ class SamplesSpec extends AbstractIntegrationSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ['jaxb', '-s', '-d']
+        List<String> args = ['jaxb', '-s']
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -751,7 +752,8 @@ class SamplesSpec extends AbstractIntegrationSpec {
             jaxb {
                 schemaGen {
                     test {
-                        javaFiles = fileTree(dir: 'src', include: '**/**/*.java', exclude: 'Main.java')
+                        inputDir = file('src')
+                        excludes = [ 'Main.java' ]
                     }
                 }
             }
@@ -762,7 +764,7 @@ class SamplesSpec extends AbstractIntegrationSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ['jaxb', '-s', '-d']
+        List<String> args = ['jaxb', '-s']
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -797,9 +799,8 @@ class SamplesSpec extends AbstractIntegrationSpec {
             jaxb {
                 schemaGen {
                     test {
-                        javaFiles = fileTree(dir: 'src',
-                                             include: '**/**/*.java',
-                                             excludes: [ 'Main.java', 'shoppingCart/AdapterPurchaseListToHashMap.java'] )
+                        inputDir = file('src')
+                        excludes = [ 'Main.java', 'shoppingCart/AdapterPurchaseListToHashMap.java']
                     }
                 }
             }
@@ -810,7 +811,7 @@ class SamplesSpec extends AbstractIntegrationSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ['jaxb', '-s', '-d']
+        List<String> args = ['jaxb', '-s']
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)

@@ -50,7 +50,7 @@ class JaxbPlugin implements Plugin<Project> {
         project.logger.info('Create extension {} for {}', JaxbExtension.JAXB_EXTENSION_NAME, project.name)
         extension = project.extensions.findByType(JaxbExtension) ?:  project.extensions.create(JaxbExtension.JAXB_EXTENSION_NAME, JaxbExtension, project)
 
-        addConfiguration(project)
+        Configuration configuration = getConfiguration(project)
 
         Task jaxbTask = project.tasks.findByName('jaxb')
         if(! jaxbTask) {
@@ -59,8 +59,8 @@ class JaxbPlugin implements Plugin<Project> {
             jaxbTask.description = 'JAXB code generation tasks'
         }
 
-        configureJavaCodeGenTasks(project, jaxbTask)
-        configureSchemaCodeGenTasks(project, jaxbTask)
+        configureJavaCodeGenTasks(project, configuration, jaxbTask)
+        configureSchemaCodeGenTasks(project, configuration, jaxbTask)
     }
 
     /**
@@ -69,17 +69,19 @@ class JaxbPlugin implements Plugin<Project> {
      * @param project
      * @param jaxbTask
      */
-    private void configureJavaCodeGenTasks(Project project, Task jaxbTask) {
+    private void configureJavaCodeGenTasks(Project project, Configuration configuration, Task jaxbTask) {
         extension.getJavaGen().all {SchemaToJava javaGen ->
             SchemaToJavaTask task = project.getTasks().create(javaGen.getTaskName(), SchemaToJavaTask)
             task.group = JaxbExtension.JAXB_TASK_GROUP
 
             task.setOutputDir(javaGen.getOutputDirProvider())
+            task.setJaxbConfiguration(configuration)
+
             task.setSchema(javaGen.getSchemaProvider())
             task.setBinding(javaGen.getBindingProvider())
             task.setCatalog(javaGen.getCatalogProvider())
-            task.setSchemas(javaGen.getSchemasProvider())
-            task.setBindings(javaGen.getBindingsProvider())
+            task.setSchemas(javaGen.getSchemas())
+            task.setBindings(javaGen.getBindings())
             task.setPackageName(javaGen.getPackageNameProvider())
             task.setStrictValidation(javaGen.getStrictValidationProvider())
             task.setHeader(javaGen.getHeaderProvider())
@@ -87,7 +89,7 @@ class JaxbPlugin implements Plugin<Project> {
             task.setEncoding(javaGen.getEncodingProvider())
             task.setExtension(javaGen.getExtensionProvider())
             task.setLanguage(javaGen.getLanguageProvider())
-            task.setParameters(javaGen.getArgsProvider())
+            task.setParameters(javaGen.getArgumentsProvider())
             task.setAntTaskClassName(javaGen.getAntTaskClassNameProvider())
 
             // identify sourceset configuration and add output to sourceset
@@ -114,13 +116,18 @@ class JaxbPlugin implements Plugin<Project> {
      * @param project
      * @param jaxbTask
      */
-    private void configureSchemaCodeGenTasks(Project project, Task jaxbTask) {
+    private void configureSchemaCodeGenTasks(Project project, Configuration configuration, Task jaxbTask) {
         extension.getSchemaGen().all {JavaToSchema schemaGen ->
             JavaToSchemaTask task = project.getTasks().create(schemaGen.getTaskName(), JavaToSchemaTask)
             task.group = JaxbExtension.JAXB_TASK_GROUP
 
             task.setOutputDir(schemaGen.getOutputDirProvider())
-            task.setSources(schemaGen.getJavaFilesProvider())
+            task.setInputDir(schemaGen.getInputDirProvider())
+            task.setIncludes(schemaGen.getIncludesProvider())
+            task.setExcludes(schemaGen.getExcludesProvider())
+
+            task.setJaxbConfiguration(configuration)
+
             task.setNamespaceConfigs(schemaGen.getNamespaceconfigsProvider())
             task.setEpisode(schemaGen.getEpisodeProvider())
 
@@ -136,7 +143,7 @@ class JaxbPlugin implements Plugin<Project> {
      * @param project
      * @param extension
      */
-    private void addConfiguration(final Project project) {
+    private Configuration getConfiguration(final Project project) {
         final Configuration configuration =
                 project.getConfigurations().findByName(JaxbExtension.JAXB_CONFIGURATION_NAME) ?:
                 project.getConfigurations().create(JaxbExtension.JAXB_CONFIGURATION_NAME)
@@ -148,6 +155,7 @@ class JaxbPlugin implements Plugin<Project> {
                 .defaultDependencies(new Action<DependencySet>() {
             @Override
             void execute(DependencySet dependencies ) {
+                // this will be executed if configuration is empty
                 DependencyHandler dependencyHandler = project.getDependencies()
 
                 dependencies.add(dependencyHandler.create('com.sun.xml.bind:jaxb-xjc:' + extension.getXjcVersion()))
@@ -157,5 +165,6 @@ class JaxbPlugin implements Plugin<Project> {
                 dependencies.add(dependencyHandler.create('com.sun.xml.bind:jaxb-core:' + extension.getXjcVersion()))
             }
         })
+        return configuration
     }
 }

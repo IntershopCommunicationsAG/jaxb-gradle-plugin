@@ -18,9 +18,12 @@ package com.intershop.gradle.jaxb.extension
 import groovy.transform.CompileStatic
 import org.gradle.api.Named
 import org.gradle.api.Project
+import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.Directory
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.FileCollection
 import org.gradle.api.file.RegularFile
+import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
@@ -130,13 +133,13 @@ class SchemaToJava implements Named {
     /**
      * Single schema file
      */
-    private final Property<File> schema
+    private final RegularFileProperty schema
 
-    Provider<File> getSchemaProvider() {
+    Provider<RegularFile> getSchemaProvider() {
         return schema
     }
 
-    File getSchema() {
+    RegularFile getSchema() {
         return schema.get()
     }
 
@@ -147,13 +150,13 @@ class SchemaToJava implements Named {
     /**
      * Single binding file
      */
-    private final Property<File> binding
+    private final RegularFileProperty binding
 
-    Provider<File> getBindingProvider() {
+    Provider<RegularFile> getBindingProvider() {
         return binding
     }
 
-    File getBinding() {
+    RegularFile getBinding() {
         return binding.get()
     }
 
@@ -164,13 +167,13 @@ class SchemaToJava implements Named {
     /**
      * Single catalog file
      */
-    private final Property<File> catalog
+    private final RegularFileProperty catalog
 
-    Provider<File> getCatalogProvider() {
+    Provider<RegularFile> getCatalogProvider() {
         return catalog
     }
 
-    File getCatalog() {
+    RegularFile getCatalog() {
         return catalog.get()
     }
 
@@ -181,47 +184,39 @@ class SchemaToJava implements Named {
     /**
      * Schema files
      */
-    private final Property<FileCollection> schemas
+    private final ConfigurableFileCollection schemas
 
-    Provider<FileCollection> getSchemasProvider() {
+    FileCollection getSchemas() {
         return schemas
     }
 
-    FileCollection getSchemas() {
-        return schemas.get()
-    }
-
     void setSchemas(FileCollection schemas) {
-        this.schemas.set(schemas)
+        this.schemas.setFrom(schemas)
     }
 
     /**
      * Binding files
      */
-    private final Property<FileCollection> bindings
+    private final ConfigurableFileCollection bindings
 
-    Provider<FileCollection> getBindingsProvider() {
+    FileCollection getBindings() {
         return bindings
     }
 
-    FileCollection getBindings() {
-        return bindings.get()
-    }
-
     void setBindings(FileCollection bindings) {
-        this.bindings.set(bindings)
+        this.bindings.setFrom(bindings)
     }
 
     /**
      * Output path
      */
-    private final Property<File> outputDir
+    private final DirectoryProperty outputDir
 
-    Provider<File> getOutputDirProvider() {
+    Provider<Directory> getOutputDirProvider() {
         return outputDir
     }
 
-    File getOutputDir() {
+    Directory getOutputDir() {
         return outputDir.get()
     }
 
@@ -286,22 +281,28 @@ class SchemaToJava implements Named {
     /**
      * Additional args for xjc
     */
-    private final Property<List<String>> argsProvider
+    private final ListProperty<String> arguments
 
-    Provider<List<String>> getArgsProvider() {
-        return argsProvider
+    Provider<List<String>> getArgumentsProvider() {
+        return arguments
     }
 
     List<String> getArgs() {
-        return argsProvider.get()
+        return arguments.get()
     }
 
     void setArgs(List<String> args) {
-        this.argsProvider.set(args)
+        arguments.set(args)
     }
 
-    void args(String paramater) {
-        argsProvider.get().add(paramater)
+    void args(String arg) {
+        arguments.add(arg)
+    }
+
+    void args(List<String> args) {
+        for(String arg : args) {
+            arguments.add(arg)
+        }
     }
 
     /**
@@ -331,16 +332,16 @@ class SchemaToJava implements Named {
         extension = project.objects.property(Boolean)
         header = project.objects.property(Boolean)
         packageName = project.objects.property(String)
-        schema = project.objects.property(File)
-        binding = project.objects.property(File)
-        catalog = project.objects.property(File)
-        schemas = project.objects.property(FileCollection)
-        bindings = project.objects.property(FileCollection)
-        outputDir = project.objects.property(File)
+        schema = project.layout.fileProperty()
+        binding = project.layout.fileProperty()
+        catalog = project.layout.fileProperty()
+        schemas = project.files()
+        bindings = project.files()
+        outputDir = project.layout.directoryProperty()
         targetVersion = project.objects.property(String)
         language = project.objects.property(String)
         sourceSetName = project.objects.property(String)
-        argsProvider = project.objects.property(List)
+        arguments = project.objects.listProperty(String)
         antTaskClassName = project.objects.property(String)
 
         setEncoding('UTF-8')
@@ -350,7 +351,7 @@ class SchemaToJava implements Named {
         setHeader(true)
         setArgs([])
 
-        outputDir.set(project.getLayout().getBuildDirectory().dir("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_JAVAGEN_OUTPUTPATH}/${name.replace(' ', '_')}").get().asFile)
+        outputDir.set(project.getLayout().getBuildDirectory().dir("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_JAVAGEN_OUTPUTPATH}/${name.replace(' ', '_')}").get())
 
         setTargetVersion('2.2')
         setLanguage('XMLSCHEMA')

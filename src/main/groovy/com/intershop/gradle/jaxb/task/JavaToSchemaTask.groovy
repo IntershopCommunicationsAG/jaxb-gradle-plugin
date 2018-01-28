@@ -15,15 +15,15 @@
  */
 package com.intershop.gradle.jaxb.task
 
-import com.intershop.gradle.jaxb.extension.JaxbExtension
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import groovy.util.logging.Slf4j
 import org.gradle.api.DefaultTask
-import org.gradle.api.file.ConfigurableFileTree
+import org.gradle.api.artifacts.Configuration
 import org.gradle.api.file.Directory
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.FileCollection
-import org.gradle.api.file.RegularFile
+import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.*
@@ -35,10 +35,12 @@ import org.gradle.api.tasks.*
 @Slf4j
 class JavaToSchemaTask extends DefaultTask {
 
-    final Property<File> outputDir = project.objects.property(File)
+    private Configuration jaxbConfiguration
+
+    final DirectoryProperty outputDir = this.newOutputDirectory()
 
     @OutputDirectory
-    File getOutputDir() {
+    Directory getOutputDir() {
         return outputDir.get()
     }
 
@@ -46,26 +48,70 @@ class JavaToSchemaTask extends DefaultTask {
         this.outputDir.set(outputDir)
     }
 
-    void setOutputDir(Provider<File> outputDir) {
+    void setOutputDir(Provider<Directory> outputDir) {
         this.outputDir.set(outputDir)
     }
 
-    final Property<FileCollection> sources = project.objects.property(FileCollection)
+    final DirectoryProperty inputDir = this.newInputDirectory()
 
-    @InputFiles
-    FileCollection getSources() {
-        return sources.get()
+    @InputDirectory
+    Directory getInputDir() {
+        return inputDir.get()
     }
 
-    void setSources(FileCollection sources) {
-        this.sources.set(sources)
+    void setInputDir(File inputDir) {
+        this.inputDir.set(inputDir)
     }
 
-    void setSources(Provider<FileCollection> sources) {
-        this.sources.set(sources)
+    void setInputDir(Provider<Directory> inputDir) {
+        this.inputDir.set(inputDir)
     }
 
-    final Property<Map<String, String>> namespaceConfigs = project.objects.property(Map)
+    final ListProperty<String> excludes = project.objects.listProperty(String)
+
+    @Input
+    List<String> getExcludes() {
+        return excludes.get()
+    }
+
+    void setExcludes(List<String> excludes) {
+        this.excludes.set(excludes)
+    }
+
+    void setExcludes(Provider<List<String>> excludes) {
+        this.excludes.set(excludes)
+    }
+
+    final ListProperty<String> includes = project.objects.listProperty(String)
+
+    @Input
+    List<String> getIncludes() {
+        return includes.get()
+    }
+
+    void setIncludes(List<String> includes) {
+        this.includes.set(includes)
+    }
+
+    void setIncludes(Provider<List<String>> includes) {
+        this.includes.set(includes)
+    }
+
+    @Classpath
+    Configuration getJaxbConfiguration() {
+        return jaxbConfiguration
+    }
+
+    void setJaxbConfiguration(Configuration jaxbConfiguration ) {
+        this.jaxbConfiguration = jaxbConfiguration
+    }
+
+    @Classpath
+    Configuration getClasspathConfiguration() {
+        return getProject().getConfigurations().maybeCreate('compile')
+    }
+
+    final Property<Map> namespaceConfigs = project.objects.property(Map)
 
     @Optional
     @Input
@@ -86,7 +132,7 @@ class JavaToSchemaTask extends DefaultTask {
     @Optional
     @Input
     String getEpisode() {
-        episode.getOrNull()
+        episode.getOrElse('')
     }
 
     void setEpisode(String episode) {
@@ -97,19 +143,21 @@ class JavaToSchemaTask extends DefaultTask {
         this.episode.set(episode)
     }
 
+    private FileCollection sources = project.files()
+
+
     @CompileStatic(TypeCheckingMode.SKIP)
     @TaskAction
     void generate() {
-        FileCollection jaxbConfiguration = project.configurations.getAt(JaxbExtension.JAXB_CONFIGURATION_NAME)
 
         ant.taskdef(name: 'schemagen',
-                    classname: 'com.sun.tools.jxc.SchemaGenTask',
-                    classpath: jaxbConfiguration.asPath)
+                classname: 'com.sun.tools.jxc.SchemaGenTask',
+                classpath: getJaxbConfiguration().asPath)
 
-        def args = [destdir	 : getOutputDir(),
-                    srcdir   : getSources().getDir().absolutePath,
-                    ]
-        if(episode != null) {
+        def args = [destdir	 : getOutputDir().asFile,
+                    srcdir   : getInputDir().asFile
+        ]
+        if(getEpisode()) {
             args << [episode : getEpisode()]
         }
 
@@ -117,19 +165,27 @@ class JavaToSchemaTask extends DefaultTask {
             log.info('Arguments for schema: {}', args)
         }
 
-        FileCollection classpath = project.configurations.getByName('compile') + project.buildscript.configurations.getByName('classpath') + jaxbConfiguration
+        FileCollection classpath = getClasspathConfiguration() + getJaxbConfiguration()
 
         ant.schemagen(args) {
-            getNamespaceConfigs().each { namespace, fileName ->
-                schema(namespace: namespace, file: fileName)
+            if(getNamespaceConfigs() && ! getNamespaceConfigs().isEmpty()) {
+                getNamespaceConfigs().each { namespace, fileName ->
+                    schema(namespace: namespace, file: fileName)
+                }
             }
-            getSources().excludes.each {
-                exclude(name: it)
+            if(! getExcludes().isEmpty()) {
+                getExcludes().each {
+                    exclude(name: it)
+                }
             }
-            getSources().includes.each {
-                include(name: it)
+            if(! getIncludes().isEmpty()) {
+                getIncludes().each {
+                    include(name: it)
+                }
             }
             classpath.addToAntBuilder(ant, 'classpath', FileCollection.AntType.ResourceCollection)
         }
     }
+
+
 }
