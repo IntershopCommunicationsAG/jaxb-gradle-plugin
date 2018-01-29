@@ -97,7 +97,7 @@ class JavaToSchema implements Named {
         return namespaceconfigs
     }
 
-    Map<String, String> getNamespaceconfigs() {
+    Map getNamespaceconfigs() {
         return namespaceconfigs.get()
     }
 

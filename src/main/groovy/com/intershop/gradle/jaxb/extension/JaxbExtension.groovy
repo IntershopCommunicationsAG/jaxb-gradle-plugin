@@ -28,41 +28,41 @@ class JaxbExtension {
     /**
      * Default version of JAXB
      */
-    final static String XJC_DEFAULT_VERSION = '2.2.11'
+    public final static String XJC_DEFAULT_VERSION = '2.2.11'
 
     /**
      * Extension name
      */
-    final static String JAXB_EXTENSION_NAME = 'jaxb'
+    public final static String JAXB_EXTENSION_NAME = 'jaxb'
     /**
      * Dependency configuration name
      */
-    final static String JAXB_CONFIGURATION_NAME = 'jaxb'
+    public final static String JAXB_CONFIGURATION_NAME = 'jaxb'
     /**
      * Task group name
      */
-    final static String JAXB_TASK_GROUP = 'jaxb code generation'
+    public final static String JAXB_TASK_GROUP = 'jaxb code generation'
 
     /**
      * Default output path
      */
-    final static String CODEGEN_DEFAULT_OUTPUTPATH = 'generated/jaxb'
+    public final static String CODEGEN_DEFAULT_OUTPUTPATH = 'generated/jaxb'
 
     /**
      * Folder name for generated code
      */
-    final static String JAXB_JAVAGEN_OUTPUTPATH = 'java'
-    final static String JAXB_SCHEMAGEN_OUTPUTPATH = 'schema'
+    public final static String JAXB_JAVAGEN_OUTPUTPATH = 'java'
+    public final static String JAXB_SCHEMAGEN_OUTPUTPATH = 'schema'
 
     /**
      * Default source set name
      */
-    final static String DEFAULT_SOURCESET_NAME = 'main'
+    public final static String DEFAULT_SOURCESET_NAME = 'main'
 
     /**
      * Default Ant task class name.
      */
-    final static String DEFAULT_ANT_TASK_CLASS_NAME = 'com.sun.tools.xjc.XJCTask'
+    public final static String DEFAULT_ANT_TASK_CLASS_NAME = 'com.sun.tools.xjc.XJCTask'
 
     /**
      * Container for schema generation configurations

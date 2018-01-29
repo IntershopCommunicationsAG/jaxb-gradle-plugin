@@ -115,15 +115,15 @@ class JavaToSchemaTask extends DefaultTask {
 
     @Optional
     @Input
-    Map<String,String> getNamespaceConfigs() {
+    Map getNamespaceConfigs() {
         namespaceConfigs.getOrNull()
     }
 
-    void setNamespaceConfigs(Map<String, String> namespaceConfigs) {
+    void setNamespaceConfigs(Map namespaceConfigs) {
         this.namespaceConfigs.set(namespaceConfigs)
     }
 
-    void setNamespaceConfigs(Provider<Map<String, String>> namespaceConfigs) {
+    void setNamespaceConfigs(Provider<Map> namespaceConfigs) {
         this.namespaceConfigs.set(namespaceConfigs)
     }
 

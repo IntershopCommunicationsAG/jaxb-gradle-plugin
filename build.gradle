@@ -47,6 +47,9 @@ gradlePlugin {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+sourceSets.main.java.srcDirs = []
+sourceSets.main.groovy.srcDirs += ['src/main/java']
+
 // set correct project status
 if (project.version.endsWith('-SNAPSHOT')) {
     status = 'snapshot'
