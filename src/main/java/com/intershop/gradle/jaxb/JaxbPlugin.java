@@ -23,9 +23,11 @@ import org.gradle.api.Project;
 import org.gradle.api.Task;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
+import org.gradle.api.file.Directory;
 import org.gradle.api.plugins.JavaBasePlugin;
 import org.gradle.api.plugins.JavaPluginConvention;
 import org.gradle.api.tasks.SourceSet;
+import org.jetbrains.annotations.NotNull;
 
 public class JaxbPlugin implements Plugin<Project> {
 
@@ -35,9 +37,9 @@ public class JaxbPlugin implements Plugin<Project> {
      * Applies the extension and calls the
      * task initialization for this plugin
      *
-     * @param project
+     * @param project current project
      */
-    public void apply (Project project) {
+    public void apply (@NotNull Project project) {
         project.getLogger().info("Create extension {} for {}", JaxbExtension.JAXB_EXTENSION_NAME, project.getName());
 
         extension = project.getExtensions().findByType(JaxbExtension.class);
@@ -61,9 +63,9 @@ public class JaxbPlugin implements Plugin<Project> {
     /**
      * Configures tasks for java code generation.
      *
-     * @param project
-     * @param configuration
-     * @param jaxbTask
+     * @param project       current project
+     * @param configuration configuration for jaxb dependencies
+     * @param jaxbTask      the main jaxb task
      */
     private void configureJavaCodeGenTasks(Project project, Configuration configuration, Task jaxbTask) {
         extension.getJavaGen().all(schemaToJava ->
@@ -93,8 +95,9 @@ public class JaxbPlugin implements Plugin<Project> {
                 JavaPluginConvention javaPluginConvention = project.getConvention().getPlugin(JavaPluginConvention.class);
                 SourceSet sourceSet = javaPluginConvention.getSourceSets().findByName(schemaToJava.getSourceSetName());
                 if(sourceSet != null) {
-                    if(! sourceSet.getJava().getSrcDirs().contains(schemaToJavaTask.getOutputDir())) {
-                        sourceSet.getJava().srcDir(schemaToJavaTask.getOutputDir());
+                    Directory outputDir = schemaToJavaTask.getOutputDir();
+                    if(! sourceSet.getJava().getSrcDirs().contains(outputDir.getAsFile())) {
+                        sourceSet.getJava().srcDir(outputDir);
                     }
                     project.getTasks().getByName(sourceSet.getCompileJavaTaskName()).dependsOn(schemaToJavaTask);
                 }
@@ -107,8 +110,9 @@ public class JaxbPlugin implements Plugin<Project> {
     /**
      * Configures tasks for schema generation.
      *
-     * @param project
-     * @param jaxbTask
+     * @param project       current project
+     * @param configuration configuration for jaxb dependencies
+     * @param jaxbTask      the main jaxb task
      */
     private void configureSchemaCodeGenTasks(Project project, Configuration configuration, Task jaxbTask) {
         extension.getSchemaGen().all(javaToSchema ->
@@ -134,7 +138,7 @@ public class JaxbPlugin implements Plugin<Project> {
     /**
      * Adds the dependencies for the code generation. It is possible to override this.
      *
-     * @param project
+     * @param project   current project
      */
     private Configuration getConfiguration(final Project project) {
         Configuration configuration = project.getConfigurations().findByName(JaxbExtension.JAXB_CONFIGURATION_NAME);

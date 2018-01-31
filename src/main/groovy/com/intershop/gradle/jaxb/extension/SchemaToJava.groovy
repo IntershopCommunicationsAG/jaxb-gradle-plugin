@@ -288,7 +288,7 @@ class SchemaToJava implements Named {
         arguments.set(args)
     }
 
-    void args(String arg) {
+    void arg(String arg) {
         arguments.add(arg)
     }
 

@@ -1,6 +1,9 @@
 = JAXB Gradle Plugin
-:latestRevision: 2.0.0
+:latestRevision: 3.0.0
 :toc:
+:icons: font
+
+NOTE: Version 3 of this plugin will only work with Gradle 4 and JDK 8.
 
 == Summary
 This plugin generates Java code from schema files (see https://jaxb.java.net/jaxb20-ea/docs/xjcTask.html[com.sun.tools.xjc.XJCTask]) or schema files from existing Java code (see https://jaxb.java.net/jaxb20-ea/docs/schemagenTask.html[com.sun.tools.jxc.SchemaGenTask]).
@@ -79,7 +82,7 @@ This plugin adds an extension *`jaxb`* to the project.
 |Property | Type | Default value | Description
 
 |*outputDir*          | `File`      | `<project.buildDir>/generated/jaxb/java/<config name>` | Generated code will be written under this directory.
-|*args*                | `List<String>` |            | Additional command line arguments passed to the XJC (-use-runtime, -schema, -dtd, -relaxng, -Xlocator, -Xsync-methods)
+|*args*                | `List<String>` | `[]`        | Additional command line arguments passed to the XJC (-use-runtime, -schema, -dtd, -relaxng, -Xlocator, -Xsync-methods)
 |*sourceSetName*      | `String`    | `'main'`      | Generated source code will be added to the source set.
 |*encoding*           | `String`    | `'UTF-8'` | specify character encoding for generated source files
 |*strictValidation*   | `boolean`   | `true`    | perform strict validation of the input schema
@@ -103,7 +106,8 @@ If this value is false '-nv' will be added to the command line parameter list.
 [cols="17%,17%,66%", width="90%, options="header"]
 |===
 |Method | Parameter | Description
-|*arg* | `String` | Add an additional command line arguments passed to the XJC
+|*arg* | `String` | Add an additional command line argument passed to the XJC
+|*args* | `List<String>` | Add additional command line arguments passed to the XJC
 |===
 
 ==== [[schemaGen]]Object 'schemaGen' (JavaToSchema)
@@ -113,9 +117,20 @@ If this value is false '-nv' will be added to the command line parameter list.
 |Property | Type | Default value | Description
 
 |*outputDir*        | `File`      | `<project.buildDir>/generated/jaxb/schema/<config name>` | Base directory to place the generated schema files
-|*javaFiles*        | `FileCollection`     | `null` | Source files configuration.
+|*InputDir*         | `File`      | `null` | Base directory of input files
+|*excludes*             | List<String> | [] | List of exclude filters of this configuration.
+|*includes*             | List<String> | ['**/**/*.java'] | List of includes filters of this configuration.
 |*namespaceconfigs* | `Map<String,String>` | `null` | Control the file name of the generated schema. The entry key is the namespace attribute and the value is the file name. When this element is present, the schema document generated for the specified namespace will be placed in the specified file name.
-|*episode*          | `String`             | `null` | If specified, generate an episode file in the specified name.
+|*episode*          | `String`             | `null` | If specified, generate an episode file with the specified name.
+|===
+
+===== Method
+
+[cols="17%,17%,66%", width="90%, options="header"]
+|===
+|Method | Parameter | Description
+|*exclude* | `String` | Add exclude filter to excludes list
+|*include* | `String` | Add include filter to excludes list
 |===
 
 === Example Configurations
@@ -229,7 +244,7 @@ jaxb {
 
 == License
 
-Copyright 2014-2016 Intershop Communications.
+Copyright 2014-2018 Intershop Communications.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 

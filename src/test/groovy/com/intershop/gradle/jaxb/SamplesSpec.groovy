@@ -62,7 +62,7 @@ class SamplesSpec extends AbstractIntegrationSpec {
                         schema = file('test05/po.xsd')
                         packageName = 'primer.test05.myPo'
                         extension = true
-                        args('-Xsync-methods')
+                        arg('-Xsync-methods')
                     }
                 }
             }
@@ -307,7 +307,7 @@ class SamplesSpec extends AbstractIntegrationSpec {
                     testxjc {
                         schema = file('nameCard.dtd')
                         binding = file('nameCard.jaxb')
-                        args('-dtd')
+                        arg('-dtd')
                         packageName = ''
                     }
                 }
@@ -449,7 +449,7 @@ class SamplesSpec extends AbstractIntegrationSpec {
                         schema = file('po.xsd')
                         packageName = 'primer.myPo'
                         extension = true
-                        args('-Xlocator')
+                        arg('-Xlocator')
                     }
                 }
             }
@@ -504,7 +504,7 @@ class SamplesSpec extends AbstractIntegrationSpec {
                         schema = file('po.xsd')
                         packageName = 'primer.myPo'
                         extension = true
-                        args('-Xsync-methods')
+                        arg('-Xsync-methods')
                     }
                 }
             }

@@ -123,23 +123,6 @@ class JavaToSchema implements Named {
     }
 
     /**
-     * Special parameters for classpath calculation
-     */
-    private final ListProperty<String> configurationNames
-
-    Provider<List<String>> getConfigurationNamesProvider() {
-        return configurationNames
-    }
-
-    List<String> getConfigurationNames() {
-        return configurationNames.get()
-    }
-
-    void setConfigurationNames(List<String> configurations) {
-        configurationNames.set(configurations)
-    }
-
-    /**
      * Output path
      */
     private final DirectoryProperty outputDir
@@ -168,14 +151,10 @@ class JavaToSchema implements Named {
         episode = project.objects.property(String)
         outputDir = project.layout.directoryProperty()
 
-        configurationNames = project.objects.listProperty(String)
-
         outputDir.set(project.getLayout().getBuildDirectory().
                 dir("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_SCHEMAGEN_OUTPUTPATH}/${name.replace(' ', '_')}").get())
 
         includes.add( '**/**/*.java' )
-
-        configurationNames.set(['default'])
     }
 
     /**

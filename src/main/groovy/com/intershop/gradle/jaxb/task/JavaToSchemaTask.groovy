@@ -154,8 +154,9 @@ class JavaToSchemaTask extends DefaultTask {
                 classname: 'com.sun.tools.jxc.SchemaGenTask',
                 classpath: getJaxbConfiguration().asPath)
 
-        def args = [destdir	 : getOutputDir().asFile,
-                    srcdir   : getInputDir().asFile
+        def args = [destdir	          : getOutputDir().asFile,
+                    srcdir            : getInputDir().asFile,
+                    includeantruntime : 'false'
         ]
         if(getEpisode()) {
             args << [episode : getEpisode()]
