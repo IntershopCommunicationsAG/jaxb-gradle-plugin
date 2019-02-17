@@ -78,6 +78,13 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+sourceSets.main {
+    withConvention(GroovySourceSet::class) {
+        groovy {
+            srcDirs.add(file("src/main/java"))
+        }
+    }
+}
 
 // set correct project status
 if (project.version.toString().endsWith("-SNAPSHOT")) {
