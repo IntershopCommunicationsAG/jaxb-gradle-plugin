@@ -79,6 +79,7 @@ java {
 }
 
 sourceSets.main {
+    java.setSrcDirs(emptyList())
     withConvention(GroovySourceSet::class) {
         groovy {
             srcDirs.add(file("src/main/java"))
