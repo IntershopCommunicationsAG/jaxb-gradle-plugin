@@ -3,7 +3,7 @@
 :toc:
 :icons: font
 
-NOTE: Version 3 of this plugin will only work with Gradle 4 and JDK 8.
+NOTE: Version 3 of this plugin will only work with Gradle 5 and JDK 8.
 
 == Summary
 This plugin generates Java code from schema files (see https://jaxb.java.net/jaxb20-ea/docs/xjcTask.html[com.sun.tools.xjc.XJCTask]) or schema files from existing Java code (see https://jaxb.java.net/jaxb20-ea/docs/schemagenTask.html[com.sun.tools.jxc.SchemaGenTask]).
