@@ -81,9 +81,7 @@ java {
 sourceSets.main {
     java.setSrcDirs(emptyList())
     withConvention(GroovySourceSet::class) {
-        groovy {
-            srcDirs.add(file("src/main/java"))
-        }
+        groovy.setSrcDirs(mutableListOf("src/main/groovy", "src/main/java"))
     }
 }
 
@@ -253,6 +251,8 @@ bintray {
 }
 
 dependencies {
+    compileOnly("org.jetbrains:annotations:17.0.0")
+    
     testImplementation("commons-io:commons-io:2.2")
     testImplementation("com.intershop.gradle.test:test-gradle-plugin:3.1.0-dev.2")
     testImplementation(gradleTestKit())
