@@ -16,12 +16,12 @@
 package com.intershop.gradle.jaxb
 
 import com.intershop.gradle.jaxb.extension.JaxbExtension
-import com.intershop.gradle.test.AbstractIntegrationSpec
+import com.intershop.gradle.test.AbstractIntegrationGroovySpec
 
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS as SUCCESS
 import static org.gradle.testkit.runner.TaskOutcome.UP_TO_DATE as UP_TO_DATE
 
-class SamplesSpec extends AbstractIntegrationSpec {
+class SamplesSpec extends AbstractIntegrationGroovySpec {
 
     def 'Test multithread execution - xjc'() {
         given:

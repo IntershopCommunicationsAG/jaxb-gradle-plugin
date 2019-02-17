@@ -15,11 +15,11 @@
  */
 package com.intershop.gradle.jaxb
 
-import com.intershop.gradle.test.AbstractIntegrationSpec
+import com.intershop.gradle.test.AbstractIntegrationGroovySpec
 
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS as SUCCESS
 
-class ProjectSpec extends AbstractIntegrationSpec {
+class ProjectSpec extends AbstractIntegrationGroovySpec {
 
     def 'Test xew-test - xjc'() {
         given:
