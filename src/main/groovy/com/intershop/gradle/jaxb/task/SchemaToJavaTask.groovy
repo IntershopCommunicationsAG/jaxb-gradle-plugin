@@ -35,7 +35,7 @@ class SchemaToJavaTask extends DefaultTask {
 
     private Configuration jaxbConfiguration
 
-    final DirectoryProperty outputDir = project.layout.directoryProperty()
+    final DirectoryProperty outputDir = project.objects.directoryProperty()
 
     @OutputDirectory
     Directory getOutputDir() {
@@ -64,7 +64,7 @@ class SchemaToJavaTask extends DefaultTask {
         return getProject().getConfigurations().maybeCreate('xjc')
     }
 
-    final RegularFileProperty schema = project.layout.fileProperty()
+    final RegularFileProperty schema = project.objects.fileProperty()
 
     @Optional
     @InputFile
@@ -83,7 +83,7 @@ class SchemaToJavaTask extends DefaultTask {
         this.schema.set(schema)
     }
 
-    final RegularFileProperty binding = project.layout.fileProperty()
+    final RegularFileProperty binding = project.objects.fileProperty()
 
     @Optional
     @InputFile
@@ -102,7 +102,7 @@ class SchemaToJavaTask extends DefaultTask {
         this.binding.set(binding)
     }
 
-    final RegularFileProperty catalog = project.layout.fileProperty()
+    final RegularFileProperty catalog = project.objects.fileProperty()
 
     @Optional
     @InputFile

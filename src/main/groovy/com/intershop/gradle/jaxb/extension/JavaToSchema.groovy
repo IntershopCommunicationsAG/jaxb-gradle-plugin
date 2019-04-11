@@ -143,13 +143,13 @@ class JavaToSchema implements Named {
         this.project = project
         this.name = name
 
-        inputDir = project.layout.directoryProperty()
+        inputDir = project.objects.directoryProperty()
         includes = project.objects.listProperty(String)
         excludes = project.objects.listProperty(String)
 
         namespaceconfigs = project.objects.property(Map)
         episode = project.objects.property(String)
-        outputDir = project.layout.directoryProperty()
+        outputDir = project.objects.directoryProperty()
 
         outputDir.set(project.getLayout().getBuildDirectory().
                 dir("${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_SCHEMAGEN_OUTPUTPATH}/${name.replace(' ', '_')}").get())

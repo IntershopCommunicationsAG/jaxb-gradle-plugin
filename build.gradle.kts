@@ -1,6 +1,5 @@
 import com.jfrog.bintray.gradle.BintrayExtension
-import org.asciidoctor.gradle.AsciidoctorExtension
-import org.asciidoctor.gradle.AsciidoctorTask
+import org.asciidoctor.gradle.jvm.AsciidoctorTask
 import java.util.Date
 
 /*
@@ -33,10 +32,10 @@ plugins {
     `maven-publish`
 
     // intershop version plugin
-    id("com.intershop.gradle.scmversion") version "4.1.0"
+    id("com.intershop.gradle.scmversion") version "4.1.1"
 
     // plugin for documentation
-    id("org.asciidoctor.convert") version "1.5.10"
+    id("org.asciidoctor.jvm.convert") version "2.0.0"
 
     // plugin for publishing to Gradle Portal
     id("com.gradle.plugin-publish") version "0.10.1"
@@ -90,13 +89,9 @@ if (project.version.toString().endsWith("-SNAPSHOT")) {
     status = "snapshot'"
 }
 
-configure<AsciidoctorExtension> {
-    noDefaultRepositories = true
-}
-
 tasks {
     withType<Test>().configureEach {
-        systemProperty("intershop.gradle.versions", "5.2")
+        systemProperty("intershop.gradle.versions", "5.3")
 
         if(project.hasProperty("repoURL") && project.hasProperty("repoUser") && project.hasProperty("repoPasswd")) {
             systemProperty("repo_url_config", project.property("repoURL").toString())
@@ -129,12 +124,15 @@ tasks {
     withType<AsciidoctorTask> {
         dependsOn("copyAsciiDoc")
 
-        sourceDir = file("$buildDir/tmp/asciidoctorSrc")
+        setSourceDir(file("$buildDir/tmp/asciidoctorSrc"))
         sources(delegateClosureOf<PatternSet> {
             include("README.asciidoc")
         })
 
-        backends("html5", "docbook")
+        outputOptions {
+            setBackends(listOf("html5", "docbook"))
+        }
+
         options = mapOf( "doctype" to "article",
                 "ruby"    to "erubis")
         attributes = mapOf(

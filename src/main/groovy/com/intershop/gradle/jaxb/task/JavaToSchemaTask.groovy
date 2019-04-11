@@ -37,7 +37,7 @@ class JavaToSchemaTask extends DefaultTask {
 
     private Configuration jaxbConfiguration
 
-    final DirectoryProperty outputDir = this.newOutputDirectory()
+    final DirectoryProperty outputDir = project.objects.directoryProperty()
 
     @OutputDirectory
     Directory getOutputDir() {
@@ -52,7 +52,7 @@ class JavaToSchemaTask extends DefaultTask {
         this.outputDir.set(outputDir)
     }
 
-    final DirectoryProperty inputDir = this.newInputDirectory()
+    final DirectoryProperty inputDir = project.objects.directoryProperty()
 
     @InputDirectory
     Directory getInputDir() {
