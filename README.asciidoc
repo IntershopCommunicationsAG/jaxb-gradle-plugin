@@ -1,5 +1,5 @@
 = JAXB Gradle Plugin
-:latestRevision: 3.0.0
+:latestRevision: 3.0.1
 :toc:
 :icons: font
 

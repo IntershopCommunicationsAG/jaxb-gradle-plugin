@@ -91,7 +91,7 @@ if (project.version.toString().endsWith("-SNAPSHOT")) {
 
 tasks {
     withType<Test>().configureEach {
-        systemProperty("intershop.gradle.versions", "5.2")
+        systemProperty("intershop.gradle.versions", "5.3")
 
         if(project.hasProperty("repoURL") && project.hasProperty("repoUser") && project.hasProperty("repoPasswd")) {
             systemProperty("repo_url_config", project.property("repoURL").toString())
