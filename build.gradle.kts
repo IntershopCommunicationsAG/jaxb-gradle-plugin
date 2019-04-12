@@ -186,11 +186,11 @@ publishing {
             artifact(tasks.getByName("sourceJar"))
             artifact(tasks.getByName("javaDoc"))
 
-            artifact(File(buildDir, "asciidoc/html5/README.html")) {
+            artifact(File(buildDir, "docs/asciidoc/html5/README.html")) {
                 classifier = "reference"
             }
 
-            artifact(File(buildDir, "asciidoc/docbook/README.xml")) {
+            artifact(File(buildDir, "docs/asciidoc/docbook/README.xml")) {
                 classifier = "docbook"
             }
 
