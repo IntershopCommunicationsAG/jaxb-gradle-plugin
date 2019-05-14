@@ -341,11 +341,10 @@ class SchemaToJavaTask extends DefaultTask {
                 if(! getStrictValidation()) {
                     arg(value: '-nv')
                 }
-                if (log.isDebugEnabled()) {
-                    arg(value: '-debug')
-                }
-                if (log.isInfoEnabled()) {
+                if (log.isInfoEnabled() || log.isDebugEnabled()) {
                     arg(value: '-verbose')
+                } else {
+                    arg(value: '-quiet')
                 }
             }
             log.info(' -> Unlocked XJC Gradle Task!')
