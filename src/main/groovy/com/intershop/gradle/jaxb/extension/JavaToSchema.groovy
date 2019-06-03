@@ -21,6 +21,7 @@ import org.gradle.api.Project
 import org.gradle.api.file.Directory
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.ListProperty
+import org.gradle.api.provider.MapProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.util.GUtil
@@ -91,9 +92,9 @@ class JavaToSchema implements Named {
     /**
      * A map of name space configurations
      */
-    private final Property<Map> namespaceconfigs
+    private final MapProperty<String, String> namespaceconfigs
 
-    Provider<Map> getNamespaceconfigsProvider() {
+    MapProperty<String, String> getNamespaceconfigsProvider() {
         return namespaceconfigs
     }
 
@@ -101,8 +102,8 @@ class JavaToSchema implements Named {
         return namespaceconfigs.get()
     }
 
-    void setNamespaceconfigs(Map namespaceconfigs) {
-        this.namespaceconfigs.set(namespaceconfigs)
+    void setNamespaceconfigs(Map<String, String> namespaceconfigs) {
+        this.namespaceconfigs.putAll(namespaceconfigs)
     }
 
     /**
@@ -147,7 +148,7 @@ class JavaToSchema implements Named {
         includes = project.objects.listProperty(String)
         excludes = project.objects.listProperty(String)
 
-        namespaceconfigs = project.objects.property(Map)
+        namespaceconfigs = project.objects.mapProperty(String, String)
         episode = project.objects.property(String)
         outputDir = project.objects.directoryProperty()
 
