@@ -24,6 +24,7 @@ import org.gradle.api.file.Directory
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.FileCollection
 import org.gradle.api.provider.ListProperty
+import org.gradle.api.provider.MapProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.*
@@ -111,7 +112,7 @@ class JavaToSchemaTask extends DefaultTask {
         return getProject().getConfigurations().maybeCreate('compile')
     }
 
-    final Property<Map> namespaceConfigs = project.objects.property(Map)
+    final MapProperty<String, String> namespaceConfigs = project.objects.mapProperty(String, String)
 
     @Optional
     @Input
@@ -123,7 +124,7 @@ class JavaToSchemaTask extends DefaultTask {
         this.namespaceConfigs.set(namespaceConfigs)
     }
 
-    void setNamespaceConfigs(Provider<Map> namespaceConfigs) {
+    void setNamespaceConfigs(Provider<Map<String, String>> namespaceConfigs) {
         this.namespaceConfigs.set(namespaceConfigs)
     }
 
