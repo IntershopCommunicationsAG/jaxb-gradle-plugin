@@ -163,7 +163,6 @@ class SchemaToJavaTask extends DefaultTask {
 
     final Property<Boolean> strictValidation = project.objects.property(Boolean)
 
-    @Optional
     @Input
     boolean getStrictValidation() {
         return strictValidation.get()
@@ -211,7 +210,6 @@ class SchemaToJavaTask extends DefaultTask {
 
     final Property<Boolean> header = project.objects.property(Boolean)
 
-    @Optional
     @Input
     boolean getHeader() {
         return header.get()
@@ -227,7 +225,6 @@ class SchemaToJavaTask extends DefaultTask {
 
     final Property<Boolean> extension = project.objects.property(Boolean)
 
-    @Optional
     @Input
     boolean getExtension() {
         return extension.get()
@@ -286,6 +283,13 @@ class SchemaToJavaTask extends DefaultTask {
 
     void setAntTaskClassName(Provider<String> antTaskClassName) {
         this.antTaskClassName.set(antTaskClassName)
+    }
+
+    SchemaToJavaTask() {
+        super()
+        extension.convention(false)
+        header.convention(false)
+        strictValidation.convention(false)
     }
 
     @CompileStatic(TypeCheckingMode.SKIP)

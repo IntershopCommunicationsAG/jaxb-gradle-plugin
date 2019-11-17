@@ -39,7 +39,7 @@ class JaxbPluginSpec extends AbstractProjectSpec {
         plugin.apply(project)
 
         then:
-        project.extensions.getByName(JaxbExtension.JAXB_EXTENSION_NAME).getXjcVersion() == JaxbExtension.XJC_DEFAULT_VERSION
+        project.extensions.getByName(JaxbExtension.JAXB_EXTENSION_NAME) != null
 
         when:
         project.extensions.getByName(JaxbExtension.JAXB_EXTENSION_NAME).schemaGen {
