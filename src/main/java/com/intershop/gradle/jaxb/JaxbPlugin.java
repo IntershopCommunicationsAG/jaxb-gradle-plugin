@@ -154,11 +154,10 @@ public class JaxbPlugin implements Plugin<Project> {
                     // this will be executed if configuration is empty
                     DependencyHandler dependencyHandler = project.getDependencies();
 
-                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-xjc:" + extension.getXjcVersion()));
-                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-impl:" + extension.getXjcVersion()));
-
-                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-jxc:" + extension.getXjcVersion()));
-                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-core:" + extension.getXjcVersion()));
+                    dependencies.add(dependencyHandler.create("org.glassfish.jaxb:jaxb-runtime:2.3.2"));
+                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-jxc:2.2.11"));
+                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-xjc:2.2.11"));
+                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-core:2.2.11"));
                 });
         return configuration;
     }

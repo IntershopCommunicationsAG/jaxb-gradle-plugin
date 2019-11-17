@@ -26,11 +26,6 @@ import org.gradle.api.Project
 class JaxbExtension {
 
     /**
-     * Default version of JAXB
-     */
-    public final static String XJC_DEFAULT_VERSION = '2.2.11'
-
-    /**
      * Extension name
      */
     public final static String JAXB_EXTENSION_NAME = 'jaxb'
@@ -85,18 +80,9 @@ class JaxbExtension {
 
         this.project = project
 
-        if(! xjcVersion) {
-            xjcVersion = XJC_DEFAULT_VERSION
-        }
-
         schemaGen = project.container(JavaToSchema, new JavaToSchemaFactory(project))
         javaGen = project.container(SchemaToJava, new SchemaToJavaFactory(project))
     }
-
-    /**
-     * Version of xjc, default is 2.2.11
-     */
-    String xjcVersion
 
     /**
      * Closure with the configuration of schema generation configurations
