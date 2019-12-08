@@ -11,6 +11,11 @@ This plugin generates Java code from schema files (see https://jaxb.java.net/jax
 == Usage
 To apply the JAXB Gradle Plugin to your projects, add the following in your build script:
 
+++++
+<details open>
+<summary>Groovy</summary>
+++++
+
 [source,groovy]
 [subs=+attributes]
 .build.gradle
@@ -40,6 +45,49 @@ jaxb {
 }
 ----
 
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Kotlin</summary>
+++++
+
+[source,kotlin]
+[source,kotlin]
+[subs=+attributes]
+.build.gradle.kts
+----
+plugins {
+    id("com.intershop.gradle.jaxb") version "{latestRevision}"
+}
+
+jaxb {
+     // generate java code from schema
+     javaGen {
+        //generates a 'project' schema file from existing java code
+        register("name") {
+            schema = file("schema.xsd")
+            binding = file("binding.xjb")
+        }
+    }
+
+    //generates schema from java code
+    schemaGen {
+        //generates java code for project from project schema
+        register("name") {
+            javaFiles = fileTree("dir" to "src/main/java", "include" to "com/corporate/annotated/**/binding/**/*.java")
+            namespaceconfigs = mapOf("http://www.corporate.com/xml/ns/corporate/feature/1.0" to "feature.xsd")
+        }
+    }
+}
+----
+
+++++
+</details>
+++++
+
 If the JavaBasePlugin is applied to the project, generated java sources will be added to the specified source set. Per default the main source set is used.
 
 IMPORTANT: This plugin uses the following dependencies: +
@@ -51,6 +99,8 @@ It is possible to overwrite the project dependency configuration 'jaxb', if you 
 The classpath of the xjc can be extended with a project configuration 'jaxb' and dependencies.
 
 This configuration is used, because 'org.glassfish.jaxb:jaxb-runtime:2.3.2' does not contain a classpath configuration in the manifest.
+
+It is possible to add additional dependencies to the configured "jaxb" with the configuration "jaxbext".
 
 == Tasks
 The JAXB Gradle plugin adds one task `jaxb` to the project. This task depends on all other plugin task. It is a task added for each configuration in schemaGen and javaGen.
@@ -203,10 +253,6 @@ plugins {
     def xewFile = file('staticfiles/definition/xew-includes.txt')
     def args = ['-Xxew', '-Xxew:instantiate early', '-Xxew:delete', "-Xxew:includeFile \${xewFile.absolutePath.replace('\\','/')}"]
 
-    configurations {
-        xjc
-    }
-
     jaxb {
         javaGen {
             gcdm {
@@ -220,7 +266,7 @@ plugins {
     }
 
     dependencies {
-        xjc 'com.github.jaxb-xew-plugin:jaxb-xew-plugin:1.1'
+        jaxbext 'com.github.jaxb-xew-plugin:jaxb-xew-plugin:1.1'
     }
 ----
 

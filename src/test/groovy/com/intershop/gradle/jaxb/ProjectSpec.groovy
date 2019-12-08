@@ -34,10 +34,6 @@ class ProjectSpec extends AbstractIntegrationGroovySpec {
             def xewFile = file('staticfiles/definition/xew-includes.txt')
             def addArgs = ['-Xxew', '-Xxew:instantiate early', '-Xxew:delete', "-Xxew:includeFile \${xewFile.absolutePath.replace('\\\\','/')}"]
 
-            configurations {
-                xjc
-            }
-
             jaxb {
                 javaGen {
                     gcdm {
@@ -51,7 +47,7 @@ class ProjectSpec extends AbstractIntegrationGroovySpec {
             }
 
             dependencies {
-                xjc 'com.github.jaxb-xew-plugin:jaxb-xew-plugin:1.1'
+                jaxbext 'com.github.jaxb-xew-plugin:jaxb-xew-plugin:1.1'
             }
 
             repositories {
