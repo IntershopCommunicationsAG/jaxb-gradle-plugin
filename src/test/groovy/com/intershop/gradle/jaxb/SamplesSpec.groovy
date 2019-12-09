@@ -15,7 +15,7 @@
  */
 package com.intershop.gradle.jaxb
 
-import com.intershop.gradle.jaxb.extension.JaxbExtension
+
 import com.intershop.gradle.test.AbstractIntegrationGroovySpec
 
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS as SUCCESS
