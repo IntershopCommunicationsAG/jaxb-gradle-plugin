@@ -303,7 +303,7 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
             }
 
             dependencies {
-                compile 'com.sun.xml.bind:jaxb-core:2.2.11'
+                implementation 'com.sun.xml.bind:jaxb-core:2.2.11'
             }
 
             repositories {
@@ -538,7 +538,7 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
             }
 
             dependencies {
-                compile 'com.sun.xml.bind:jaxb-core:2.2.11'
+                implementation 'com.sun.xml.bind:jaxb-core:2.2.11'
             }
 
             repositories {

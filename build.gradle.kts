@@ -36,13 +36,13 @@ plugins {
     id("com.intershop.gradle.scmversion") version "6.0.0"
 
     // plugin for documentation
-    id("org.asciidoctor.jvm.convert") version "2.3.0"
+    id("org.asciidoctor.jvm.convert") version "2.4.0"
 
     // documentation
     id("org.jetbrains.dokka") version "0.10.0"
 
     // code analysis for kotlin
-    id("io.gitlab.arturbosch.detekt") version "1.1.1"
+    id("io.gitlab.arturbosch.detekt") version "1.4.0"
 
     // plugin for publishing to Gradle Portal
     id("com.gradle.plugin-publish") version "0.10.1"
@@ -96,7 +96,7 @@ detekt {
 
 tasks {
     withType<Test>().configureEach {
-        systemProperty("intershop.gradle.versions", "5.6.4, 6.0")
+        systemProperty("intershop.gradle.versions", "5.6.4, 6.0, 6.1")
 
         if(project.hasProperty("repoURL")
                 && project.hasProperty("repoUser")
@@ -268,7 +268,7 @@ bintray {
 }
 
 dependencies {
-    compileOnly("org.jetbrains:annotations:17.0.0")
+    compileOnly("org.jetbrains:annotations:18.0.0")
     implementation(gradleKotlinDsl())
 
     testImplementation("commons-io:commons-io:2.2")

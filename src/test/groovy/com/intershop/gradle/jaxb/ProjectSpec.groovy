@@ -56,7 +56,7 @@ class ProjectSpec extends AbstractIntegrationGroovySpec {
         """.stripIndent()
 
         when:
-        List<String> args = ['jaxb', '-s', '-d']
+        List<String> args = ['jaxb', '-s']
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
