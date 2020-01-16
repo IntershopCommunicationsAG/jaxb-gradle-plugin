@@ -1,12 +1,13 @@
 package com.intershop.gradle.jaxb.task
 
+import com.intershop.gradle.jaxb.utils.getValue
+import com.intershop.gradle.jaxb.utils.setValue
 import com.intershop.gradle.jaxb.extension.JaxbExtension
 import com.intershop.gradle.jaxb.extension.JaxbExtension.Companion.DEFAULT_SCHEMAGEN_TASK_CLASS_NAME
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.Directory
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.FileCollection
-import org.gradle.api.file.ProjectLayout
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Input
@@ -123,9 +124,7 @@ abstract class JavaToSchemaTask: DefaultTask() {
      */
     @get:Optional
     @get:Input
-    var episode: String
-        get() = episodeProperty.get()
-        set(value) = episodeProperty.set(value)
+    var episode by episodeProperty
 
     /**
      * This function set the input property episode.
@@ -138,9 +137,7 @@ abstract class JavaToSchemaTask: DefaultTask() {
      * @property antTaskClassName
      */
     @get:Input
-    var antTaskClassName: String
-        get() = antTaskClassNameProperty.get()
-        set(value) = antTaskClassNameProperty.set(value)
+    var antTaskClassName by antTaskClassNameProperty
 
     /**
      * This function set the classname of javagen.
