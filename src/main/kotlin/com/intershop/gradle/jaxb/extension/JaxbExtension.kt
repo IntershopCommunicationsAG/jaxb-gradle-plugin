@@ -56,38 +56,4 @@ open class JaxbExtension @Inject constructor(objectFactory: ObjectFactory) {
 
     val javaGen = objectFactory.domainObjectContainer(SchemaToJava::class.java)
 
-    /**
-     * Closure with the configuration of schema generation configurations.
-     * @param closure with schema generation configurations
-     */
-    fun schemaGen(closure: Closure<Any>) {
-        schemaGen.configure(closure)
-    }
-
-    /**
-     * Action with the configuration of schema generation configurations.
-     *
-     * @param configureAction with schema generation configurations
-     */
-    fun schemaGen(configureAction: Action<in NamedDomainObjectContainer<JavaToSchema>>) {
-        configureAction.execute(schemaGen)
-    }
-
-    /**
-     * Closure with the configuration of java generation configurations.
-     *
-     * @param closure with java generation configurations
-     */
-    fun javaGen(closure: Closure<Any>) {
-        javaGen.configure(closure)
-    }
-
-    /**
-     * Action with the configuration of java generation configurations.
-     *
-     * @param configureAction with java generation configurations
-     */
-    fun javaGen(configureAction: Action<in NamedDomainObjectContainer<SchemaToJava>>) {
-        configureAction.execute(javaGen)
-    }
 }

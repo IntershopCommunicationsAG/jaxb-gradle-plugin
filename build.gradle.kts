@@ -1,9 +1,5 @@
-import com.jfrog.bintray.gradle.BintrayExtension
-import org.asciidoctor.gradle.jvm.AsciidoctorTask
-import java.util.Date
-
 /*
- * Copyright 2015 Intershop Communications AG.
+ * Copyright 2019 Intershop Communications AG.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +13,10 @@ import java.util.Date
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import com.jfrog.bintray.gradle.BintrayExtension
+import org.asciidoctor.gradle.jvm.AsciidoctorTask
+import java.util.Date
+
 plugins {
     // project plugins
     `java-gradle-plugin`
@@ -96,7 +96,7 @@ detekt {
 
 tasks {
     withType<Test>().configureEach {
-        systemProperty("intershop.gradle.versions", "5.6.4, 6.0, 6.1")
+        systemProperty("intershop.gradle.versions", "6.0, 6.1")
 
         if(project.hasProperty("repoURL")
                 && project.hasProperty("repoUser")
