@@ -28,32 +28,67 @@ import javax.inject.Inject
 open class JaxbExtension @Inject constructor(objectFactory: ObjectFactory) {
 
     companion object {
-        // Extension name
+        /**
+         * Extension name of plugin.
+         */
         const val JAXB_EXTENSION_NAME = "jaxb"
-        // Dependency configuration name
+
+        /**
+         * Dependency configuration name for jaxb code generation.
+         */
         const val JAXB_CONFIGURATION_NAME = "jaxb"
 
+        /**
+         * Additional dependency configuration name for jaxb code generation
+         * to extend the existing dependencies.
+         */
         const val ADD_JAXB_CONFIGURATION_NAME = "jaxbext"
 
-        // Task group name
+        /**
+         * Task group name of jaxb code generation.
+         */
         const val JAXB_TASK_GROUP = "jaxb code generation"
-        // Default output path
+
+        /**
+         * Default output path of all generation tasks.
+         **/
         const val CODEGEN_DEFAULT_OUTPUTPATH = "generated/jaxb"
 
-        // Folder names for generated code
+        /**
+         * Folder names for generated java code.
+         **/
         const val JAXB_JAVAGEN_OUTPUTPATH = "java"
+
+        /**
+         * Folder names for generated schema files.
+         **/
         const val JAXB_SCHEMAGEN_OUTPUTPATH = "schema"
 
-        // Default source set name
+        /**
+         * Default source set name used for code generation.
+         **/
         const val DEFAULT_SOURCESET_NAME = "main"
 
-        // Default Ant task class name.
+        /**
+         * Default Ant task class name for Java code generation.
+         **/
         const val DEFAULT_XJC_TASK_CLASS_NAME = "com.sun.tools.xjc.XJCTask"
+
+        /**
+         * Default Ant task class name for Schema code generation.
+         **/
         const val DEFAULT_SCHEMAGEN_TASK_CLASS_NAME = "com.sun.tools.jxc.SchemaGenTask"
     }
 
+
+    /**
+     * Domain object container of configurations for Java code generation.
+     */
     val schemaGen = objectFactory.domainObjectContainer(JavaToSchema::class.java)
 
+    /**
+     * Domain object container of configurations for Schema code generation.
+     */
     val javaGen = objectFactory.domainObjectContainer(SchemaToJava::class.java)
 
 }

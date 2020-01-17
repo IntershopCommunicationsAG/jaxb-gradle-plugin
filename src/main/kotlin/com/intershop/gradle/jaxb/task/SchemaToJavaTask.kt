@@ -24,6 +24,9 @@ import javax.inject.Inject
  */
 abstract class SchemaToJavaTask: DefaultTask() {
 
+    /**
+     * Inject service of ObjectFactory (See "Service injection" in Gradle documentation.
+     */
     @get:Inject
     abstract val objectFactory: ObjectFactory
 
@@ -289,6 +292,11 @@ abstract class SchemaToJavaTask: DefaultTask() {
     fun provideAntTaskClassName(antTaskClassName: Provider<String>) =
             antTaskClassNameProperty.set(antTaskClassName)
 
+    /**
+     * Classpath files for schema code generation (see Jaxb configuration (JAXB_CONFIGURATION_NAME)).
+     *
+     * @property jaxbClasspathfiles
+     */
     @get:InputFiles
     val jaxbClasspathfiles : FileCollection by lazy {
         val returnFiles = project.files()
@@ -297,6 +305,11 @@ abstract class SchemaToJavaTask: DefaultTask() {
         returnFiles
     }
 
+    /**
+     * Additional classpath files for schema code generation (see Jaxb configuration (ADD_JAXB_CONFIGURATION_NAME)).
+     *
+     * @property addjaxbClasspathfiles
+     */
     @get:InputFiles
     val addjaxbClasspathfiles : FileCollection by lazy {
         val returnFiles = project.files()
@@ -305,6 +318,11 @@ abstract class SchemaToJavaTask: DefaultTask() {
         returnFiles
     }
 
+    /**
+     * Classpath files for Schema generation.
+     *
+     * @property classpathfiles
+     */
     @get:InputFiles
     val classpathfiles : FileCollection by lazy {
         val returnFiles = project.files()
