@@ -32,6 +32,17 @@ import org.gradle.api.plugins.JavaPluginConvention
  */
 open class JaxbPlugin: Plugin<Project> {
 
+    companion object {
+        /**
+         * Description for main task.
+         */
+        const val TASKDESCRIPTION = "JAXB code generation tasks"
+        /**
+         * Taskname for main task.
+         */
+        const val TASKNAME = "jaxb"
+    }
+
     /**
      * Applies the extension and calls the
      * task initialization for this plugin.
@@ -48,9 +59,9 @@ open class JaxbPlugin: Plugin<Project> {
 
             addJaxbConfiguration(this)
 
-            val jaxbTask = tasks.maybeCreate("jaxb")
+            val jaxbTask = tasks.maybeCreate(TASKNAME)
             jaxbTask.group = JaxbExtension.JAXB_TASK_GROUP
-            jaxbTask.description = "JAXB code generation tasks"
+            jaxbTask.description = TASKDESCRIPTION
 
             configureJavaCodeGenTasks(this, extension, jaxbTask)
             configureSchemaCodeGenTasks(this, extension, jaxbTask)

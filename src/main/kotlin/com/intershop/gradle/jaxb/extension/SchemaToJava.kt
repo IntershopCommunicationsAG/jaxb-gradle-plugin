@@ -32,9 +32,15 @@ import javax.inject.Inject
  */
 abstract class SchemaToJava(val name: String) {
 
+    /**
+     * Inject service of ObjectFactory (See "Service injection" in Gradle documentation.
+     */
     @get:Inject
     abstract val objectFactory: ObjectFactory
 
+    /**
+     * Inject service of ProjectLayout (See "Service injection" in Gradle documentation.
+     */
     @get:Inject
     abstract val layout: ProjectLayout
 

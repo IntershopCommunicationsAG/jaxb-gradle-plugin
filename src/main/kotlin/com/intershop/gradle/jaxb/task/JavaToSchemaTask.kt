@@ -26,6 +26,9 @@ import javax.inject.Inject
  */
 abstract class JavaToSchemaTask: DefaultTask() {
 
+    /**
+     * Inject service of ObjectFactory (See "Service injection" in Gradle documentation.
+     */
     @get:Inject
     abstract val objectFactory: ObjectFactory
 
@@ -145,18 +148,38 @@ abstract class JavaToSchemaTask: DefaultTask() {
     fun provideAntTaskClassName(antTaskClassName: Provider<String>) =
             antTaskClassNameProperty.set(antTaskClassName)
 
+    /**
+     * Classpath files for Java code generation (see Jaxb configuration (JAXB_CONFIGURATION_NAME)).
+     *
+     * @property jaxbClasspathfiles
+     */
     @get:InputFiles
     val jaxbClasspathfiles : FileCollection by lazy {
         val returnFiles = project.files()
-        // find files of original JASPER and Eclipse compiler
         returnFiles.from(project.configurations.findByName(JaxbExtension.JAXB_CONFIGURATION_NAME))
         returnFiles
     }
 
+    /**
+     * Additional classpath files for Java code generation (see Jaxb configuration (ADD_JAXB_CONFIGURATION_NAME)).
+     *
+     * @property addjaxbClasspathfiles
+     */
+    @get:InputFiles
+    val addjaxbClasspathfiles : FileCollection by lazy {
+        val returnFiles = project.files()
+        returnFiles.from(project.configurations.findByName(JaxbExtension.ADD_JAXB_CONFIGURATION_NAME))
+        returnFiles
+    }
+
+    /**
+     * Classpath files for Java code generation.
+     *
+     * @property classpathfiles
+     */
     @get:InputFiles
     val classpathfiles : FileCollection by lazy {
         val returnFiles = project.files()
-        // find files of original JASPER and Eclipse compiler
         returnFiles.from(project.configurations.findByName("compile"))
         returnFiles
     }
@@ -181,7 +204,7 @@ abstract class JavaToSchemaTask: DefaultTask() {
             project.logger.info("Arguments for schema: {}", argMap)
         }
 
-        val classpath = classpathfiles + jaxbClasspathfiles
+        val classpath = classpathfiles + jaxbClasspathfiles + addjaxbClasspathfiles
 
         ant.withGroovyBuilder {
             "taskdef"(
