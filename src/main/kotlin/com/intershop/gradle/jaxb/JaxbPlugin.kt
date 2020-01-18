@@ -80,8 +80,7 @@ open class JaxbPlugin: Plugin<Project> {
                                           extension: JaxbExtension,
                                           jaxbTask: Task) {
         extension.javaGen.all({ schemaToJava: SchemaToJava ->
-            project.tasks.create(schemaToJava.taskName,
-                                 SchemaToJavaTask::class.java).apply {
+            project.tasks.maybeCreate(schemaToJava.taskName, SchemaToJavaTask::class.java).apply {
                 description = "Generate java code for " + schemaToJava.name
                 group = JaxbExtension.JAXB_TASK_GROUP
 
@@ -132,8 +131,7 @@ open class JaxbPlugin: Plugin<Project> {
                                                  extension: JaxbExtension,
                                                  jaxbTask: Task) {
         extension.schemaGen.all({ javaToSchema: JavaToSchema ->
-            project.tasks.create(javaToSchema.taskName,
-                                 JavaToSchemaTask::class.java).apply {
+            project.tasks.maybeCreate(javaToSchema.taskName, JavaToSchemaTask::class.java).apply {
                 description = "Generate Schema for " + javaToSchema.name
                 group = JaxbExtension.JAXB_TASK_GROUP
                 provideOutputDir(javaToSchema.outputDirProvider)
