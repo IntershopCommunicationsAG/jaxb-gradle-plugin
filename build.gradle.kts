@@ -96,6 +96,10 @@ detekt {
 
 tasks {
     withType<Test>().configureEach {
+        testLogging {
+            showStandardStreams = true
+        }
+
         systemProperty("intershop.gradle.versions", "6.0, 6.1")
 
         if(project.hasProperty("repoURL")
