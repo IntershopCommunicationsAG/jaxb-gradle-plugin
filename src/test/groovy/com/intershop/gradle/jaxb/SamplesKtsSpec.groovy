@@ -71,7 +71,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ["compileJava", "-s", "-i", "--configure-on-demand", "--parallel", "--max-workers=4"]
+        List<String> args = ["compileJava", "-s", "--configure-on-demand", "--parallel", "--max-workers=4"]
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -154,7 +154,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ["compileJava", "-s", "-d", "--configure-on-demand", "--parallel", "--max-workers=4"]
+        List<String> args = ["compileJava", "-s", "--configure-on-demand", "--parallel", "--max-workers=4"]
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -213,7 +213,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ["compileJava", "-s", "-i"]
+        List<String> args = ["compileJava", "-s"]
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -261,7 +261,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ["compileJava", "-s", "-i"]
+        List<String> args = ["compileJava", "-s"]
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -310,7 +310,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ["compileJava", "-s", "-i"]
+        List<String> args = ["compileJava", "-s"]
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -353,7 +353,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ["compileJava", "-s", "-i"]
+        List<String> args = ["compileJava", "-s"]
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -400,7 +400,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ["compileJava", "-s", "-i"]
+        List<String> args = ["compileJava", "-s"]
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -445,7 +445,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ["compileJava", "-s", "-i"]
+        List<String> args = ["compileJava", "-s"]
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -492,7 +492,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ["compileJava", "-s", "-i"]
+        List<String> args = ["compileJava", "-s"]
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -545,7 +545,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ["compileJava", "-s", "-i"]
+        List<String> args = ["compileJava", "-s"]
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -596,7 +596,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ["compileJava", "-s", "-i"]
+        List<String> args = ["compileJava", "-s"]
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -645,7 +645,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ["compileJava", "-s", "-i"]
+        List<String> args = ["compileJava", "-s"]
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -702,7 +702,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ["compileJava", "-s", "-i"]
+        List<String> args = ["compileJava", "-s"]
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -750,7 +750,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ["compileJava", "-s", "-d"]
+        List<String> args = ["compileJava", "-s"]
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
@@ -799,7 +799,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         """.stripIndent()
 
         when:
-        List<String> args = ["jaxb", "-s", "-i"]
+        List<String> args = ["jaxb", "-s"]
 
         def result = getPreparedGradleRunner()
                 .withArguments(args)
