@@ -84,7 +84,7 @@ abstract class JavaToSchema(val name: String) {
      *
      * @param exclude
      */
-    fun exlude(exclude: String) {
+    fun exclude(exclude: String) {
         excludesProperty.add(exclude)
     }
 
