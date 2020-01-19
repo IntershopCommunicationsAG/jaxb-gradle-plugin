@@ -4,7 +4,6 @@ import com.intershop.gradle.jaxb.extension.JaxbExtension
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.Directory
 import org.gradle.api.file.FileCollection
-import org.gradle.api.file.ProjectLayout
 import org.gradle.api.file.RegularFile
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Provider
@@ -193,10 +192,10 @@ abstract class SchemaToJavaTask: DefaultTask() {
     @get:InputFile
     var schema: File?
         get() {
-            if(schemaProperty.isPresent) {
-                return schemaProperty.get().asFile
+            return if(schemaProperty.isPresent) {
+                schemaProperty.get().asFile
             } else {
-                return null
+                null
             }
         }
         set(value) = schemaProperty.set(value)
@@ -215,10 +214,10 @@ abstract class SchemaToJavaTask: DefaultTask() {
     @get:InputFile
     var binding: File?
         get() {
-            if(bindingProperty.isPresent) {
-                return bindingProperty.get().asFile
+            return if(bindingProperty.isPresent) {
+                bindingProperty.get().asFile
             } else {
-                return null
+                null
             }
         }
         set(value) = bindingProperty.set(value)
@@ -237,10 +236,10 @@ abstract class SchemaToJavaTask: DefaultTask() {
     @get:InputFile
     var catalog: File?
         get() {
-            if(catalogProperty.isPresent) {
-                return catalogProperty.get().asFile
+            return if(catalogProperty.isPresent) {
+                catalogProperty.get().asFile
             } else {
-                return null
+                null
             }
         }
         set(value) = catalogProperty.set(value)
@@ -362,17 +361,17 @@ abstract class SchemaToJavaTask: DefaultTask() {
         )
 
         if(packageName != null) {
-            argMap.put("package", packageName)
+            argMap["package"] = packageName
         }
 
         if(schemaProperty.isPresent) {
-            argMap.put("schema", schemaProperty.get().asFile.absolutePath)
+            argMap["schema"] = schemaProperty.get().asFile.absolutePath
         }
         if(bindingProperty.isPresent) {
-            argMap.put("binding", bindingProperty.get().asFile.absolutePath)
+            argMap["binding"] = bindingProperty.get().asFile.absolutePath
         }
         if(catalogProperty.isPresent) {
-            argMap.put("catalog", catalogProperty.get().asFile.absolutePath)
+            argMap["catalog"] = catalogProperty.get().asFile.absolutePath
         }
 
         if(project.logger.isInfoEnabled) {
@@ -409,7 +408,7 @@ abstract class SchemaToJavaTask: DefaultTask() {
                     if(! strictValidation) {
                         "arg"( "value" to "-nv")
                     }
-                    if (project.logger.isInfoEnabled() || project.logger.isDebugEnabled()) {
+                    if (project.logger.isInfoEnabled || project.logger.isDebugEnabled) {
                         "arg"( "value" to "-verbose")
                     } else {
                         "arg"( "value" to "-quiet")

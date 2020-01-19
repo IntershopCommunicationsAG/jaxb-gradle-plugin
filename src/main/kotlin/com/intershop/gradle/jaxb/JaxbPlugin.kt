@@ -130,7 +130,7 @@ open class JaxbPlugin: Plugin<Project> {
     private fun configureSchemaCodeGenTasks(project: Project,
                                                  extension: JaxbExtension,
                                                  jaxbTask: Task) {
-        extension.schemaGen.all({ javaToSchema: JavaToSchema ->
+        extension.schemaGen.all { javaToSchema: JavaToSchema ->
             project.tasks.maybeCreate(javaToSchema.taskName, JavaToSchemaTask::class.java).apply {
                 description = "Generate Schema for " + javaToSchema.name
                 group = JaxbExtension.JAXB_TASK_GROUP
@@ -144,7 +144,7 @@ open class JaxbPlugin: Plugin<Project> {
 
                 jaxbTask.dependsOn(this)
             }
-        })
+        }
     }
 
     /*
