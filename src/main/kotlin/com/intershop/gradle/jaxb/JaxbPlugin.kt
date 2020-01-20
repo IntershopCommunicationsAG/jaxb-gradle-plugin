@@ -79,7 +79,7 @@ open class JaxbPlugin: Plugin<Project> {
     private fun configureJavaCodeGenTasks(project: Project,
                                           extension: JaxbExtension,
                                           jaxbTask: Task) {
-        extension.javaGen.all({ schemaToJava: SchemaToJava ->
+        extension.javaGen.all { schemaToJava: SchemaToJava ->
             project.tasks.maybeCreate(schemaToJava.taskName, SchemaToJavaTask::class.java).apply {
                 description = "Generate java code for " + schemaToJava.name
                 group = JaxbExtension.JAXB_TASK_GROUP
@@ -116,7 +116,7 @@ open class JaxbPlugin: Plugin<Project> {
 
                 jaxbTask.dependsOn(this)
             }
-        })
+        }
     }
 
     /*
