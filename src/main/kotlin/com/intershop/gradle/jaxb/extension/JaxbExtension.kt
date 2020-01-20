@@ -16,8 +16,6 @@
  */
 package com.intershop.gradle.jaxb.extension
 
-import groovy.lang.Closure
-import org.gradle.api.Action
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.model.ObjectFactory
 import javax.inject.Inject
@@ -84,11 +82,11 @@ open class JaxbExtension @Inject constructor(objectFactory: ObjectFactory) {
     /**
      * Domain object container of configurations for Java code generation.
      */
-    val schemaGen = objectFactory.domainObjectContainer(JavaToSchema::class.java)
+    val schemaGen: NamedDomainObjectContainer<JavaToSchema> = objectFactory.domainObjectContainer(JavaToSchema::class.java)
 
     /**
      * Domain object container of configurations for Schema code generation.
      */
-    val javaGen = objectFactory.domainObjectContainer(SchemaToJava::class.java)
+    val javaGen: NamedDomainObjectContainer<SchemaToJava> = objectFactory.domainObjectContainer(SchemaToJava::class.java)
 
 }

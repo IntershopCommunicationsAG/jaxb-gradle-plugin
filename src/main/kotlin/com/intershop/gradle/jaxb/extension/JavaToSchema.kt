@@ -157,7 +157,7 @@ abstract class JavaToSchema(val name: String) {
      *
      * @property episode
      */
-    var episode by episodeProperty
+    var episode: String by episodeProperty
 
     /**
      * Provider for outputDir property.
@@ -185,11 +185,11 @@ abstract class JavaToSchema(val name: String) {
      *
      * @property antTaskClassName
      */
-    var antTaskClassName by antTaskClassNameProperty
+    var antTaskClassName: String by antTaskClassNameProperty
 
     init {
         val outPath = "${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_SCHEMAGEN_OUTPUTPATH}"
-        outputDirProperty.convention(layout.getBuildDirectory().
+        outputDirProperty.convention(layout.buildDirectory.
                         dir("${outPath}/${name.replace(' ', '_')}").get())
         antTaskClassNameProperty.convention("com.sun.tools.jxc.SchemaGenTask")
         includesProperty.add("**/**/*.java")

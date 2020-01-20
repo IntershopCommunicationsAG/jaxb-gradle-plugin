@@ -77,7 +77,7 @@ abstract class SchemaToJava(val name: String) {
      *
      * @property encoding
      */
-    var encoding by encodingProperty
+    var encoding: String by encodingProperty
 
     /**
      * Provider for strictValidation property.
@@ -90,7 +90,7 @@ abstract class SchemaToJava(val name: String) {
      *
      * @property strictValidation
      */
-    var strictValidation by strictValidationProperty
+    var strictValidation: Boolean by strictValidationProperty
 
     /**
      * Provider for extension property.
@@ -103,7 +103,7 @@ abstract class SchemaToJava(val name: String) {
      *
      * @property extension
      */
-    var extension by extensionProperty
+    var extension: Boolean by extensionProperty
 
     /**
      * Provider for header property.
@@ -116,7 +116,7 @@ abstract class SchemaToJava(val name: String) {
      *
      * @property header
      */
-    var header by headerProperty
+    var header: Boolean by headerProperty
 
     /**
      * Provider for packageName property.
@@ -129,7 +129,7 @@ abstract class SchemaToJava(val name: String) {
      *
      * @property packageName
      */
-    var packageName by packageNameProperty
+    var packageName: String by packageNameProperty
 
     /**
      * Provider for targetVersion property.
@@ -142,7 +142,7 @@ abstract class SchemaToJava(val name: String) {
      *
      * @property targetVersion
      */
-    var targetVersion by targetVersionProperty
+    var targetVersion: String by targetVersionProperty
 
     /**
      * Provider for language property.
@@ -155,7 +155,7 @@ abstract class SchemaToJava(val name: String) {
      *
      * @property language
      */
-    var language by languageProperty
+    var language: String by languageProperty
 
     /**
      * Provider for additional arguments.
@@ -202,10 +202,10 @@ abstract class SchemaToJava(val name: String) {
      */
     var schema: File?
             get()  {
-                if(schemaProperty.orNull != null) {
-                    return schemaProperty.get().asFile
+                return if(schemaProperty.orNull != null) {
+                    schemaProperty.get().asFile
                 } else {
-                    return null
+                    null
                 }
             }
             set(value) = schemaProperty.set(value)
@@ -223,10 +223,10 @@ abstract class SchemaToJava(val name: String) {
      */
     var binding: File?
         get()  {
-            if(bindingProperty.orNull != null) {
-                return bindingProperty.get().asFile
+            return if(bindingProperty.orNull != null) {
+                bindingProperty.get().asFile
             } else {
-                return null
+                null
             }
         }
         set(value) = bindingProperty.set(value)
@@ -244,10 +244,10 @@ abstract class SchemaToJava(val name: String) {
      */
     var catalog: File?
         get()  {
-            if(catalogProperty.orNull != null) {
-                return catalogProperty.get().asFile
+            return if(catalogProperty.orNull != null) {
+                catalogProperty.get().asFile
             } else {
-                return null
+                null
             }
         }
         set(value) = catalogProperty.set(value)
@@ -296,7 +296,7 @@ abstract class SchemaToJava(val name: String) {
      *
      * @property sourceSetName
      */
-    var sourceSetName by sourceSetNameProperty
+    var sourceSetName: String by sourceSetNameProperty
 
     /**
      * Provider for used  JavaGen antTaskClassName.
@@ -309,7 +309,7 @@ abstract class SchemaToJava(val name: String) {
      *
      * @property antTaskClassName
      */
-    var antTaskClassName by antTaskClassNameProperty
+    var antTaskClassName: String by antTaskClassNameProperty
 
     init {
         encodingProperty.convention("UTF-8")
@@ -322,7 +322,7 @@ abstract class SchemaToJava(val name: String) {
         languageProperty.convention("XMLSCHEMA")
 
         val outPath = "${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_JAVAGEN_OUTPUTPATH}"
-        outputDirProperty.convention(layout.getBuildDirectory().
+        outputDirProperty.convention(layout.buildDirectory.
                 dir("${outPath}/${name.replace(' ', '_')}").get())
 
         sourceSetNameProperty.convention(JaxbExtension.DEFAULT_SOURCESET_NAME)

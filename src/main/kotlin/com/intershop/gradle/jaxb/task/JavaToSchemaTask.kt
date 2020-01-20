@@ -127,7 +127,7 @@ abstract class JavaToSchemaTask: DefaultTask() {
      */
     @get:Optional
     @get:Input
-    var episode by episodeProperty
+    var episode: String by episodeProperty
 
     /**
      * This function set the input property episode.
@@ -140,7 +140,7 @@ abstract class JavaToSchemaTask: DefaultTask() {
      * @property antTaskClassName
      */
     @get:Input
-    var antTaskClassName by antTaskClassNameProperty
+    var antTaskClassName: String by antTaskClassNameProperty
 
     /**
      * This function set the classname of javagen.
@@ -197,7 +197,7 @@ abstract class JavaToSchemaTask: DefaultTask() {
         )
 
         if (episode.isNotBlank()) {
-            argMap.put("episode", episode)
+            argMap["episode"] = episode
         }
 
         if(project.logger.isInfoEnabled) {
