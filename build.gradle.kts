@@ -33,7 +33,7 @@ plugins {
     `maven-publish`
 
     // intershop version plugin
-    id("com.intershop.gradle.scmversion") version "6.0.0"
+    id("com.intershop.gradle.scmversion") version "6.1.0"
 
     // plugin for documentation
     id("org.asciidoctor.jvm.convert") version "2.4.0"
