@@ -6,6 +6,7 @@ import org.gradle.api.file.Directory
 import org.gradle.api.file.FileCollection
 import org.gradle.api.file.RegularFile
 import org.gradle.api.model.ObjectFactory
+import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
@@ -326,7 +327,7 @@ abstract class SchemaToJavaTask: DefaultTask() {
     val classpathfiles : FileCollection by lazy {
         val returnFiles = project.files()
         // find files of original JASPER and Eclipse compiler
-        returnFiles.from(project.configurations.findByName("compile"))
+        returnFiles.from(project.configurations.findByName(JavaPlugin.COMPILE_CLASSPATH_CONFIGURATION_NAME))
         returnFiles
     }
 
