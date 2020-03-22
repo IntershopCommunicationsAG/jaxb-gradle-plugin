@@ -313,9 +313,9 @@ abstract class SchemaToJava(val name: String) {
 
     init {
         encodingProperty.convention("UTF-8")
-        strictValidationProperty.convention(true)
+        strictValidationProperty.convention(false)
         extensionProperty.convention(false)
-        headerProperty.convention(true)
+        headerProperty.convention(false)
         targetVersionProperty.convention("2.2")
 
         argsProperty.convention(listOf<String>())
