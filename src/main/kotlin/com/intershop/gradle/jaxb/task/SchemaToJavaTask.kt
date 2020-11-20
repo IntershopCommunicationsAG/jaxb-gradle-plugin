@@ -359,6 +359,8 @@ abstract class SchemaToJavaTask: DefaultTask() {
                 "header" to header.toString(),
                 "extension" to extension.toString(),
                 "target" to targetVersion
+                //,
+                //"fork" to true
         )
 
         if(packageName != null) {
@@ -381,8 +383,17 @@ abstract class SchemaToJavaTask: DefaultTask() {
 
         val taskClassPath = jaxbClasspathfiles + addjaxbClasspathfiles
 
-        synchronized(SchemaToJavaTask::class.java) {
-            project.logger.info(" -> Locked XJC Gradle Task to prevent the parallel execution!")
+        //synchronized(SchemaToJavaTask::class.java) {
+        //    project.logger.info(" -> Locked XJC Gradle Task to prevent the parallel execution!")
+
+            System.setProperty("javax.xml.accessExternalSchema", "all")
+            System.setProperty("javax.xml.accessExternalDTD", "all")
+            System.setProperty("enableExternalEntityProcessing", "true")
+
+            ant.properties.putAll(
+                    mapOf( "javax.xml.accessExternalSchema" to "all",
+                            "javax.xml.accessExternalDTD" to "file,http")
+            )
 
             ant.withGroovyBuilder {
                 "taskdef"(
@@ -402,8 +413,10 @@ abstract class SchemaToJavaTask: DefaultTask() {
                         bindings.addToAntBuilder(ant, "binding", FileCollection.AntType.FileSet)
                     }
 
+                    "arg"("value" to "-disableXmlSecurity")
+
                     args.forEach {
-                        "arg"( "value" to it)
+                        "arg"("value" to it)
                     }
 
                     if(! strictValidation) {
@@ -414,10 +427,10 @@ abstract class SchemaToJavaTask: DefaultTask() {
                     } else {
                         "arg"( "value" to "-quiet")
                     }
-
                 }
             }
-            project.logger.info(" -> Unlocked XJC Gradle Task!")
-        }
+
+        //    project.logger.info(" -> Unlocked XJC Gradle Task!")
+        // }
     }
 }

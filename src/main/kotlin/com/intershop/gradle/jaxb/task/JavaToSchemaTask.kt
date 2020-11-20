@@ -206,6 +206,8 @@ abstract class JavaToSchemaTask: DefaultTask() {
 
         val classpath = classpathfiles + jaxbClasspathfiles + addjaxbClasspathfiles
 
+        System.setProperty("javax.xml.accessExternalSchema", "all")
+
         ant.withGroovyBuilder {
             "taskdef"(
                     "name" to "schemagen",
@@ -227,5 +229,7 @@ abstract class JavaToSchemaTask: DefaultTask() {
                 }
             }
         }
+
+        System.clearProperty("javax.xml.accessExternalSchema")
     }
 }
