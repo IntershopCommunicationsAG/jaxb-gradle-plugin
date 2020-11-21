@@ -20,6 +20,7 @@ import com.intershop.gradle.jaxb.extension.JaxbExtension
 import com.intershop.gradle.jaxb.extension.SchemaToJava
 import com.intershop.gradle.jaxb.task.JavaToSchemaTask
 import com.intershop.gradle.jaxb.task.SchemaToJavaTask
+import com.intershop.gradle.jaxb.utils.JaxbCodeGenRegistry
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -41,6 +42,8 @@ open class JaxbPlugin: Plugin<Project> {
          * Taskname for main task.
          */
         const val TASKNAME = "jaxb"
+
+        const val JAXB_REGISTRY = "jaxbCodeGenRegistry"
     }
 
     /**
@@ -58,6 +61,12 @@ open class JaxbPlugin: Plugin<Project> {
             ) ?: extensions.create( JaxbExtension.JAXB_EXTENSION_NAME, JaxbExtension::class.java )
 
             addJaxbConfiguration(this)
+
+            project.rootProject.gradle.sharedServices.registerIfAbsent(
+                    JAXB_REGISTRY,
+                    JaxbCodeGenRegistry::class.java) {
+                it.maxParallelUsages.set(1)
+            }
 
             val jaxbTask = tasks.maybeCreate(TASKNAME)
             jaxbTask.group = JaxbExtension.JAXB_TASK_GROUP
