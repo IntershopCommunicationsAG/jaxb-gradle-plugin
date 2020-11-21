@@ -1,22 +1,47 @@
+/*
+ * Copyright 2019 Intershop Communications AG.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 package com.intershop.gradle.jaxb.task
 
+import com.intershop.gradle.jaxb.JaxbPlugin.Companion.JAXB_REGISTRY
 import com.intershop.gradle.jaxb.extension.JaxbExtension
 import org.gradle.api.DefaultTask
+import org.gradle.api.GradleException
 import org.gradle.api.file.Directory
 import org.gradle.api.file.FileCollection
 import org.gradle.api.file.RegularFile
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.provider.Provider
+import org.gradle.api.services.BuildService
+import org.gradle.api.services.BuildServiceRegistry
+import org.gradle.api.services.internal.BuildServiceRegistryInternal
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
+import org.gradle.internal.resources.ResourceLock
 import org.gradle.kotlin.dsl.withGroovyBuilder
 import java.io.File
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 /**
  * This task generates a java code from an
@@ -346,6 +371,24 @@ abstract class SchemaToJavaTask: DefaultTask() {
      */
     fun provideOutputDir(outputDir: Provider<Directory>) = outputDirProperty.set(outputDir)
 
+    @Internal
+    override fun getSharedResources(): List<ResourceLock> {
+        val locks = ArrayList(super.getSharedResources())
+        val serviceRegistry = services.get(BuildServiceRegistryInternal::class.java)
+        val jaxbResourceProvider = getBuildService(serviceRegistry, JAXB_REGISTRY)
+        val resource = serviceRegistry.forService(jaxbResourceProvider)
+        locks.add(resource.getResourceLock(1))
+
+        return Collections.unmodifiableList(locks)
+    }
+
+    private fun getBuildService(registry: BuildServiceRegistry, name: String): Provider<out BuildService<*>> {
+        val registration = registry.registrations.findByName(name)
+                ?: throw GradleException ("Unable to find build service with name '$name'.")
+
+        return registration.getService()
+    }
+
     /**
      * This creates the java code fron a JAXB configuration.
      * It calls the original ant task with necessary parameters.
@@ -383,54 +426,50 @@ abstract class SchemaToJavaTask: DefaultTask() {
 
         val taskClassPath = jaxbClasspathfiles + addjaxbClasspathfiles
 
-        //synchronized(SchemaToJavaTask::class.java) {
-        //    project.logger.info(" -> Locked XJC Gradle Task to prevent the parallel execution!")
+        project.logger.info(" -> Locked XJC Gradle Task to prevent the parallel execution!")
 
-            System.setProperty("javax.xml.accessExternalSchema", "all")
-            System.setProperty("javax.xml.accessExternalDTD", "all")
-            System.setProperty("enableExternalEntityProcessing", "true")
+        System.setProperty("javax.xml.accessExternalSchema", "all")
+        System.setProperty("javax.xml.accessExternalDTD", "all")
+        System.setProperty("enableExternalEntityProcessing", "true")
 
-            ant.properties.putAll(
-                    mapOf( "javax.xml.accessExternalSchema" to "all",
-                            "javax.xml.accessExternalDTD" to "file,http")
-            )
+        ant.properties.putAll(
+                mapOf( "javax.xml.accessExternalSchema" to "all",
+                        "javax.xml.accessExternalDTD" to "file,http")
+        )
 
-            ant.withGroovyBuilder {
-                "taskdef"(
-                        "name" to "jaxb",
-                        "classname" to antTaskClassName,
-                        "classpath" to taskClassPath.asPath)
-                "jaxb"(argMap) {
-                    "classpath" {
-                        "pathelement"( "path" to classpathfiles.asPath)
-                    }
+        ant.withGroovyBuilder {
+            "taskdef"(
+                    "name" to "jaxb",
+                    "classname" to antTaskClassName,
+                    "classpath" to taskClassPath.asPath)
+            "jaxb"(argMap) {
+                "classpath" {
+                    "pathelement"( "path" to classpathfiles.asPath)
+                }
 
-                    if(! schemas.isEmpty) {
-                        schemas.addToAntBuilder(ant, "schema", FileCollection.AntType.FileSet)
-                    }
+                if(! schemas.isEmpty) {
+                    schemas.addToAntBuilder(ant, "schema", FileCollection.AntType.FileSet)
+                }
 
-                    if(! bindings.isEmpty) {
-                        bindings.addToAntBuilder(ant, "binding", FileCollection.AntType.FileSet)
-                    }
+                if(! bindings.isEmpty) {
+                    bindings.addToAntBuilder(ant, "binding", FileCollection.AntType.FileSet)
+                }
 
-                    "arg"("value" to "-disableXmlSecurity")
+                "arg"("value" to "-disableXmlSecurity")
 
-                    args.forEach {
-                        "arg"("value" to it)
-                    }
+                args.forEach {
+                    "arg"("value" to it)
+                }
 
-                    if(! strictValidation) {
-                        "arg"( "value" to "-nv")
-                    }
-                    if (project.logger.isInfoEnabled || project.logger.isDebugEnabled) {
-                        "arg"( "value" to "-verbose")
-                    } else {
-                        "arg"( "value" to "-quiet")
-                    }
+                if(! strictValidation) {
+                    "arg"( "value" to "-nv")
+                }
+                if (project.logger.isInfoEnabled || project.logger.isDebugEnabled) {
+                    "arg"( "value" to "-verbose")
+                } else {
+                    "arg"( "value" to "-quiet")
                 }
             }
-
-        //    project.logger.info(" -> Unlocked XJC Gradle Task!")
-        // }
+        }
     }
 }
