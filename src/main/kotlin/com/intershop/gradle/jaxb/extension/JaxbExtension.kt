@@ -82,11 +82,13 @@ open class JaxbExtension @Inject constructor(objectFactory: ObjectFactory) {
     /**
      * Domain object container of configurations for Java code generation.
      */
-    val schemaGen: NamedDomainObjectContainer<JavaToSchema> = objectFactory.domainObjectContainer(JavaToSchema::class.java)
+    val schemaGen: NamedDomainObjectContainer<JavaToSchema> =
+            objectFactory.domainObjectContainer(JavaToSchema::class.java)
 
     /**
      * Domain object container of configurations for Schema code generation.
      */
-    val javaGen: NamedDomainObjectContainer<SchemaToJava> = objectFactory.domainObjectContainer(SchemaToJava::class.java)
+    val javaGen: NamedDomainObjectContainer<SchemaToJava> =
+            objectFactory.domainObjectContainer(SchemaToJava::class.java)
 
 }
