@@ -29,6 +29,8 @@ import org.gradle.api.provider.Provider
 import org.gradle.api.services.BuildService
 import org.gradle.api.services.BuildServiceRegistry
 import org.gradle.api.services.internal.BuildServiceRegistryInternal
+import org.gradle.api.tasks.Classpath
+import org.gradle.api.tasks.CompileClasspath
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.InputFiles
@@ -335,7 +337,7 @@ abstract class SchemaToJavaTask: DefaultTask() {
      *
      * @property addjaxbClasspathfiles
      */
-    @get:InputFiles
+    @get:Classpath
     val addjaxbClasspathfiles : FileCollection by lazy {
         val returnFiles = project.files()
         // find files of original JASPER and Eclipse compiler
@@ -348,7 +350,7 @@ abstract class SchemaToJavaTask: DefaultTask() {
      *
      * @property classpathfiles
      */
-    @get:InputFiles
+    @get:CompileClasspath
     val classpathfiles : FileCollection by lazy {
         val returnFiles = project.files()
         // find files of original JASPER and Eclipse compiler

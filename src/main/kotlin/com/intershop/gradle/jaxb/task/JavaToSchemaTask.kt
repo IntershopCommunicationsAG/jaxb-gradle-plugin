@@ -25,7 +25,10 @@ import org.gradle.api.file.Directory
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.FileCollection
 import org.gradle.api.model.ObjectFactory
+import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.Classpath
+import org.gradle.api.tasks.CompileClasspath
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.InputFiles
@@ -169,7 +172,7 @@ abstract class JavaToSchemaTask: DefaultTask() {
      *
      * @property jaxbClasspathfiles
      */
-    @get:InputFiles
+    @get:Classpath
     val jaxbClasspathfiles : FileCollection by lazy {
         val returnFiles = project.files()
         returnFiles.from(project.configurations.findByName(JaxbExtension.JAXB_CONFIGURATION_NAME))
@@ -181,7 +184,7 @@ abstract class JavaToSchemaTask: DefaultTask() {
      *
      * @property addjaxbClasspathfiles
      */
-    @get:InputFiles
+    @get:Classpath
     val addjaxbClasspathfiles : FileCollection by lazy {
         val returnFiles = project.files()
         returnFiles.from(project.configurations.findByName(JaxbExtension.ADD_JAXB_CONFIGURATION_NAME))
@@ -193,10 +196,10 @@ abstract class JavaToSchemaTask: DefaultTask() {
      *
      * @property classpathfiles
      */
-    @get:InputFiles
+    @get:CompileClasspath
     val classpathfiles : FileCollection by lazy {
         val returnFiles = project.files()
-        returnFiles.from(project.configurations.findByName("compile"))
+        returnFiles.from(project.configurations.findByName(JavaPlugin.COMPILE_CLASSPATH_CONFIGURATION_NAME))
         returnFiles
     }
 
