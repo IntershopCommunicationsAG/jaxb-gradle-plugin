@@ -77,19 +77,6 @@ abstract class SchemaToJavaTask: DefaultTask() {
     private val outputDirProperty = objectFactory.directoryProperty()
     private val antTaskClassNameProperty = objectFactory.property(String::class.java)
 
-    init {
-        encodingProperty.convention("UTF-8")
-        strictValidationProperty.convention(false)
-        extensionProperty.convention(false)
-        headerProperty.convention(false)
-
-        encodingProperty.convention("UTF-8")
-        targetVersionProperty.convention("2.2")
-
-        argsProperty.convention(listOf<String>())
-        languageProperty.convention("XMLSCHEMA")
-    }
-
     /**
      * Parameter encoding for javagen.
      *
