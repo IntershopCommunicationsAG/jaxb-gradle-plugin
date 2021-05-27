@@ -2,7 +2,7 @@
 <!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
 <!-- Mit XMLSpy v2006 sp2 U bearbeitet (http://www.altova.com) von Softlab GmbH (Softlab GmbH) -->
 <!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer Leasing GmbH) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner/enums" targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums" version="1.0" jxb:version="2.1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="https://jakarta.ee/xml/ns/jaxb" xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner/enums" targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums" version="1.0" jxb:version="2.1">
 	<xs:simpleType name="PlannedPurchaseScheduledList">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="YES">

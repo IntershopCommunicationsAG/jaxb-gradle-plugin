@@ -4,7 +4,7 @@
 	bearbeitet -->
 <!-- $Id: SubscriptionDO.xsd 46310 2014-03-25 17:20:11Z qxg1996 $ -->
 <xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:enh="http://customer.com/gcdm/controller/v3/model"
+	xmlns:jxb="https://jakarta.ee/xml/ns/jaxb" xmlns:enh="http://customer.com/gcdm/controller/v3/model"
 	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner/customerProfile"
 	targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner/customerProfile"
 	elementFormDefault="qualified" attributeFormDefault="unqualified"

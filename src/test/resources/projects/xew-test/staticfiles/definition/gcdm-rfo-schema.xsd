@@ -5,7 +5,7 @@
 <!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
 	Leasing GmbH) -->
 <xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:root="http://customer.com/gcdm/controller/v3/model"
+	xmlns:jxb="https://jakarta.ee/xml/ns/jaxb" xmlns:root="http://customer.com/gcdm/controller/v3/model"
 	xmlns:bupa="http://customer.com/gcdm/controller/v3/model/businessPartner"
 	xmlns:cmp="http://customer.com/gcdm/controller/v3/model/campaignResponse"
 	xmlns:req="http://customer.com/gcdm/controller/v3/model/request" 

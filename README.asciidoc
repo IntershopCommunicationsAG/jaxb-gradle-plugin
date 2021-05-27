@@ -1,9 +1,15 @@
 = JAXB Gradle Plugin
-:latestRevision: 4.3.0
+:latestRevision: 5.0.0
 :toc:
 :icons: font
 
-NOTE: Version 4 of this plugin will only work with Gradle 6 and JDK 8.
+[CAUTION]
+====
+**Breaking Changes!**
+
+Source and target compatibility of the library was changed to **Java 11**
+The default configuration was adapted for Jakarta XML Binding 3.0.1
+====
 
 == Summary
 This plugin generates Java code from schema files (see https://jaxb.java.net/jaxb20-ea/docs/xjcTask.html[com.sun.tools.xjc.XJCTask]) or schema files from existing Java code (see https://jaxb.java.net/jaxb20-ea/docs/schemagenTask.html[com.sun.tools.jxc.SchemaGenTask]).
@@ -90,16 +96,16 @@ jaxb {
 If the JavaBasePlugin is applied to the project, generated java sources will be added to the specified source set. Per default the main source set is used.
 
 IMPORTANT: This plugin uses the following dependencies: +
-   **&nbsp;&nbsp;&nbsp;&nbsp;org.glassfish.jaxb:jaxb-runtime:2.3.2** +
-   **&nbsp;&nbsp;&nbsp;&nbsp;com.sun.xml.bind:jaxb-jxc:2.2.11** +
-   **&nbsp;&nbsp;&nbsp;&nbsp;com.sun.xml.bind:jaxb-xjc:2.2.11** +
-   **&nbsp;&nbsp;&nbsp;&nbsp;com.sun.xml.bind:jaxb-core:2.2.11** +
+   **&nbsp;&nbsp;&nbsp;&nbsp;com.sun.xml.bind:jaxb-xjc:3.0.1** +
+   **&nbsp;&nbsp;&nbsp;&nbsp;com.sun.xml.bind:jaxb-jxc:3.0.1** +
+   **&nbsp;&nbsp;&nbsp;&nbsp;com.sun.xml.bind:jaxb-impl:3.0.1** +
+   **&nbsp;&nbsp;&nbsp;&nbsp;com.sun.xml.bind:jaxb-core:3.0.1** +
+   **&nbsp;&nbsp;&nbsp;&nbsp;org.glassfish.jaxb:jaxb-runtime:3.0.1** +
+   **&nbsp;&nbsp;&nbsp;&nbsp;jakarta.xml.bind:jakarta.xml.bind-api:3.0.1** +
+   **&nbsp;&nbsp;&nbsp;&nbsp;jakarta.activation:jakarta.activation-api:2.0.1** +
+
 It is possible to overwrite the project dependency configuration 'jaxb', if you want use an other version of JAXB.
-The classpath of the xjc can be extended with a project configuration 'jaxb' and dependencies.
-
-This configuration is used, because 'org.glassfish.jaxb:jaxb-runtime:2.3.2' does not contain a classpath configuration in the manifest.
-
-It is possible to add additional dependencies to the configured "jaxb" with the configuration "jaxbext".
+It is also possible to add additional dependencies to the configured "jaxb" with the configuration "jaxbext".
 
 == Tasks
 The JAXB Gradle plugin adds one task `jaxb` to the project. This task depends on all other plugin task. It is a task added for each configuration in schemaGen and javaGen.
@@ -221,54 +227,6 @@ jaxb {
 }
 ----
 
-==== Configuration with more than one schema file for java code generation
-
-[source,groovy,subs="attributes"]
-----
-plugins {
-    id 'java'
-    id 'com.intershop.gradle.jaxb' version '{latestRevision}'
-}
-
-jaxb {
-    javaGen {
-        ublConfig {
-            binding = file('ubl.xjb')
-            schemas = fileTree(dir: 'cd-UBL-1.0/xsd', include: '**/*.xsd')
-        }
-    }
-}
-----
-
-==== Configuration with xew plugin for java code generation
-
-[source,groovy,subs="attributes"]
-----
-plugins {
-    id 'java'
-    id 'com.intershop.gradle.jaxb' version '{latestRevision}'
-}
-
-    def xewFile = file('staticfiles/definition/xew-includes.txt')
-    def args = ['-Xxew', '-Xxew:instantiate early', '-Xxew:delete', "-Xxew:includeFile \${xewFile.absolutePath.replace('\\','/')}"]
-
-    jaxb {
-        javaGen {
-            gcdm {
-                schemas = fileTree(dir: 'staticfiles/definition', include: '**/**/*.xsd')
-                binding = file('staticfiles/definition/gcdm-customer-binding.xjb')
-                strictValidation = false
-                extension = true
-                arg.addAll(args)
-            }
-        }
-    }
-
-    dependencies {
-        jaxbext 'com.github.jaxb-xew-plugin:jaxb-xew-plugin:1.1'
-    }
-----
-
 ==== Configuration for schema generation
 
 [source,groovy,subs="attributes"]
@@ -290,7 +248,7 @@ jaxb {
 
 == License
 
-Copyright 2014-2019 Intershop Communications.
+Copyright 2014-2021 Intershop Communications.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 

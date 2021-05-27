@@ -4,7 +4,7 @@
 	(customer AG) bearbeitet -->
 <!-- $Id: PackageDO.xsd 44588 2014-02-25 12:44:59Z qxe3031 $ -->
 <xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:enh="http://customer.com/gcdm/controller/v3/model"
+	xmlns:jxb="https://jakarta.ee/xml/ns/jaxb" xmlns:enh="http://customer.com/gcdm/controller/v3/model"
 	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/request/vehicleConfiguration"
 	targetNamespace="http://customer.com/gcdm/controller/v3/model/request/vehicleConfiguration"
 	elementFormDefault="qualified" attributeFormDefault="unqualified"

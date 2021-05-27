@@ -4,7 +4,7 @@
 	(customer AG) bearbeitet -->
 <!--$Id: AccountStatusList.xsd 20505 2012-12-11 11:19:34Z qxb2675 $ -->
 <xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1" 
+	xmlns:jxb="https://jakarta.ee/xml/ns/jaxb" jxb:version="2.1"
 	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/enums"
 	targetNamespace="http://customer.com/gcdm/controller/v3/model/enums"
 	version="1.0">

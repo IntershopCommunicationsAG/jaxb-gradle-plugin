@@ -316,7 +316,7 @@ abstract class SchemaToJava(val name: String) {
         strictValidationProperty.convention(true)
         extensionProperty.convention(false)
         headerProperty.convention(true)
-        targetVersionProperty.convention("2.2")
+        targetVersionProperty.convention("")
 
         argsProperty.convention(listOf<String>())
         languageProperty.convention("XMLSCHEMA")

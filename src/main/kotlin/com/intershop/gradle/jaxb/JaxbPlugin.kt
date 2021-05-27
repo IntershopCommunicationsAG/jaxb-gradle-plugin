@@ -170,10 +170,14 @@ open class JaxbPlugin: Plugin<Project> {
                 .defaultDependencies { dependencies: DependencySet ->
                     // this will be executed if configuration is empty
                     val dependencyHandler = project.dependencies
-                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-impl:2.3.3"))
-                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-jxc:2.3.3"))
-                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-xjc:2.3.3"))
-                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-core:2.3.0.1"))
+                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-xjc:3.0.1"))
+                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-jxc:3.0.1"))
+                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-impl:3.0.1"))
+                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-core:3.0.1"))
+
+                    dependencies.add(dependencyHandler.create("org.glassfish.jaxb:jaxb-runtime:3.0.1"))
+                    dependencies.add(dependencyHandler.create("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1"))
+                    dependencies.add(dependencyHandler.create("jakarta.activation:jakarta.activation-api:2.0.1"))
                 }
 
         project.configurations.maybeCreate(JaxbExtension.ADD_JAXB_CONFIGURATION_NAME)
