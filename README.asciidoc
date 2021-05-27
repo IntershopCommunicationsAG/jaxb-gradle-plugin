@@ -28,7 +28,7 @@ To apply the JAXB Gradle Plugin to your projects, add the following in your buil
 .build.gradle
 ----
 plugins {
-    id 'com.intershop.gradle.jaxb' version 'It is not necessary to apply this plugin to a project separately.'
+    id 'com.intershop.gradle.jaxb' version '{latestRevision}'
 }
 
 jaxb {
