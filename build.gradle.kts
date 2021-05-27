@@ -40,7 +40,7 @@ plugins {
     id("org.asciidoctor.jvm.convert") version "3.3.2"
 
     // documentation
-    id("org.jetbrains.dokka") version "1.4.30"
+    id("org.jetbrains.dokka") version "1.4.32"
 
     // code analysis for kotlin
     id("io.gitlab.arturbosch.detekt") version "1.17.1"
