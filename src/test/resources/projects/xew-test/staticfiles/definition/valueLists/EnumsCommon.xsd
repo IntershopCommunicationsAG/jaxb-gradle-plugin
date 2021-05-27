@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Id: EnumsCommon.xsd 27480 2013-04-25 14:24:22Z qxd4511 $ -->
 <xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns="http://customer.com/gcdm/controller/v3/model/enums"
+	xmlns:jxb="https://jakarta.ee/xml/ns/jaxb" xmlns="http://customer.com/gcdm/controller/v3/model/enums"
 	targetNamespace="http://customer.com/gcdm/controller/v3/model/enums"
 	elementFormDefault="unqualified" version="1.0" jxb:version="2.1" >
 	<xs:include schemaLocation="AccountStatusList.xsd" />

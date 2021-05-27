@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" 
+	xmlns:jxb="https://jakarta.ee/xml/ns/jaxb"
 	xmlns:enum="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
 	xmlns:enumc="http://customer.com/gcdm/controller/v3/model/enums" 
 	xmlns:enh="http://customer.com/gcdm/controller/v3/model"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
 <xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:metadata="http://customer.com/gcdm/v3/metadata"
+	xmlns:jxb="https://jakarta.ee/xml/ns/jaxb" xmlns:metadata="http://customer.com/gcdm/v3/metadata"
 	targetNamespace="http://customer.com/gcdm/v3/metadata" elementFormDefault="qualified"
 	attributeFormDefault="unqualified" jxb:version="2.1" >
 	<xs:include schemaLocation="gcdm-metadata-usecaseEnumerations.xsd" />

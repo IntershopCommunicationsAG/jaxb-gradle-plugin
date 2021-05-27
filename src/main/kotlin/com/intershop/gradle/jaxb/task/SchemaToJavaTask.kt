@@ -84,7 +84,7 @@ abstract class SchemaToJavaTask: DefaultTask() {
         headerProperty.convention(false)
 
         encodingProperty.convention("UTF-8")
-        targetVersionProperty.convention("2.2")
+        targetVersionProperty.convention("")
 
         argsProperty.convention(listOf<String>())
         languageProperty.convention("XMLSCHEMA")
@@ -403,10 +403,11 @@ abstract class SchemaToJavaTask: DefaultTask() {
                 "encoding" to encoding,
                 "header" to header.toString(),
                 "extension" to extension.toString(),
-                "target" to targetVersion
-                //,
-                //"fork" to true
+                "fork" to true
         )
+        if(targetVersion == "2.0" || targetVersion == "2.1") {
+            argMap["target"] = targetVersion
+        }
 
         if(packageName != null) {
             argMap["package"] = packageName
@@ -432,7 +433,6 @@ abstract class SchemaToJavaTask: DefaultTask() {
 
         System.setProperty("javax.xml.accessExternalSchema", "all")
         System.setProperty("javax.xml.accessExternalDTD", "all")
-        System.setProperty("enableExternalEntityProcessing", "true")
 
         ant.properties.putAll(
                 mapOf( "javax.xml.accessExternalSchema" to "all",
@@ -444,10 +444,14 @@ abstract class SchemaToJavaTask: DefaultTask() {
                     "name" to "jaxb",
                     "classname" to antTaskClassName,
                     "classpath" to taskClassPath.asPath)
+
+
+
             "jaxb"(argMap) {
                 "classpath" {
                     "pathelement"( "path" to classpathfiles.asPath)
                 }
+
 
                 if(! schemas.isEmpty) {
                     schemas.addToAntBuilder(ant, "schema", FileCollection.AntType.FileSet)
@@ -471,6 +475,9 @@ abstract class SchemaToJavaTask: DefaultTask() {
                 } else {
                     "arg"( "value" to "-quiet")
                 }
+
+                "jvmarg"("value" to "-DenableExternalEntityProcessing=true")
+
             }
         }
     }

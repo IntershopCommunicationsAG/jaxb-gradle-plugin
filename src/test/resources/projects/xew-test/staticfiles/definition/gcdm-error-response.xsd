@@ -4,7 +4,7 @@
 	bearbeitet -->
 <!-- $Id: gcdm-customer-schema.xsd 24933 2013-03-15 16:20:10Z qx70068 $ -->
 <xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:error="http://customer.com/gcdm/controller/v3/model/error"
+	xmlns:jxb="https://jakarta.ee/xml/ns/jaxb" xmlns:error="http://customer.com/gcdm/controller/v3/model/error"
 	targetNamespace="http://customer.com/gcdm/controller/v3/model/error"
 	version="1.0" jxb:version="2.1" >
 

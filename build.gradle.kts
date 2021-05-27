@@ -37,16 +37,16 @@ plugins {
     id("com.intershop.gradle.scmversion") version "6.2.0"
 
     // plugin for documentation
-    id("org.asciidoctor.jvm.convert") version "3.3.0"
+    id("org.asciidoctor.jvm.convert") version "3.3.2"
 
     // documentation
-    id("org.jetbrains.dokka") version "0.10.1"
+    id("org.jetbrains.dokka") version "1.4.32"
 
     // code analysis for kotlin
-    id("io.gitlab.arturbosch.detekt") version "1.15.0"
+    id("io.gitlab.arturbosch.detekt") version "1.17.1"
 
     // plugin for publishing to Gradle Portal
-    id("com.gradle.plugin-publish") version "0.14.0"
+    id("com.gradle.plugin-publish") version "0.15.0"
 }
 
 scm {
@@ -63,7 +63,6 @@ val sonatypePassword: String? by project
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 val pluginId = "com.intershop.gradle.jaxb"
@@ -87,8 +86,8 @@ pluginBundle {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 // set correct project status
@@ -107,7 +106,7 @@ tasks {
             showStandardStreams = true
         }
 
-        systemProperty("intershop.gradle.versions", "6.8")
+        systemProperty("intershop.gradle.versions","6.8, 7.0.2")
 
         if(project.hasProperty("repoURL")
                 && project.hasProperty("repoUser")
@@ -116,6 +115,7 @@ tasks {
             systemProperty("repo_user_config", project.property("repoUser").toString())
             systemProperty("repo_passwd_config", project.property("repoPasswd").toString())
         }
+        useJUnitPlatform()
 
         dependsOn("jar")
     }
@@ -181,16 +181,11 @@ tasks {
     getByName("jar")?.dependsOn("asciidoctor")
 
     val compileKotlin by getting(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class) {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
-    val dokka by existing(org.jetbrains.dokka.gradle.DokkaTask::class) {
-        outputFormat = "javadoc"
-        outputDirectory = "$buildDir/javadoc"
-
-        // Java 8 is only version supported both by Oracle/OpenJDK and Dokka itself
-        // https://github.com/Kotlin/dokka/issues/294
-        enabled = JavaVersion.current().isJava8
+    dokkaJavadoc.configure {
+        outputDirectory.set(buildDir.resolve("dokka"))
     }
 
     register<Jar>("sourceJar") {
@@ -201,8 +196,8 @@ tasks {
     }
 
     register<Jar>("javaDoc") {
-        dependsOn(dokka)
-        from(dokka)
+        dependsOn(dokkaJavadoc)
+        from(dokkaJavadoc)
         archiveClassifier.set("javadoc")
     }
 }
@@ -271,11 +266,9 @@ signing {
 }
 
 dependencies {
-    compileOnly("org.jetbrains:annotations:18.0.0")
     implementation(gradleApi())
     implementation(gradleKotlinDsl())
 
-    testImplementation("commons-io:commons-io:2.2")
-    testImplementation("com.intershop.gradle.test:test-gradle-plugin:3.7.0")
+    testImplementation("com.intershop.gradle.test:test-gradle-plugin:4.0.0")
     testImplementation(gradleTestKit())
 }

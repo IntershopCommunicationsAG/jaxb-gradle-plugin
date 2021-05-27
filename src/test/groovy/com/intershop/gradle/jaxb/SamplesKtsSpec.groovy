@@ -21,6 +21,13 @@ import static org.gradle.testkit.runner.TaskOutcome.UP_TO_DATE as UP_TO_DATE
 
 class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
 
+    private String DEPENDENCIES = """
+            dependencies {
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+                implementation("org.glassfish.jaxb:jaxb-runtime:3.0.0")
+            }
+    """.stripIndent()
+
     def "Test multithread execution - xjc"() {
         given:
         copyResources("samples/catalog-resolver", "test01")
@@ -63,6 +70,10 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                         arg("-Xsync-methods")
                     }
                 }
+            }
+            
+            dependencies {
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
             }
 
             repositories {
@@ -147,6 +158,11 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            dependencies {
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+            }
+
 
             repositories {
                 mavenCentral()
@@ -206,6 +222,11 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            dependencies {
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+            }
+
 
             repositories {
                 mavenCentral()
@@ -224,10 +245,10 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         result.task(":jaxbJavaGenTest").outcome == SUCCESS
         result.task(":compileJava").outcome == SUCCESS
 
-        fileExists("build/generated/jaxb/java/test/Foo.java")
-        fileExists("build/generated/jaxb/java/test/ObjectFactory.java")
-        fileExists("build/classes/java/main/Foo.class")
-        fileExists("build/classes/java/main/ObjectFactory.class")
+        fileExists("build/generated/jaxb/java/test/generated/Foo.java")
+        fileExists("build/generated/jaxb/java/test/generated/ObjectFactory.java")
+        fileExists("build/classes/java/main/generated/Foo.class")
+        fileExists("build/classes/java/main/generated/ObjectFactory.class")
 
         where:
         gradleVersion << supportedGradleVersions
@@ -255,6 +276,10 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                 }
             }
 
+            dependencies {
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+            }
+
             repositories {
                 mavenCentral()
             }
@@ -272,10 +297,10 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         result.task(":jaxbJavaGenTest").outcome == SUCCESS
         result.task(":compileJava").outcome == SUCCESS
 
-        fileExists("target/generated/jaxb/java/test/Foo.java")
-        fileExists("target/generated/jaxb/java/test/ObjectFactory.java")
-        fileExists("target/classes/java/main/Foo.class")
-        fileExists("target/classes/java/main/ObjectFactory.class")
+        fileExists("target/generated/jaxb/java/test/generated/Foo.java")
+        fileExists("target/generated/jaxb/java/test/generated/ObjectFactory.java")
+        fileExists("target/classes/java/main/generated/Foo.class")
+        fileExists("target/classes/java/main/generated/ObjectFactory.class")
 
         where:
         gradleVersion << supportedGradleVersions
@@ -300,9 +325,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                 }
             }
 
-            dependencies {
-                implementation("com.sun.xml.bind:jaxb-core:2.2.11")
-            }
+            ${DEPENDENCIES}
 
             repositories {
                 mavenCentral()
@@ -346,6 +369,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${DEPENDENCIES}
 
             repositories {
                 mavenCentral()
@@ -393,6 +418,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${DEPENDENCIES}
 
             repositories {
                 mavenCentral()
@@ -411,10 +438,10 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         result.task(":jaxbJavaGenTestxjc").outcome == SUCCESS
         result.task(":compileJava").outcome == SUCCESS
 
-        fileExists("build/generated/jaxb/java/testxjc/NameCard.java")
-        fileExists("build/generated/jaxb/java/testxjc/NameCards.java")
-        fileExists("build/classes/java/main/NameCard.class")
-        fileExists("build/classes/java/main/NameCards.class")
+        fileExists("build/generated/jaxb/java/testxjc/foo/jaxb/NameCard.java")
+        fileExists("build/generated/jaxb/java/testxjc/foo/jaxb/NameCards.java")
+        fileExists("build/classes/java/main/foo/jaxb/NameCard.class")
+        fileExists("build/classes/java/main/foo/jaxb/NameCards.class")
 
         where:
         gradleVersion << supportedGradleVersions
@@ -438,6 +465,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+
+            ${DEPENDENCIES}
 
             repositories {
                 mavenCentral()
@@ -485,6 +514,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+
+            ${DEPENDENCIES}
 
             repositories {
                 mavenCentral()
@@ -535,9 +566,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                 }
             }
 
-            dependencies {
-                implementation("com.sun.xml.bind:jaxb-core:2.2.11")
-            }
+            ${DEPENDENCIES}
 
             repositories {
                 mavenCentral()
@@ -589,6 +618,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${DEPENDENCIES}
 
             repositories {
                 mavenCentral()
@@ -638,6 +669,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${DEPENDENCIES}
 
             repositories {
                 mavenCentral()
@@ -677,53 +710,6 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         gradleVersion << supportedGradleVersions
     }
 
-    def "Test ubl - xjc"() {
-        given:
-        copyResources("samples/ubl")
-
-        buildFile << """
-            plugins {
-                `java`
-                id("com.intershop.gradle.jaxb")
-            }
-
-            jaxb {
-                javaGen {
-                    register("test") {
-                        binding = file("ubl.xjb")
-                        schemas = fileTree("dir" to "cd-UBL-1.0/xsd", "include" to "**/*.xsd")
-                    }
-                }
-            }
-
-            repositories {
-                mavenCentral()
-            }
-        """.stripIndent()
-
-        when:
-        List<String> args = ["compileJava", "-s"]
-
-        def result = getPreparedGradleRunner()
-                .withArguments(args)
-                .withGradleVersion(gradleVersion)
-                .build()
-
-        then:
-        result.task(":jaxbJavaGenTest").outcome == SUCCESS
-        result.task(":compileJava").outcome == SUCCESS
-
-        fileExists("build/generated/jaxb/java/test/org/oasis/ubl/order/ObjectFactory.java")
-        fileExists("build/classes/java/main/org/oasis/ubl/order/ObjectFactory.class")
-        dirExists("build/generated/jaxb/java/test/org/oasis/ubl/codelist")
-        dirExists("build/classes/java/main/org/oasis/ubl/codelist")
-        dirExists("build/generated/jaxb/java/test/org/oasis/ubl/orderchange")
-        dirExists("build/classes/java/main/org/oasis/ubl/orderchange")
-
-        where:
-        gradleVersion << supportedGradleVersions
-    }
-
     def "Test vendor-extensions - xjc"() {
         given:
         copyResources("samples/vendor-extensions")
@@ -743,6 +729,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${DEPENDENCIES}
 
             repositories {
                 mavenCentral()
@@ -908,8 +896,223 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         ! schemaFile.text.contains("main")
         schemaFile.text.contains("kitchenWorldBasket")
         schemaFile.text.contains("purchaseList")
-        schemaFile.text.contains("KitchenWorldBasketType")
-        schemaFile.text.contains("PurchaseListType")
+
+        where:
+        gradleVersion << supportedGradleVersions
+    }
+
+    def "Test - datatypeconverter - xjc"() {
+        given:
+        copyResources('samples/datatypeconverter')
+
+        buildFile << """
+            plugins {
+                `java`
+                id("com.intershop.gradle.jaxb")
+            }
+
+            jaxb {
+                javaGen {
+                    register("test") {
+                        schema = file("po.xsd")
+                    }
+                }
+            }
+            
+            dependencies {
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+            }
+
+            repositories {
+                mavenCentral()
+            }
+        """.stripIndent()
+
+        when:
+        List<String> args = ['compileJava', '-s']
+
+        def result = getPreparedGradleRunner()
+                .withArguments(args)
+                .withGradleVersion(gradleVersion)
+                .build()
+
+        then:
+        result.task(':jaxbJavaGenTest').outcome == SUCCESS
+        result.task(':compileJava').outcome == SUCCESS
+
+        fileExists('build/generated/jaxb/java/test/primer/myPo/ObjectFactory.java')
+        fileExists('build/classes/java/main/primer/myPo/ObjectFactory.class')
+        fileExists('build/generated/jaxb/java/test/primer/myPo/Items.java')
+        fileExists('build/classes/java/main/primer/myPo/Items.class')
+        fileExists('build/generated/jaxb/java/test/primer/myPo/POType.java')
+        fileExists('build/classes/java/main/primer/myPo/POType.class')
+        fileExists('build/generated/jaxb/java/test/primer/myPo/USAddress.java')
+        fileExists('build/classes/java/main/primer/myPo/USAddress.class')
+        fileExists('build/generated/jaxb/java/test/primer/myPo/USState.java')
+        fileExists('build/classes/java/main/primer/myPo/USState.class')
+
+        where:
+        gradleVersion << supportedGradleVersions
+    }
+
+    def 'Test - element-substitution - xjc'() {
+        given:
+        copyResources('samples/element-substitution')
+
+        buildFile << """
+            plugins {
+                `java`
+                id("com.intershop.gradle.jaxb")
+            }
+
+            jaxb {
+                javaGen {
+                    register("test") {
+                        schema = file("folder.xsd")
+                    }
+                }
+            }
+            
+            dependencies {
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+            }
+
+            repositories {
+                mavenCentral()
+            }
+        """.stripIndent()
+
+        when:
+        List<String> args = ['compileJava', '-s']
+
+        def result = getPreparedGradleRunner()
+                .withArguments(args)
+                .withGradleVersion(gradleVersion)
+                .build()
+
+        then:
+        result.task(':jaxbJavaGenTest').outcome == SUCCESS
+        result.task(':compileJava').outcome == SUCCESS
+
+        fileExists('build/generated/jaxb/java/test/org/example/ObjectFactory.java')
+        fileExists('build/classes/java/main/org/example/ObjectFactory.class')
+
+        fileExists('build/generated/jaxb/java/test/org/example/BidHeader.java')
+        fileExists('build/classes/java/main/org/example/BidHeader.class')
+        fileExists('build/generated/jaxb/java/test/org/example/Folder.java')
+        fileExists('build/classes/java/main/org/example/Folder.class')
+        fileExists('build/generated/jaxb/java/test/org/example/Header.java')
+        fileExists('build/classes/java/main/org/example/Header.class')
+        fileExists('build/generated/jaxb/java/test/org/example/InvoiceHeader.java')
+        fileExists('build/classes/java/main/org/example/InvoiceHeader.class')
+        fileExists('build/generated/jaxb/java/test/org/example/OrderHeader.java')
+        fileExists('build/classes/java/main/org/example/OrderHeader.class')
+
+        where:
+        gradleVersion << supportedGradleVersions
+    }
+
+    def 'Test - inline-customize - xjc'() {
+        given:
+        copyResources('samples/inline-customize')
+
+        buildFile << """
+            plugins {
+                `java`
+                id("com.intershop.gradle.jaxb")
+            }
+
+            jaxb {
+                javaGen {
+                    register("test") {
+                        schema = file("po.xsd")
+                    }
+                }
+            }
+            
+            dependencies {
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+            }
+
+            repositories {
+                mavenCentral()
+            }
+        """.stripIndent()
+
+        when:
+        List<String> args = ['compileJava', '-s']
+
+        def result = getPreparedGradleRunner()
+                .withArguments(args)
+                .withGradleVersion(gradleVersion)
+                .build()
+
+        then:
+        result.task(':jaxbJavaGenTest').outcome == SUCCESS
+        result.task(':compileJava').outcome == SUCCESS
+
+        fileExists('build/generated/jaxb/java/test/primer/myPo/ObjectFactory.java')
+        fileExists('build/classes/java/main/primer/myPo/ObjectFactory.class')
+        fileExists('build/generated/jaxb/java/test/primer/myPo/Items.java')
+        fileExists('build/classes/java/main/primer/myPo/Items.class')
+        fileExists('build/generated/jaxb/java/test/primer/myPo/POType.java')
+        fileExists('build/classes/java/main/primer/myPo/POType.class')
+        fileExists('build/generated/jaxb/java/test/primer/myPo/USAddress.java')
+        fileExists('build/classes/java/main/primer/myPo/USAddress.class')
+        fileExists('build/generated/jaxb/java/test/primer/myPo/USState.java')
+        fileExists('build/classes/java/main/primer/myPo/USState.class')
+
+        where:
+        gradleVersion << supportedGradleVersions
+    }
+
+    def 'Test - modify-marshal - xjc'() {
+        given:
+        copyResources('samples/modify-marshal')
+
+        buildFile << """
+            plugins {
+                `java`
+                id("com.intershop.gradle.jaxb")
+            }
+
+            jaxb {
+                javaGen {
+                    register("test") {
+                        schema = file("po.xsd")
+                    }
+                }
+            }
+            
+            dependencies {
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+            }
+
+            repositories {
+                mavenCentral()
+            }
+        """.stripIndent()
+
+        when:
+        List<String> args = ['compileJava', '-s']
+
+        def result = getPreparedGradleRunner()
+                .withArguments(args)
+                .withGradleVersion(gradleVersion)
+                .build()
+
+        then:
+        result.task(':jaxbJavaGenTest').outcome == SUCCESS
+        result.task(':compileJava').outcome == SUCCESS
+
+        fileExists('build/generated/jaxb/java/test/generated/ObjectFactory.java')
+        fileExists('build/classes/java/main/generated/ObjectFactory.class')
+        fileExists('build/generated/jaxb/java/test/generated/Items.java')
+        fileExists('build/classes/java/main/generated/Items.class')
+        fileExists('build/generated/jaxb/java/test/generated/PurchaseOrderType.java')
+        fileExists('build/classes/java/main/generated/PurchaseOrderType.class')
+        fileExists('build/generated/jaxb/java/test/generated/USAddress.java')
+        fileExists('build/classes/java/main/generated/USAddress.class')
 
         where:
         gradleVersion << supportedGradleVersions

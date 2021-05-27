@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- edited with XMLSpy v2013 (http://www.altova.com) by customer AG (customer AG) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="https://jakarta.ee/xml/ns/jaxb"
 	xmlns:enh="http://customer.com/gcdm/controller/v3/model"
 	xmlns:enum="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
 	xmlns:tns="http://customer.com/gcdm/controller/v3/model/policy/consent"

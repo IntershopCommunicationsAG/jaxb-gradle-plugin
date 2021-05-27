@@ -3,7 +3,7 @@
 <!-- $Id: BusinessPartnerExtensionDO.xsd 20509 2012-12-11 11:28:26Z qxb2675 
 	$ -->
 <xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:jxb="https://jakarta.ee/xml/ns/jaxb"
 	xmlns:enum="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
 	xmlns:ns1="http://customer.com/gcdm/controller/v3/model" targetNamespace="http://customer.com/gcdm/controller/v3/model"
 	elementFormDefault="qualified" attributeFormDefault="unqualified"

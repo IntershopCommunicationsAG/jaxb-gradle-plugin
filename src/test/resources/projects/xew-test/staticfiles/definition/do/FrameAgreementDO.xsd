@@ -4,7 +4,7 @@
 	bearbeitet -->
 <!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by customer AG (customer 
 	Leasing GmbH) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:enh="http://customer.com/gcdm/controller/v3/model" xmlns:enum="http://customer.com/gcdm/controller/v3/model/businessPartner/enums" xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner" targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner" elementFormDefault="qualified" attributeFormDefault="unqualified" jxb:version="2.1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="https://jakarta.ee/xml/ns/jaxb" xmlns:enh="http://customer.com/gcdm/controller/v3/model" xmlns:enum="http://customer.com/gcdm/controller/v3/model/businessPartner/enums" xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner" targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner" elementFormDefault="qualified" attributeFormDefault="unqualified" jxb:version="2.1">
 	<xs:import namespace="http://customer.com/gcdm/controller/v3/model" schemaLocation="enhancements/ExtensionDO.xsd"/>
 	<xs:import namespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums" schemaLocation="../valueLists/EnumsBusinessPartner.xsd"/>
 	<xs:complexType name="frameAgreement">

@@ -4,7 +4,7 @@
 	bearbeitet -->
 <!-- $Id: gcdm-customer-schema.xsd 47960 2014-04-29 15:14:25Z qxg1996 $ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:plcy="http://customer.com/gcdm/controller/v3/model/policy"
+	xmlns:jxb="https://jakarta.ee/xml/ns/jaxb" xmlns:plcy="http://customer.com/gcdm/controller/v3/model/policy"
 	xmlns:cons="http://customer.com/gcdm/controller/v3/model/policy/consent"
 	xmlns:bupa="http://customer.com/gcdm/controller/v3/model/businessPartner"
 	xmlns:cmp="http://customer.com/gcdm/controller/v3/model/campaignResponse"

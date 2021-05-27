@@ -3,7 +3,7 @@
 	(customer AG) bearbeitet -->
 <!--$Id: CustomerStatusList.xsd 42274 2014-01-22 15:26:55Z qxe3031 $ -->
 <xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1" 
+	xmlns:jxb="https://jakarta.ee/xml/ns/jaxb" jxb:version="2.1"
 	xmlns:ns1="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
 	targetNamespace="http://customer.com/gcdm/controller/v3/model/businessPartner/enums"
 	version="1.0">
