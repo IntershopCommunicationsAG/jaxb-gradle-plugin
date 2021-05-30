@@ -111,17 +111,18 @@ tasks {
         this.javaLauncher.set( project.javaToolchains.launcherFor {
             languageVersion.set(JavaLanguageVersion.of(11))
         })
-            systemProperty("intershop.gradle.versions","6.8, 7.0.2")
 
-            if(project.hasProperty("repoURL")
-                && project.hasProperty("repoUser")
-                && project.hasProperty("repoPasswd")) {
+        systemProperty("intershop.gradle.versions","6.8, 7.0.2")
+
+        if(project.hasProperty("repoURL")
+            && project.hasProperty("repoUser")
+            && project.hasProperty("repoPasswd")) {
                 systemProperty("repo_url_config", project.property("repoURL").toString())
                 systemProperty("repo_user_config", project.property("repoUser").toString())
                 systemProperty("repo_passwd_config", project.property("repoPasswd").toString())
-            }
+        }
 
-            useJUnitPlatform()
+        useJUnitPlatform()
     }
 
     val copyAsciiDoc = register<Copy>("copyAsciiDoc") {
@@ -185,7 +186,7 @@ tasks {
     getByName("jar")?.dependsOn("asciidoctor")
 
     val compileKotlin by getting(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class) {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     dokkaJavadoc.configure {
