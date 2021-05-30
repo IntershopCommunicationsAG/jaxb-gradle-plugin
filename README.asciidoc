@@ -7,8 +7,6 @@
 ====
 **Breaking Changes!**
 
-Source and target compatibility of the library was changed to **Java 11**.
-
 The default configuration was adapted for **Jakarta XML Binding 3.0.1**.
 ====
 

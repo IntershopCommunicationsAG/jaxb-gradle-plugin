@@ -86,8 +86,8 @@ pluginBundle {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 // set correct project status
@@ -108,6 +108,9 @@ tasks {
             tl@this.events(org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
         }
 
+        this.javaLauncher.set( project.javaToolchains.launcherFor {
+            languageVersion.set(JavaLanguageVersion.of(11))
+        })
             systemProperty("intershop.gradle.versions","6.8, 7.0.2")
 
             if(project.hasProperty("repoURL")
@@ -270,6 +273,6 @@ dependencies {
     implementation(gradleApi())
     implementation(gradleKotlinDsl())
 
-    testImplementation("com.intershop.gradle.test:test-gradle-plugin:4.0.0")
+    testImplementation("com.intershop.gradle.test:test-gradle-plugin:4.1.0")
     testImplementation(gradleTestKit())
 }
