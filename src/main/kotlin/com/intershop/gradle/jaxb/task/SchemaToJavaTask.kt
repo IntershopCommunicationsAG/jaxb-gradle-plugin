@@ -52,7 +52,7 @@ import kotlin.collections.ArrayList
 abstract class SchemaToJavaTask: DefaultTask() {
 
     /**
-     * Inject service of ObjectFactory (See "Service injection" in Gradle documentation.
+     * Inject service of ObjectFactory (see "Service injection" in Gradle documentation).
      */
     @get:Inject
     abstract val objectFactory: ObjectFactory
@@ -388,7 +388,7 @@ abstract class SchemaToJavaTask: DefaultTask() {
         val registration = registry.registrations.findByName(name)
                 ?: throw GradleException ("Unable to find build service with name '$name'.")
 
-        return registration.getService()
+        return registration.service
     }
 
     /**

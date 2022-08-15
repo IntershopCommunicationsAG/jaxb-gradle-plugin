@@ -16,8 +16,8 @@
 package com.intershop.gradle.jaxb
 
 import com.intershop.gradle.test.AbstractIntegrationKotlinSpec
-import static org.gradle.testkit.runner.TaskOutcome.SUCCESS as SUCCESS
-import static org.gradle.testkit.runner.TaskOutcome.UP_TO_DATE as UP_TO_DATE
+import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
+import static org.gradle.testkit.runner.TaskOutcome.UP_TO_DATE
 
 class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
 

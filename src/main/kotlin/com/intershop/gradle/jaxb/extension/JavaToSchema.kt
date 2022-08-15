@@ -23,6 +23,7 @@ import org.gradle.api.file.ProjectLayout
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Provider
 import java.io.File
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -31,13 +32,13 @@ import javax.inject.Inject
 abstract class JavaToSchema(val name: String) {
 
     /**
-     * Inject service of ObjectFactory (See "Service injection" in Gradle documentation.
+     * Inject service of ObjectFactory (see "Service injection" in Gradle documentation).
      */
     @get:Inject
     abstract val objectFactory: ObjectFactory
 
     /**
-     * Inject service of ProjectLayout (See "Service injection" in Gradle documentation.
+     * Inject service of ProjectLayout (see "Service injection" in Gradle documentation).
      */
     @get:Inject
     abstract val layout: ProjectLayout
@@ -189,8 +190,9 @@ abstract class JavaToSchema(val name: String) {
 
     init {
         val outPath = "${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_SCHEMAGEN_OUTPUTPATH}"
-        outputDirProperty.convention(layout.buildDirectory.
-                        dir("${outPath}/${name.replace(' ', '_')}").get())
+        outputDirProperty.convention(
+            layout.buildDirectory.dir("${outPath}/${name.replace(' ', '_')}").get()
+        )
         antTaskClassNameProperty.convention("com.sun.tools.jxc.SchemaGenTask")
         includesProperty.add("**/**/*.java")
         episodeProperty.convention("")
@@ -201,5 +203,7 @@ abstract class JavaToSchema(val name: String) {
      *
      * @property taskName name with prefix jaxbSchemaGen
      */
-    val taskName = "jaxbSchemaGen" + name.capitalize()
+    val taskName = "jaxbSchemaGen" + name.replaceFirstChar {
+        if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+    }
 }

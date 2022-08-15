@@ -25,6 +25,7 @@ import org.gradle.api.file.RegularFile
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Provider
 import java.io.File
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -33,13 +34,13 @@ import javax.inject.Inject
 abstract class SchemaToJava(val name: String) {
 
     /**
-     * Inject service of ObjectFactory (See "Service injection" in Gradle documentation.
+     * Inject service of ObjectFactory (see "Service injection" in Gradle documentation).
      */
     @get:Inject
     abstract val objectFactory: ObjectFactory
 
     /**
-     * Inject service of ProjectLayout (See "Service injection" in Gradle documentation.
+     * Inject service of ProjectLayout (see "Service injection" in Gradle documentation).
      */
     @get:Inject
     abstract val layout: ProjectLayout
@@ -201,14 +202,14 @@ abstract class SchemaToJava(val name: String) {
      * @property schema file for schema configuration
      */
     var schema: File?
-            get()  {
-                return if(schemaProperty.orNull != null) {
-                    schemaProperty.get().asFile
-                } else {
-                    null
-                }
+        get() {
+            return if (schemaProperty.orNull != null) {
+                schemaProperty.get().asFile
+            } else {
+                null
             }
-            set(value) = schemaProperty.set(value)
+        }
+        set(value) = schemaProperty.set(value)
 
     /**
      * Provider for binding file.
@@ -222,8 +223,8 @@ abstract class SchemaToJava(val name: String) {
      * @property binding file for binding configuration
      */
     var binding: File?
-        get()  {
-            return if(bindingProperty.orNull != null) {
+        get() {
+            return if (bindingProperty.orNull != null) {
                 bindingProperty.get().asFile
             } else {
                 null
@@ -243,8 +244,8 @@ abstract class SchemaToJava(val name: String) {
      * @property catalog file for catalog configuration
      */
     var catalog: File?
-        get()  {
-            return if(catalogProperty.orNull != null) {
+        get() {
+            return if (catalogProperty.orNull != null) {
                 catalogProperty.get().asFile
             } else {
                 null
@@ -322,8 +323,9 @@ abstract class SchemaToJava(val name: String) {
         languageProperty.convention("XMLSCHEMA")
 
         val outPath = "${JaxbExtension.CODEGEN_DEFAULT_OUTPUTPATH}/${JaxbExtension.JAXB_JAVAGEN_OUTPUTPATH}"
-        outputDirProperty.convention(layout.buildDirectory.
-                dir("${outPath}/${name.replace(' ', '_')}").get())
+        outputDirProperty.convention(
+            layout.buildDirectory.dir("${outPath}/${name.replace(' ', '_')}").get()
+        )
 
         sourceSetNameProperty.convention(JaxbExtension.DEFAULT_SOURCESET_NAME)
         antTaskClassNameProperty.convention(JaxbExtension.DEFAULT_XJC_TASK_CLASS_NAME)
@@ -334,5 +336,7 @@ abstract class SchemaToJava(val name: String) {
      *
      * @property taskName name with prefix jaxbJavaGen
      */
-    val taskName = "jaxbJavaGen" + name.capitalize()
+    val taskName = "jaxbJavaGen" + name.replaceFirstChar {
+        if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+    }
 }
