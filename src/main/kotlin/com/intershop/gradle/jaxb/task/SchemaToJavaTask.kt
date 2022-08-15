@@ -379,7 +379,7 @@ abstract class SchemaToJavaTask: DefaultTask() {
         val serviceRegistry = services.get(BuildServiceRegistryInternal::class.java)
         val jaxbResourceProvider = getBuildService(serviceRegistry, JAXB_REGISTRY)
         val resource = serviceRegistry.forService(jaxbResourceProvider)
-        locks.add(resource.getResourceLock(1))
+        locks.add(resource.resourceLock)
 
         return Collections.unmodifiableList(locks)
     }

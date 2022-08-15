@@ -19,7 +19,7 @@ plugins {
     // project plugins
     `java-gradle-plugin`
     groovy
-    kotlin("jvm") version "1.4.20"
+    kotlin("jvm") version "1.6.21"
 
     // test coverage
     jacoco
@@ -40,7 +40,7 @@ plugins {
     id("org.asciidoctor.jvm.convert") version "3.3.2"
 
     // documentation
-    id("org.jetbrains.dokka") version "1.4.32"
+    id("org.jetbrains.dokka") version "1.7.10"
 
     // code analysis for kotlin
     id("io.gitlab.arturbosch.detekt") version "1.17.1"
@@ -112,7 +112,7 @@ tasks {
             languageVersion.set(JavaLanguageVersion.of(11))
         })
 
-        systemProperty("intershop.gradle.versions","6.8, 7.0.2")
+        systemProperty("intershop.gradle.versions","7.5.1")
 
         if(project.hasProperty("repoURL")
             && project.hasProperty("repoUser")
@@ -173,10 +173,10 @@ tasks {
 
     withType<JacocoReport> {
         reports {
-            xml.isEnabled = true
-            html.isEnabled = true
+            xml.required.set(true)
+            html.required.set(true)
 
-            html.destination = File(project.buildDir, "jacocoHtml")
+            html.outputLocation.set(File(project.buildDir, "jacocoHtml"))
         }
 
         val jacocoTestReport by tasks
