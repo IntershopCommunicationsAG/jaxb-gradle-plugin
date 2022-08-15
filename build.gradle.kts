@@ -43,10 +43,10 @@ plugins {
     id("org.jetbrains.dokka") version "1.7.10"
 
     // code analysis for kotlin
-    id("io.gitlab.arturbosch.detekt") version "1.17.1"
+    id("io.gitlab.arturbosch.detekt") version "1.19.0"
 
     // plugin for publishing to Gradle Portal
-    id("com.gradle.plugin-publish") version "0.15.0"
+    id("com.gradle.plugin-publish") version "1.0.0"
 }
 
 scm {
@@ -96,7 +96,7 @@ if (project.version.toString().endsWith("-SNAPSHOT")) {
 }
 
 detekt {
-    input = files("src/main/kotlin")
+    source = files("src/main/kotlin")
     config = files("detekt.yml")
 }
 
@@ -105,7 +105,7 @@ tasks {
         testLogging tl@{
             tl@this.showStandardStreams = true
             tl@this.showStackTraces = true
-            tl@this.events(org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
+            this.events(org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
         }
 
         this.javaLauncher.set( project.javaToolchains.launcherFor {
@@ -125,7 +125,7 @@ tasks {
         useJUnitPlatform()
     }
 
-    val copyAsciiDoc = register<Copy>("copyAsciiDoc") {
+    register<Copy>("copyAsciiDoc") {
         includeEmptyDirs = false
 
         val outputDir = file("$buildDir/tmp/asciidoctorSrc")
@@ -183,7 +183,7 @@ tasks {
         jacocoTestReport.dependsOn("test")
     }
 
-    getByName("jar")?.dependsOn("asciidoctor")
+    getByName("jar").dependsOn("asciidoctor")
 
     val compileKotlin by getting(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class) {
         kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
