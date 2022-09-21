@@ -49,13 +49,8 @@ import kotlin.collections.ArrayList
  * This task generates a java code from an
  * existing jaxb configuration.
  */
-abstract class SchemaToJavaTask: DefaultTask() {
-
-    /**
-     * Inject service of ObjectFactory (See "Service injection" in Gradle documentation.
-     */
-    @get:Inject
-    abstract val objectFactory: ObjectFactory
+open class SchemaToJavaTask @Inject constructor(
+    objectFactory: ObjectFactory): DefaultTask() {
 
     private val encodingProperty = objectFactory.property(String::class.java)
     private val strictValidationProperty = objectFactory.property(Boolean::class.java)
@@ -377,15 +372,15 @@ abstract class SchemaToJavaTask: DefaultTask() {
     override fun getSharedResources(): List<ResourceLock> {
         val locks = ArrayList(super.getSharedResources())
         val serviceRegistry = services.get(BuildServiceRegistryInternal::class.java)
-        val jaxbResourceProvider = getBuildService(serviceRegistry, JAXB_REGISTRY)
+        val jaxbResourceProvider = getBuildService(serviceRegistry)
         val resource = serviceRegistry.forService(jaxbResourceProvider)
-        locks.add(resource.getResourceLock(1))
+        locks.add(resource.resourceLock)
 
         return Collections.unmodifiableList(locks)
     }
 
-    private fun getBuildService(registry: BuildServiceRegistry, name: String): Provider<out BuildService<*>> {
-        val registration = registry.registrations.findByName(name)
+    private fun getBuildService(registry: BuildServiceRegistry): Provider<out BuildService<*>> {
+        val registration = registry.registrations.findByName(JAXB_REGISTRY)
                 ?: throw GradleException ("Unable to find build service with name '$name'.")
 
         return registration.getService()

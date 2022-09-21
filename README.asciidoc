@@ -5,9 +5,9 @@
 
 [CAUTION]
 ====
-**Breaking Changes!**
-
 The default configuration was adapted for **Jakarta XML Binding 3.0.1**.
+
+Starting with version 6, the plugin is working only with Gradle 7.5 or higher.
 ====
 
 == Summary

@@ -31,7 +31,6 @@ import org.gradle.api.tasks.Classpath
 import org.gradle.api.tasks.CompileClasspath
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
-import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
@@ -43,13 +42,8 @@ import javax.inject.Inject
  * This task generates a schema file from
  * existing sources.
  */
-abstract class JavaToSchemaTask: DefaultTask() {
-
-    /**
-     * Inject service of ObjectFactory (See "Service injection" in Gradle documentation.
-     */
-    @get:Inject
-    abstract val objectFactory: ObjectFactory
+abstract class JavaToSchemaTask @Inject constructor(
+    objectFactory: ObjectFactory):DefaultTask() {
 
     private val outputDirProperty: DirectoryProperty = objectFactory.directoryProperty()
     private val inputDirProperty: DirectoryProperty = objectFactory.directoryProperty()

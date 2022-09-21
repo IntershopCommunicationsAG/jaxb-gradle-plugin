@@ -52,5 +52,10 @@ jobs:
           JAVA_OPTS: "-Xmx1024M -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512M"
           GRADLE_OPTS: "-Dorg.gradle.daemon=true"
         run: ./gradlew -PrunOnCI=true test build :publishIntershopMvnPublicationToMavenRepository :publishPlugins -s --scan
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        if: always()
+        with:
+          files: build/test-results/**/*.xml
       - name: Post Build
         run: rm -f $HOME/.gradle/gradle.properties
