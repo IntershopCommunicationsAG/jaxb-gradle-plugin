@@ -1,5 +1,5 @@
 = JAXB Gradle Plugin
-:latestRevision: 5.1.0
+:latestRevision: 7.0.0
 :toc:
 :icons: font
 
@@ -7,7 +7,7 @@
 ====
 The default configuration was adapted for **Jakarta XML Binding 3.0.1**.
 
-Starting with version 6, the plugin is working only with Gradle 7.5 or higher.
+Starting with version 7, the plugin is working only with Gradle 8.0 or higher.
 ====
 
 == Summary

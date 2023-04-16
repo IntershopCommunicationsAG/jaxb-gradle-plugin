@@ -72,21 +72,19 @@ repositories {
 val pluginId = "com.intershop.gradle.jaxb"
 
 gradlePlugin {
+    val pluginURL = "https://github.com/IntershopCommunicationsAG/${project.name}"
+    website.set(pluginURL)
+    vcsUrl.set(pluginURL)
+
     plugins {
         create("jaxbPlugin") {
             id = pluginId
             implementationClass = "com.intershop.gradle.jaxb.JaxbPlugin"
             displayName = project.name
             description = project.description
+            tags.set(listOf("intershop", "jaxb", "build", "code", "generator"))
         }
     }
-}
-
-pluginBundle {
-    val pluginURL = "https://github.com/IntershopCommunicationsAG/${project.name}"
-    website = pluginURL
-    vcsUrl = pluginURL
-    tags = listOf("intershop", "jaxb", "build", "code", "generator")
 }
 
 java {
@@ -116,14 +114,14 @@ tasks {
             languageVersion.set(JavaLanguageVersion.of(11))
         })
 
-        systemProperty("intershop.gradle.versions","7.5.1")
+        systemProperty("intershop.gradle.versions","8.0.2")
 
         if(project.hasProperty("repoURL")
-            && project.hasProperty("repoUser")
-            && project.hasProperty("repoPasswd")) {
-                systemProperty("repo_url_config", project.property("repoURL").toString())
-                systemProperty("repo_user_config", project.property("repoUser").toString())
-                systemProperty("repo_passwd_config", project.property("repoPasswd").toString())
+                && project.hasProperty("repoUser")
+                && project.hasProperty("repoPasswd")) {
+            systemProperty("repo_url_config", project.property("repoURL").toString())
+            systemProperty("repo_user_config", project.property("repoUser").toString())
+            systemProperty("repo_passwd_config", project.property("repoPasswd").toString())
         }
 
         useJUnitPlatform()

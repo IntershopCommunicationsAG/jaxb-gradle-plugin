@@ -27,7 +27,9 @@ import org.gradle.api.model.ObjectFactory
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.provider.Provider
 import org.gradle.api.services.BuildService
+import org.gradle.api.services.BuildServiceParameters
 import org.gradle.api.services.BuildServiceRegistry
+import org.gradle.api.services.internal.BuildServiceProvider
 import org.gradle.api.services.internal.BuildServiceRegistryInternal
 import org.gradle.api.tasks.Classpath
 import org.gradle.api.tasks.CompileClasspath
@@ -50,7 +52,7 @@ import kotlin.collections.ArrayList
  * existing jaxb configuration.
  */
 open class SchemaToJavaTask @Inject constructor(
-    objectFactory: ObjectFactory): DefaultTask() {
+        objectFactory: ObjectFactory): DefaultTask() {
 
     private val encodingProperty = objectFactory.property(String::class.java)
     private val strictValidationProperty = objectFactory.property(Boolean::class.java)
@@ -374,16 +376,17 @@ open class SchemaToJavaTask @Inject constructor(
         val serviceRegistry = services.get(BuildServiceRegistryInternal::class.java)
         val jaxbResourceProvider = getBuildService(serviceRegistry)
         val resource = serviceRegistry.forService(jaxbResourceProvider)
-        locks.add(resource.resourceLock)
+        locks.add(resource?.resourceLock)
 
         return Collections.unmodifiableList(locks)
     }
 
-    private fun getBuildService(registry: BuildServiceRegistry): Provider<out BuildService<*>> {
+    private fun getBuildService(registry: BuildServiceRegistry): BuildServiceProvider<out BuildService<*>,
+            out BuildServiceParameters> {
         val registration = registry.registrations.findByName(JAXB_REGISTRY)
                 ?: throw GradleException ("Unable to find build service with name '$name'.")
 
-        return registration.getService()
+        return registration.getService() as BuildServiceProvider<*,*>
     }
 
     /**
