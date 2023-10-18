@@ -1,5 +1,4 @@
 import org.asciidoctor.gradle.jvm.AsciidoctorTask
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 /*
  * Copyright 2022 Intershop Communications AG.
@@ -20,19 +19,15 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 
     // project plugins
-    `java-gradle-plugin`
     groovy
 
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm") version "1.9.10"
 
     // test coverage
     jacoco
 
     // ide plugin
     idea
-
-    // publish plugin
-    `maven-publish`
 
     // artifact signing - necessary on Maven Central
     signing
@@ -44,13 +39,13 @@ plugins {
     id("org.asciidoctor.jvm.convert") version "3.3.2"
 
     // documentation
-    id("org.jetbrains.dokka") version "1.5.0"
+    id("org.jetbrains.dokka") version "1.9.0"
 
     // code analysis for kotlin
-    id("io.gitlab.arturbosch.detekt") version "1.18.0"
+    id("io.gitlab.arturbosch.detekt") version "1.23.1"
 
     // plugin for publishing to Gradle Portal
-    id("com.gradle.plugin-publish") version "1.2.0"
+    id("com.gradle.plugin-publish") version "1.2.1"
 }
 
 scm {
@@ -88,8 +83,9 @@ gradlePlugin {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 // set correct project status
@@ -98,10 +94,11 @@ if (project.version.toString().endsWith("-SNAPSHOT")) {
 }
 
 detekt {
-    source = files("src/main/kotlin")
-    config = files("detekt.yml")
+    source.from(files("src/main/kotlin"))
+    config.from(files("detekt.yml"))
 }
 
+val buildDir = layout.buildDirectory.asFile.get()
 tasks {
     withType<Test>().configureEach {
         testLogging tl@{
@@ -114,7 +111,7 @@ tasks {
             languageVersion.set(JavaLanguageVersion.of(11))
         })
 
-        systemProperty("intershop.gradle.versions","8.0.2")
+        systemProperty("intershop.gradle.versions","8.4")
 
         if(project.hasProperty("repoURL")
                 && project.hasProperty("repoUser")
@@ -178,7 +175,7 @@ tasks {
             xml.required.set(true)
             html.required.set(true)
 
-            html.outputLocation.set( File(project.buildDir, "jacocoHtml") )
+            html.outputLocation.set( File(buildDir, "jacocoHtml") )
         }
 
         val jacocoTestReport by tasks
@@ -187,9 +184,7 @@ tasks {
 
     getByName("jar").dependsOn("asciidoctor")
 
-    withType<KotlinCompile>  {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
+
 
     dokkaJavadoc.configure {
         outputDirectory.set(buildDir.resolve("dokka"))
@@ -277,7 +272,9 @@ signing {
 dependencies {
     implementation(gradleApi())
     implementation(gradleKotlinDsl())
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.1")
 
+    //todo
     testImplementation("com.intershop.gradle.test:test-gradle-plugin:4.1.2")
     testImplementation(gradleTestKit())
 }

@@ -213,7 +213,7 @@ exceptions:
       - RuntimeException
 
 formatting:
-  active: true
+  active: false #see 90233
   android: false
   autoCorrect: true
   AnnotationOnSeparateLine:

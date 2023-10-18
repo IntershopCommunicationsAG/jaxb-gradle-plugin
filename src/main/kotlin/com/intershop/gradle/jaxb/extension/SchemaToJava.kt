@@ -334,5 +334,5 @@ abstract class SchemaToJava(val name: String) {
      *
      * @property taskName name with prefix jaxbJavaGen
      */
-    val taskName = "jaxbJavaGen" + name.capitalize()
+    val taskName = "jaxbJavaGen" + name.replaceFirstChar { it.uppercaseChar() }
 }
