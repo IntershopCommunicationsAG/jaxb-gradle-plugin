@@ -33,7 +33,7 @@ plugins {
     signing
 
     // intershop version plugin
-    id("com.intershop.gradle.scmversion") version "6.2.0"
+    id("com.intershop.gradle.version.gitflow") version "1.8.0"
 
     // plugin for documentation
     id("org.asciidoctor.jvm.convert") version "3.3.2"
@@ -48,14 +48,16 @@ plugins {
     id("com.gradle.plugin-publish") version "1.2.1"
 }
 
-scm {
-    version.initialVersion = "1.0.0"
+
+gitflowVersion {
+    versionType = "three"
+    defaultVersion = "1.0.0"
 }
 
 // release configuration
 group = "com.intershop.gradle.jaxb"
 description = "Gradle JAXB code generation plugin"
-version = scm.version.version
+version = gitflowVersion.version
 
 val sonatypeUsername: String? by project
 val sonatypePassword: String? by project
@@ -108,7 +110,7 @@ tasks {
         }
 
         this.javaLauncher.set( project.javaToolchains.launcherFor {
-            languageVersion.set(JavaLanguageVersion.of(11))
+            languageVersion.set(JavaLanguageVersion.of(17))
         })
 
         systemProperty("intershop.gradle.versions","8.4")
