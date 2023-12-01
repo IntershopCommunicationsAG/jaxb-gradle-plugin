@@ -41,9 +41,6 @@ plugins {
     // documentation
     id("org.jetbrains.dokka") version "1.9.10"
 
-    // code analysis for kotlin
-    id("io.gitlab.arturbosch.detekt") version "1.23.1"
-
     // plugin for publishing to Gradle Portal
     id("com.gradle.plugin-publish") version "1.2.1"
 }
@@ -95,18 +92,13 @@ if (project.version.toString().endsWith("-SNAPSHOT")) {
     status = "snapshot'"
 }
 
-detekt {
-    source.from(files("src/main/kotlin"))
-    config.from(files("detekt.yml"))
-}
-
 val buildDir = layout.buildDirectory.asFile.get()
 tasks {
     withType<Test>().configureEach {
-        testLogging tl@{
-            tl@this.showStandardStreams = true
-            tl@this.showStackTraces = true
-            tl@this.events(org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
+        testLogging {
+            showStandardStreams = true
+            showStackTraces = true
+            events(org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
         }
 
         this.javaLauncher.set( project.javaToolchains.launcherFor {
@@ -274,7 +266,6 @@ signing {
 dependencies {
     implementation(gradleApi())
     implementation(gradleKotlinDsl())
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.1")
 
     //todo
     testImplementation("com.intershop.gradle.test:test-gradle-plugin:4.1.2")
