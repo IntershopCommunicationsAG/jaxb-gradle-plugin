@@ -43,6 +43,8 @@ plugins {
 
     // plugin for publishing to Gradle Portal
     id("com.gradle.plugin-publish") version "1.2.1"
+
+    id("com.dorongold.task-tree") version "2.1.1"
 }
 
 
