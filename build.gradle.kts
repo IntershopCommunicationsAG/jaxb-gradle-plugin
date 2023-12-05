@@ -269,7 +269,6 @@ dependencies {
     implementation(gradleApi())
     implementation(gradleKotlinDsl())
 
-    //todo
     testImplementation("com.intershop.gradle.test:test-gradle-plugin:4.1.2")
     testImplementation(gradleTestKit())
 }
