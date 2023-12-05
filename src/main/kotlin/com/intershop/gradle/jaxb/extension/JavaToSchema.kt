@@ -201,5 +201,5 @@ abstract class JavaToSchema(val name: String) {
      *
      * @property taskName name with prefix jaxbSchemaGen
      */
-    val taskName = "jaxbSchemaGen" + name.capitalize()
+    val taskName = "jaxbSchemaGen" + name.replaceFirstChar { it.uppercaseChar() }
 }
