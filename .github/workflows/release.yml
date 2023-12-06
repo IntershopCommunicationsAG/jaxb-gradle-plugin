@@ -6,57 +6,26 @@ name: Run release build from tag
 on:
   push:
     tags:
-      - '*'
+      - '**'
 
 jobs:
-  release:
+  build:
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: read
     environment: CIRelease
     runs-on: ubuntu-latest
-
     steps:
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
+      - name: Setup
+        uses: IntershopCommunicationsAG/.github/actions/gradle-plugin-setup@v0.4
+      - name: Release
+        uses: IntershopCommunicationsAG/.github/actions/gradle-plugin-release@v0.4
         with:
-          java-version: 11
-          distribution: temurin
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - run: git fetch --all --tag
-      - name: Create .gradle dir
-        run: mkdir -p $HOME/.gradle
-      - id: install-secret-key
-        name: Install gpg secret key
-        env:
-          SIGNINGFILE: ${{ secrets.SIGNINGFILE }}
-        run: |
-          cat <(echo -e "${{ secrets.SIGNINGFILE }}") | gpg --batch --import
-          gpg --list-secret-keys --keyid-format LONG
-      - id: export-gpg-file
-        name: Export gpg file
-        env:
-          SIGNINGKEYID: ${{ secrets.SIGNINGKEYID }}
-          SIGNINGPASSWORD: ${{ secrets.SIGNINGPASSWORD }}
-        run: |
-          gpg --batch --passphrase="$SIGNINGPASSWORD" --pinentry-mode loopback --export-secret-keys $SIGNINGKEYID > $HOME/.gradle/secrets.gpg
-      - name: Create gradle sproperties
-        env:
-          APIKEY: ${{ secrets.APIKEY }}
-          APISECRET: ${{ secrets.APISECRET }}
-          SIGNINGKEYID: ${{ secrets.SIGNINGKEYID }}
-          SIGNINGPASSWORD: ${{ secrets.SIGNINGPASSWORD }}
-          SONATYPEPASSWORD: ${{ secrets.SONATYPEPASSWORD }}
-          SONATYPEUSER: ${{ secrets.SONATYPEUSER }}
-        run: echo -e "gradle.publish.key=$APIKEY\ngradle.publish.secret=$APISECRET\nsigning.keyId=$SIGNINGKEYID\nsigning.password=$SIGNINGPASSWORD\nsigning.secretKeyRingFile=$HOME/.gradle/secrets.gpg\nsonatypeUsername=$SONATYPEUSER\nsonatypePassword=$SONATYPEPASSWORD" > $HOME/.gradle/gradle.properties
-      - name: Run gradle release
-        env:
-          JAVA_OPTS: "-Xmx1024M -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512M"
-          GRADLE_OPTS: "-Dorg.gradle.daemon=true"
-        run: ./gradlew -PrunOnCI=true test build :publishIntershopMvnPublicationToMavenRepository :publishPlugins -s --scan
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action/composite@v2
-        if: always()
-        with:
-          files: build/test-results/**/*.xml
-      - name: Post Build
-        run: rm -f $HOME/.gradle/gradle.properties
+          signing-file: ${{ secrets.SIGNINGFILE }}
+          signing-key-id: ${{ secrets.SIGNINGKEYID }}
+          signing-password: ${{ secrets.SIGNINGPASSWORD }}
+          api-key: ${{ secrets.APIKEY }}
+          api-secret: ${{ secrets.APISECRET }}
+          sonatype-user: ${{ secrets.SONATYPEUSER }}
+          sonatype-password: ${{ secrets.SONATYPEPASSWORD }}
