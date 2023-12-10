@@ -169,14 +169,14 @@ open class JaxbPlugin: Plugin<Project> {
                 .defaultDependencies { dependencies: DependencySet ->
                     // this will be executed if configuration is empty
                     val dependencyHandler = project.dependencies
-                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-xjc:4.0.0"))
-                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-jxc:4.0.0"))
-                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-impl:4.0.0"))
-                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-core:4.0.0"))
+                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-xjc:4.0.4"))
+                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-jxc:4.0.4"))
+                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-impl:4.0.4"))
+                    dependencies.add(dependencyHandler.create("com.sun.xml.bind:jaxb-core:4.0.4"))
 
-                    dependencies.add(dependencyHandler.create("org.glassfish.jaxb:jaxb-runtime:4.0.0"))
-                    dependencies.add(dependencyHandler.create("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"))
-                    dependencies.add(dependencyHandler.create("jakarta.activation:jakarta.activation-api:2.1.0"))
+                    dependencies.add(dependencyHandler.create("org.glassfish.jaxb:jaxb-runtime:4.0.4"))
+                    dependencies.add(dependencyHandler.create("jakarta.xml.bind:jakarta.xml.bind-api:4.0.1"))
+                    dependencies.add(dependencyHandler.create("jakarta.activation:jakarta.activation-api:2.1.2"))
                 }
 
         project.configurations.maybeCreate(JaxbExtension.ADD_JAXB_CONFIGURATION_NAME)
