@@ -21,7 +21,7 @@ plugins {
     // project plugins
     groovy
 
-    kotlin("jvm") version "1.9.10"
+    kotlin("jvm") version "1.9.21"
 
     // test coverage
     jacoco
@@ -31,9 +31,6 @@ plugins {
 
     // artifact signing - necessary on Maven Central
     signing
-
-    // intershop version plugin
-    id("com.intershop.gradle.version.gitflow") version "1.8.0"
 
     // plugin for documentation
     id("org.asciidoctor.jvm.convert") version "3.3.2"
@@ -47,43 +44,40 @@ plugins {
     id("com.dorongold.task-tree") version "2.1.1"
 }
 
-
-gitflowVersion {
-    versionType = "three"
-    defaultVersion = "1.0.0"
-}
-
 // release configuration
 group = "com.intershop.gradle.jaxb"
 description = "Gradle JAXB code generation plugin"
-version = gitflowVersion.version
+// apply gradle property 'projectVersion' to project.version, default to 'LOCAL'
+val projectVersion : String? by project
+version = projectVersion ?: "LOCAL"
 
 val sonatypeUsername: String? by project
 val sonatypePassword: String? by project
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
-val pluginId = "com.intershop.gradle.jaxb"
-
+val pluginUrl = "https://github.com/IntershopCommunicationsAG/${project.name}"
 gradlePlugin {
-    val pluginURL = "https://github.com/IntershopCommunicationsAG/${project.name}"
-    website.set(pluginURL)
-    vcsUrl.set(pluginURL)
+    website = pluginUrl
+    vcsUrl = pluginUrl
 
     plugins {
-        create("jaxbPlugin") {
-            id = pluginId
+        create(project.name) {
+            id = "com.intershop.gradle.jaxb"
             implementationClass = "com.intershop.gradle.jaxb.JaxbPlugin"
             displayName = project.name
             description = project.description
-            tags.set(listOf("intershop", "jaxb", "build", "code", "generator"))
+            tags = listOf("intershop", "jaxb", "build", "code", "generator")
         }
     }
 }
 
 java {
+    withJavadocJar()
+    withSourcesJar()
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
@@ -91,7 +85,7 @@ java {
 
 // set correct project status
 if (project.version.toString().endsWith("-SNAPSHOT")) {
-    status = "snapshot'"
+    status = "snapshot"
 }
 
 val buildDir = layout.buildDirectory.asFile.get()
@@ -178,9 +172,9 @@ tasks {
         jacocoTestReport.dependsOn("test")
     }
 
-    getByName("jar").dependsOn("asciidoctor")
-
-
+    jar.configure {
+        dependsOn(asciidoctor)
+    }
 
     dokkaJavadoc.configure {
         outputDirectory.set(buildDir.resolve("dokka"))
@@ -221,7 +215,7 @@ publishing {
             pom {
                 name.set(project.name)
                 description.set(project.description)
-                url.set("https://github.com/IntershopCommunicationsAG/${project.name}")
+                url.set(pluginUrl)
                 licenses {
                     license {
                         name.set("The Apache License, Version 2.0")
@@ -243,7 +237,7 @@ publishing {
                 scm {
                     connection.set("git@github.com:IntershopCommunicationsAG/${project.name}.git")
                     developerConnection.set("git@github.com:IntershopCommunicationsAG/${project.name}.git")
-                    url.set("https://github.com/IntershopCommunicationsAG/${project.name}")
+                    url.set(pluginUrl)
                 }
             }
         }
@@ -269,6 +263,6 @@ dependencies {
     implementation(gradleApi())
     implementation(gradleKotlinDsl())
 
-    testImplementation("com.intershop.gradle.test:test-gradle-plugin:4.1.2")
+    testImplementation("com.intershop.gradle.test:test-gradle-plugin:5.0.1")
     testImplementation(gradleTestKit())
 }
