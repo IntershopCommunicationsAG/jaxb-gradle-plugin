@@ -16,36 +16,25 @@
  */
 package com.intershop.gradle.jaxb.task
 
-import com.intershop.gradle.jaxb.JaxbPlugin.Companion.JAXB_REGISTRY
 import com.intershop.gradle.jaxb.extension.JaxbExtension
 import org.gradle.api.DefaultTask
-import org.gradle.api.GradleException
 import org.gradle.api.file.Directory
 import org.gradle.api.file.FileCollection
 import org.gradle.api.file.RegularFile
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.provider.Provider
-import org.gradle.api.services.BuildService
-import org.gradle.api.services.BuildServiceParameters
-import org.gradle.api.services.BuildServiceRegistry
-import org.gradle.api.services.internal.BuildServiceProvider
-import org.gradle.api.services.internal.BuildServiceRegistryInternal
 import org.gradle.api.tasks.Classpath
 import org.gradle.api.tasks.CompileClasspath
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.InputFiles
-import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
-import org.gradle.internal.resources.ResourceLock
 import org.gradle.kotlin.dsl.withGroovyBuilder
 import java.io.File
-import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 /**
  * This task generates a java code from an
@@ -323,7 +312,7 @@ open class SchemaToJavaTask @Inject constructor(
      */
     @get:InputFiles
     val jaxbClasspathfiles : FileCollection by lazy {
-        val returnFiles = project.files()
+        val returnFiles = objectFactory.fileCollection()
         // find files of original JASPER and Eclipse compiler
         returnFiles.from(project.configurations.findByName(JaxbExtension.JAXB_CONFIGURATION_NAME))
         returnFiles
@@ -336,7 +325,7 @@ open class SchemaToJavaTask @Inject constructor(
      */
     @get:Classpath
     val addjaxbClasspathfiles : FileCollection by lazy {
-        val returnFiles = project.files()
+        val returnFiles = objectFactory.fileCollection()
         // find files of original JASPER and Eclipse compiler
         returnFiles.from(project.configurations.findByName(JaxbExtension.ADD_JAXB_CONFIGURATION_NAME))
         returnFiles
@@ -370,24 +359,6 @@ open class SchemaToJavaTask @Inject constructor(
      */
     fun provideOutputDir(outputDir: Provider<Directory>) = outputDirProperty.set(outputDir)
 
-    @Internal
-    override fun getSharedResources(): List<ResourceLock> {
-        val locks = ArrayList(super.getSharedResources())
-        val serviceRegistry = services.get(BuildServiceRegistryInternal::class.java)
-        val jaxbResourceProvider = getBuildService(serviceRegistry)
-        val resource = serviceRegistry.forService(jaxbResourceProvider)
-        locks.add(resource?.resourceLock)
-
-        return Collections.unmodifiableList(locks)
-    }
-
-    private fun getBuildService(registry: BuildServiceRegistry): BuildServiceProvider<out BuildService<*>,
-            out BuildServiceParameters> {
-        val registration = registry.registrations.findByName(JAXB_REGISTRY)
-                ?: throw GradleException ("Unable to find build service with name '$name'.")
-
-        return registration.getService() as BuildServiceProvider<*,*>
-    }
 
     /**
      * This creates the java code fron a JAXB configuration.
@@ -421,13 +392,13 @@ open class SchemaToJavaTask @Inject constructor(
             argMap["catalog"] = catalogProperty.get().asFile.absolutePath
         }
 
-        if(project.logger.isInfoEnabled) {
-            project.logger.info("Argeument for javagen: {}", argMap)
+        if(logger.isInfoEnabled) {
+            logger.info("Argeument for javagen: {}", argMap)
         }
 
         val taskClassPath = jaxbClasspathfiles + addjaxbClasspathfiles
 
-        project.logger.info(" -> Locked XJC Gradle Task to prevent the parallel execution!")
+        logger.info(" -> Locked XJC Gradle Task to prevent the parallel execution!")
 
         System.setProperty("javax.xml.accessExternalSchema", "all")
         System.setProperty("javax.xml.accessExternalDTD", "all")
@@ -442,7 +413,6 @@ open class SchemaToJavaTask @Inject constructor(
                     "name" to "jaxb",
                     "classname" to antTaskClassName,
                     "classpath" to taskClassPath.asPath)
-
 
 
             "jaxb"(argMap) {
@@ -468,7 +438,7 @@ open class SchemaToJavaTask @Inject constructor(
                 if(! strictValidation) {
                     "arg"( "value" to "-nv")
                 }
-                if (project.logger.isInfoEnabled || project.logger.isDebugEnabled) {
+                if (logger.isInfoEnabled || logger.isDebugEnabled) {
                     "arg"( "value" to "-verbose")
                 } else {
                     "arg"( "value" to "-quiet")

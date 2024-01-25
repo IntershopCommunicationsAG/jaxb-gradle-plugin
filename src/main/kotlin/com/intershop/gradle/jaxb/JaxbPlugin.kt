@@ -27,6 +27,7 @@ import org.gradle.api.Task
 import org.gradle.api.artifacts.DependencySet
 import org.gradle.api.plugins.JavaBasePlugin
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.provider.Provider
 
 /**
  * Plugin Class implementation.
@@ -62,7 +63,7 @@ open class JaxbPlugin: Plugin<Project> {
 
             addJaxbConfiguration(this)
 
-            project.rootProject.gradle.sharedServices.registerIfAbsent(
+            val jaxbCodeGenRegistryProvider = project.rootProject.gradle.sharedServices.registerIfAbsent(
                     JAXB_REGISTRY,
                     JaxbCodeGenRegistry::class.java) {
                 it.maxParallelUsages.set(1)
@@ -72,8 +73,8 @@ open class JaxbPlugin: Plugin<Project> {
             jaxbTask.group = JaxbExtension.JAXB_TASK_GROUP
             jaxbTask.description = TASKDESCRIPTION
 
-            configureJavaCodeGenTasks(this, extension, jaxbTask)
-            configureSchemaCodeGenTasks(this, extension, jaxbTask)
+            configureJavaCodeGenTasks(this, extension, jaxbTask, jaxbCodeGenRegistryProvider)
+            configureSchemaCodeGenTasks(this, extension, jaxbTask, jaxbCodeGenRegistryProvider)
         }
     }
 
@@ -87,7 +88,8 @@ open class JaxbPlugin: Plugin<Project> {
      */
     private fun configureJavaCodeGenTasks(project: Project,
                                           extension: JaxbExtension,
-                                          jaxbTask: Task) {
+                                          jaxbTask: Task,
+                                          jaxbCodeGenRegistryProvider: Provider<JaxbCodeGenRegistry>) {
         extension.javaGen.all { schemaToJava: SchemaToJava ->
             project.tasks.maybeCreate(schemaToJava.taskName, SchemaToJavaTask::class.java).apply {
                 description = "Generate java code for " + schemaToJava.name
@@ -106,6 +108,7 @@ open class JaxbPlugin: Plugin<Project> {
                 provideSchema(schemaToJava.schemaProvider)
                 provideBinding(schemaToJava.bindingProvider)
                 provideCatalog(schemaToJava.catalogProvider)
+                usesService(jaxbCodeGenRegistryProvider)
 
                 schemas = schemaToJava.schemas
                 bindings = schemaToJava.bindings
@@ -137,7 +140,8 @@ open class JaxbPlugin: Plugin<Project> {
      */
     private fun configureSchemaCodeGenTasks(project: Project,
                                                  extension: JaxbExtension,
-                                                 jaxbTask: Task) {
+                                                 jaxbTask: Task,
+                                                 jaxbCodeGenRegistryProvider: Provider<JaxbCodeGenRegistry>) {
         extension.schemaGen.all { javaToSchema: JavaToSchema ->
             project.tasks.maybeCreate(javaToSchema.taskName, JavaToSchemaTask::class.java).apply {
                 description = "Generate Schema for " + javaToSchema.name
@@ -149,7 +153,7 @@ open class JaxbPlugin: Plugin<Project> {
                 provideNamespaceconfigs(javaToSchema.namespaceconfigsProvider)
                 provideEpisode(javaToSchema.episodeProvider)
                 provideAntTaskClassName(javaToSchema.antTaskClassNameProvider)
-
+                usesService(jaxbCodeGenRegistryProvider)
                 jaxbTask.dependsOn(this)
             }
         }
