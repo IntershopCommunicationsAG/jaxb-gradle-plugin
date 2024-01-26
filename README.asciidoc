@@ -245,6 +245,10 @@ jaxb {
 }
 ----
 
+== Contribute
+
+See link:https://github.com/IntershopCommunicationsAG/.github/blob/main/CONTRIBUTE.asciidoc[here] for details.
+
 == License
 
 Copyright 2014-2021 Intershop Communications.
