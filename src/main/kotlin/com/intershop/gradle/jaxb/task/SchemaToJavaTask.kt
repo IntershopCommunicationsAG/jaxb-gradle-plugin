@@ -31,6 +31,7 @@ import org.gradle.api.services.BuildServiceParameters
 import org.gradle.api.services.BuildServiceRegistry
 import org.gradle.api.services.internal.BuildServiceProvider
 import org.gradle.api.services.internal.BuildServiceRegistryInternal
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Classpath
 import org.gradle.api.tasks.CompileClasspath
 import org.gradle.api.tasks.Input
@@ -39,6 +40,8 @@ import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 import org.gradle.internal.resources.ResourceLock
 import org.gradle.kotlin.dsl.withGroovyBuilder
@@ -51,6 +54,7 @@ import kotlin.collections.ArrayList
  * This task generates a java code from an
  * existing jaxb configuration.
  */
+@CacheableTask
 open class SchemaToJavaTask @Inject constructor(
         objectFactory: ObjectFactory): DefaultTask() {
 
@@ -215,6 +219,7 @@ open class SchemaToJavaTask @Inject constructor(
      */
     @get:Optional
     @get:InputFile
+    @get:PathSensitive(PathSensitivity.RELATIVE)
     var schema: File?
         get() {
             return if(schemaProperty.isPresent) {
@@ -237,6 +242,7 @@ open class SchemaToJavaTask @Inject constructor(
      */
     @get:Optional
     @get:InputFile
+    @get:PathSensitive(PathSensitivity.RELATIVE)
     var binding: File?
         get() {
             return if(bindingProperty.isPresent) {
@@ -259,6 +265,7 @@ open class SchemaToJavaTask @Inject constructor(
      */
     @get:Optional
     @get:InputFile
+    @get:PathSensitive(PathSensitivity.RELATIVE)
     var catalog: File?
         get() {
             return if(catalogProperty.isPresent) {
@@ -281,6 +288,7 @@ open class SchemaToJavaTask @Inject constructor(
      */
     @get:Optional
     @get:InputFiles
+    @get:PathSensitive(PathSensitivity.RELATIVE)
     var schemas: FileCollection
         get() = schemasProperty
         set(value) {
@@ -294,6 +302,7 @@ open class SchemaToJavaTask @Inject constructor(
      */
     @get:Optional
     @get:InputFiles
+    @get:PathSensitive(PathSensitivity.RELATIVE)
     var bindings: FileCollection
         get() = bindingsProperty
         set(value) {
@@ -322,6 +331,7 @@ open class SchemaToJavaTask @Inject constructor(
      * @property jaxbClasspathfiles
      */
     @get:InputFiles
+    @get:PathSensitive(PathSensitivity.RELATIVE)
     val jaxbClasspathfiles : FileCollection by lazy {
         val returnFiles = project.files()
         // find files of original JASPER and Eclipse compiler
