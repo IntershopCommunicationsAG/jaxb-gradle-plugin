@@ -422,7 +422,7 @@ open class SchemaToJavaTask @Inject constructor(
         }
 
         if(project.logger.isInfoEnabled) {
-            project.logger.info("Argeument for javagen: {}", argMap)
+            project.logger.info("Argument for javagen: {}", argMap)
         }
 
         val taskClassPath = jaxbClasspathfiles + addjaxbClasspathfiles
