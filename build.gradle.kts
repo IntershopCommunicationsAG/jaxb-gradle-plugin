@@ -17,6 +17,7 @@ import org.asciidoctor.gradle.jvm.AsciidoctorTask
  */
 
 plugins {
+    `jvm-test-suite`
 
     // project plugins
     groovy
@@ -88,32 +89,41 @@ if (project.version.toString().endsWith("-SNAPSHOT")) {
     status = "snapshot"
 }
 
+testing {
+    suites.withType<JvmTestSuite> {
+        useSpock()
+
+        dependencies {
+            implementation("com.intershop.gradle.test:test-gradle-plugin:5.1.0")
+            implementation(gradleTestKit())
+        }
+
+        targets {
+            all {
+                testTask.configure {
+                    systemProperty("intershop.gradle.versions", "8.5,8.10.2")
+
+                    testLogging {
+                        showStandardStreams = true
+                        showStackTraces = true
+                        events(org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
+                    }
+
+                    if(project.hasProperty("repoURL")
+                        && project.hasProperty("repoUser")
+                        && project.hasProperty("repoPasswd")) {
+                        systemProperty("repo_url_config", project.property("repoURL").toString())
+                        systemProperty("repo_user_config", project.property("repoUser").toString())
+                        systemProperty("repo_passwd_config", project.property("repoPasswd").toString())
+                    }
+                }
+            }
+        }
+    }
+}
+
 val buildDir = layout.buildDirectory.asFile.get()
 tasks {
-    withType<Test>().configureEach {
-        testLogging {
-            showStandardStreams = true
-            showStackTraces = true
-            events(org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
-        }
-
-        this.javaLauncher.set( project.javaToolchains.launcherFor {
-            languageVersion.set(JavaLanguageVersion.of(17))
-        })
-
-        systemProperty("intershop.gradle.versions","8.5,8.10.2")
-
-        if(project.hasProperty("repoURL")
-                && project.hasProperty("repoUser")
-                && project.hasProperty("repoPasswd")) {
-            systemProperty("repo_url_config", project.property("repoURL").toString())
-            systemProperty("repo_user_config", project.property("repoUser").toString())
-            systemProperty("repo_passwd_config", project.property("repoPasswd").toString())
-        }
-
-        useJUnitPlatform()
-    }
-
     register<Copy>("copyAsciiDoc") {
         includeEmptyDirs = false
 
@@ -265,7 +275,4 @@ signing {
 dependencies {
     implementation(gradleApi())
     implementation(gradleKotlinDsl())
-
-    testImplementation("com.intershop.gradle.test:test-gradle-plugin:5.1.0")
-    testImplementation(gradleTestKit())
 }
