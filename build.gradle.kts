@@ -266,6 +266,6 @@ dependencies {
     implementation(gradleApi())
     implementation(gradleKotlinDsl())
 
-    testImplementation("com.intershop.gradle.test:test-gradle-plugin:5.0.1")
+    testImplementation("com.intershop.gradle.test:test-gradle-plugin:5.1.0")
     testImplementation(gradleTestKit())
 }
