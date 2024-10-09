@@ -127,7 +127,7 @@ tasks {
     register<Copy>("copyAsciiDoc") {
         includeEmptyDirs = false
 
-        val outputDir = file("$buildDir/tmp/asciidoctorSrc")
+        val outputDir = project.layout.buildDirectory.dir("tmp/asciidoctorSrc")
         val inputFiles = fileTree(rootDir) {
             include("**/*.asciidoc")
             exclude("build/**")
@@ -137,7 +137,7 @@ tasks {
         outputs.dir( outputDir )
 
         doFirst {
-            outputDir.mkdir()
+            outputDir.get().asFile.mkdir()
         }
 
         from(inputFiles)
@@ -147,7 +147,7 @@ tasks {
     withType<AsciidoctorTask> {
         dependsOn("copyAsciiDoc")
 
-        setSourceDir(file("$buildDir/tmp/asciidoctorSrc"))
+        setSourceDir(project.layout.buildDirectory.dir("tmp/asciidoctorSrc"))
         sources(delegateClosureOf<PatternSet> {
             include("README.asciidoc")
         })
@@ -157,8 +157,8 @@ tasks {
         }
 
         setOptions(mapOf(
-            "doctype"                   to "article",
-            "ruby"                      to "erubis"
+            "doctype"               to "article",
+            "ruby"                  to "erubis"
         ))
         setAttributes(mapOf(
             "latestRevision"        to project.version,
