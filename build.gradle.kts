@@ -101,7 +101,7 @@ tasks {
             languageVersion.set(JavaLanguageVersion.of(17))
         })
 
-        systemProperty("intershop.gradle.versions","8.5")
+        systemProperty("intershop.gradle.versions","8.5,8.10.2")
 
         if(project.hasProperty("repoURL")
                 && project.hasProperty("repoUser")
