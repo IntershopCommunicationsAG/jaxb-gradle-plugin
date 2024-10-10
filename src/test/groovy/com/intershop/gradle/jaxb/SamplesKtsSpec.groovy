@@ -16,8 +16,8 @@
 package com.intershop.gradle.jaxb
 
 import com.intershop.gradle.test.AbstractIntegrationKotlinSpec
-import static org.gradle.testkit.runner.TaskOutcome.SUCCESS as SUCCESS
-import static org.gradle.testkit.runner.TaskOutcome.UP_TO_DATE as UP_TO_DATE
+import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
+import static org.gradle.testkit.runner.TaskOutcome.UP_TO_DATE
 
 class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
 
@@ -1121,10 +1121,5 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
     private boolean fileExists(String path) {
         File f = new File(testProjectDir, path)
         return f.isFile() && f.exists()
-    }
-
-    private boolean dirExists(String path) {
-        File f = new File(testProjectDir, path)
-        return f.isDirectory() && f.exists()
     }
 }
