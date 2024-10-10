@@ -28,7 +28,16 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
             }
     """.stripIndent()
 
-    def "Test multithread execution - xjc"() {
+    private String TASK_JAVA_COMPILE_CONFIGURATION = """
+            tasks {
+                withType<JavaCompile> {
+                    options.compilerArgs.add("-Xlint:deprecation")
+                    options.compilerArgs.add("-Xlint:unchecked")
+                }
+            }
+    """.stripIndent()
+
+    def "Test multithreading execution - xjc"() {
         given:
         copyResources("samples/catalog-resolver", "test01")
         copyResources("samples/create-marshal", "test02")
@@ -71,6 +80,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
                 implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
@@ -115,7 +126,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         gradleVersion << supportedGradleVersions
     }
 
-    def "Test multithread execution - xjc with debug"() {
+    def "Test multithreading execution - xjc with debug"() {
         given:
         copyResources("samples/catalog-resolver", "test01")
         copyResources("samples/create-marshal", "test02")
@@ -158,6 +169,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
                 implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
@@ -222,6 +235,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                 }
             }
             
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
+            
             dependencies {
                 implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
             }
@@ -273,6 +288,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
 
             dependencies {
                 implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
@@ -322,6 +339,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
 
             ${DEPENDENCIES}
 
@@ -367,6 +386,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             ${DEPENDENCIES}
 
@@ -417,6 +438,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                 }
             }
             
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
+            
             ${DEPENDENCIES}
 
             repositories {
@@ -463,6 +486,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
 
             ${DEPENDENCIES}
 
@@ -512,6 +537,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
 
             ${DEPENDENCIES}
 
@@ -563,6 +590,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
 
             ${DEPENDENCIES}
 
@@ -617,6 +646,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                 }
             }
             
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
+            
             ${DEPENDENCIES}
 
             repositories {
@@ -667,6 +698,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             ${DEPENDENCIES}
 
@@ -727,6 +760,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             ${DEPENDENCIES}
 
@@ -917,6 +952,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                 }
             }
             
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
+            
             dependencies {
                 implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
             }
@@ -970,6 +1007,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
                 implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
@@ -1028,6 +1067,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                 }
             }
             
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
+            
             dependencies {
                 implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
             }
@@ -1081,6 +1122,8 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
                 implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
