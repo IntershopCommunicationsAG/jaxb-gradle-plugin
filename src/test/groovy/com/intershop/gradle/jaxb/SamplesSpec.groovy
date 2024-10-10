@@ -276,8 +276,6 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                 id 'java'
                 id 'com.intershop.gradle.jaxb'
             }
-            
-            buildDir =  file('target')
 
             jaxb {
                 javaGen {
@@ -312,10 +310,10 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
         result.task(':jaxbJavaGenTest').outcome == SUCCESS
         result.task(':compileJava').outcome == SUCCESS
 
-        fileExists('target/generated/jaxb/java/test/generated/Foo.java')
-        fileExists('target/generated/jaxb/java/test/generated/ObjectFactory.java')
-        fileExists('target/classes/java/main/generated/Foo.class')
-        fileExists('target/classes/java/main/generated/ObjectFactory.class')
+        fileExists('build/generated/jaxb/java/test/generated/Foo.java')
+        fileExists('build/generated/jaxb/java/test/generated/ObjectFactory.java')
+        fileExists('build/classes/java/main/generated/Foo.class')
+        fileExists('build/classes/java/main/generated/ObjectFactory.class')
 
         where:
         gradleVersion << supportedGradleVersions
