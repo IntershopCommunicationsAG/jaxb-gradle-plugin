@@ -17,11 +17,12 @@ import org.asciidoctor.gradle.jvm.AsciidoctorTask
  */
 
 plugins {
+    `jvm-test-suite`
 
     // project plugins
     groovy
 
-    kotlin("jvm") version "1.9.21"
+    kotlin("jvm") version "1.9.25"
 
     // test coverage
     jacoco
@@ -33,15 +34,15 @@ plugins {
     signing
 
     // plugin for documentation
-    id("org.asciidoctor.jvm.convert") version "3.3.2"
+    id("org.asciidoctor.jvm.convert") version "4.0.3"
 
     // documentation
-    id("org.jetbrains.dokka") version "1.9.10"
+    id("org.jetbrains.dokka") version "1.9.20"
 
     // plugin for publishing to Gradle Portal
-    id("com.gradle.plugin-publish") version "1.2.1"
+    id("com.gradle.plugin-publish") version "1.3.0"
 
-    id("com.dorongold.task-tree") version "2.1.1"
+    id("com.dorongold.task-tree") version "4.0.0"
 }
 
 // release configuration
@@ -88,36 +89,45 @@ if (project.version.toString().endsWith("-SNAPSHOT")) {
     status = "snapshot"
 }
 
+testing {
+    suites.withType<JvmTestSuite> {
+        useSpock()
+
+        dependencies {
+            implementation("com.intershop.gradle.test:test-gradle-plugin:5.1.0")
+            implementation(gradleTestKit())
+        }
+
+        targets {
+            all {
+                testTask.configure {
+                    systemProperty("intershop.gradle.versions", "8.5,8.10.2")
+
+                    testLogging {
+                        showStandardStreams = true
+                        showStackTraces = true
+                        events(org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
+                    }
+
+                    if(project.hasProperty("repoURL")
+                        && project.hasProperty("repoUser")
+                        && project.hasProperty("repoPasswd")) {
+                        systemProperty("repo_url_config", project.property("repoURL").toString())
+                        systemProperty("repo_user_config", project.property("repoUser").toString())
+                        systemProperty("repo_passwd_config", project.property("repoPasswd").toString())
+                    }
+                }
+            }
+        }
+    }
+}
+
 val buildDir = layout.buildDirectory.asFile.get()
 tasks {
-    withType<Test>().configureEach {
-        testLogging {
-            showStandardStreams = true
-            showStackTraces = true
-            events(org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
-        }
-
-        this.javaLauncher.set( project.javaToolchains.launcherFor {
-            languageVersion.set(JavaLanguageVersion.of(17))
-        })
-
-        systemProperty("intershop.gradle.versions","8.5")
-
-        if(project.hasProperty("repoURL")
-                && project.hasProperty("repoUser")
-                && project.hasProperty("repoPasswd")) {
-            systemProperty("repo_url_config", project.property("repoURL").toString())
-            systemProperty("repo_user_config", project.property("repoUser").toString())
-            systemProperty("repo_passwd_config", project.property("repoPasswd").toString())
-        }
-
-        useJUnitPlatform()
-    }
-
     register<Copy>("copyAsciiDoc") {
         includeEmptyDirs = false
 
-        val outputDir = file("$buildDir/tmp/asciidoctorSrc")
+        val outputDir = project.layout.buildDirectory.dir("tmp/asciidoctorSrc")
         val inputFiles = fileTree(rootDir) {
             include("**/*.asciidoc")
             exclude("build/**")
@@ -127,7 +137,7 @@ tasks {
         outputs.dir( outputDir )
 
         doFirst {
-            outputDir.mkdir()
+            outputDir.get().asFile.mkdir()
         }
 
         from(inputFiles)
@@ -137,7 +147,7 @@ tasks {
     withType<AsciidoctorTask> {
         dependsOn("copyAsciiDoc")
 
-        setSourceDir(file("$buildDir/tmp/asciidoctorSrc"))
+        setSourceDir(project.layout.buildDirectory.dir("tmp/asciidoctorSrc"))
         sources(delegateClosureOf<PatternSet> {
             include("README.asciidoc")
         })
@@ -146,18 +156,21 @@ tasks {
             setBackends(listOf("html5", "docbook"))
         }
 
-        options = mapOf( "doctype" to "article",
-                "ruby"    to "erubis")
-        attributes = mapOf(
-                "latestRevision"        to  project.version,
-                "toc"                   to "left",
-                "toclevels"             to "2",
-                "source-highlighter"    to "coderay",
-                "icons"                 to "font",
-                "setanchors"            to "true",
-                "idprefix"              to "asciidoc",
-                "idseparator"           to "-",
-                "docinfo1"              to "true")
+        setOptions(mapOf(
+            "doctype"               to "article",
+            "ruby"                  to "erubis"
+        ))
+        setAttributes(mapOf(
+            "latestRevision"        to project.version,
+            "toc"                   to "left",
+            "toclevels"             to "2",
+            "source-highlighter"    to "coderay",
+            "icons"                 to "font",
+            "setanchors"            to "true",
+            "idprefix"              to "asciidoc",
+            "idseparator"           to "-",
+            "docinfo1"              to "true"
+        ))
     }
 
     withType<JacocoReport> {
@@ -262,7 +275,4 @@ signing {
 dependencies {
     implementation(gradleApi())
     implementation(gradleKotlinDsl())
-
-    testImplementation("com.intershop.gradle.test:test-gradle-plugin:5.0.1")
-    testImplementation(gradleTestKit())
 }

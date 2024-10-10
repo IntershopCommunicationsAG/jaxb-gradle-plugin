@@ -11,6 +11,7 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 import jakarta.xml.bind.JAXBContext;
@@ -70,7 +71,7 @@ public class Main {
                 } else if (purchaseState == USState.CA) {
                     item.setPrice(item.getPrice().multiply(new BigDecimal("1.06")));
                 }
-                item.setPrice(item.getPrice().setScale(2, BigDecimal.ROUND_DOWN));
+                item.setPrice(item.getPrice().setScale(2, RoundingMode.DOWN));
             }
 
             // create a Marshaller and marshal to a file
