@@ -27,6 +27,7 @@ import org.gradle.api.Task
 import org.gradle.api.artifacts.DependencySet
 import org.gradle.api.plugins.JavaBasePlugin
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.kotlin.dsl.register
 
 /**
  * Plugin Class implementation.
@@ -58,7 +59,7 @@ open class JaxbPlugin: Plugin<Project> {
             logger.info("Add extension {} for {}", JaxbExtension.JAXB_EXTENSION_NAME, name)
             val extension = extensions.findByType(
                     JaxbExtension::class.java
-            ) ?: extensions.create( JaxbExtension.JAXB_EXTENSION_NAME, JaxbExtension::class.java )
+            ) ?: extensions.create(JaxbExtension.JAXB_EXTENSION_NAME, JaxbExtension::class.java)
 
             addJaxbConfiguration(this)
 
@@ -89,7 +90,7 @@ open class JaxbPlugin: Plugin<Project> {
                                           extension: JaxbExtension,
                                           jaxbTask: Task) {
         extension.javaGen.all { schemaToJava: SchemaToJava ->
-            project.tasks.maybeCreate(schemaToJava.taskName, SchemaToJavaTask::class.java).apply {
+            project.tasks.register<SchemaToJavaTask>(schemaToJava.taskName) {
                 description = "Generate java code for " + schemaToJava.name
                 group = JaxbExtension.JAXB_TASK_GROUP
 
@@ -117,7 +118,7 @@ open class JaxbPlugin: Plugin<Project> {
                         project.extensions.getByType(JavaPluginExtension::class.java).sourceSets.matching {
                             it.name == schemaToJava.sourceSetName
                         }.forEach {
-                            it.java.srcDir(this@apply.outputs)
+                            it.java.srcDir(outputs)
                         }
                     }
                 }
@@ -136,10 +137,10 @@ open class JaxbPlugin: Plugin<Project> {
      * @param jaxbTask      the main jaxb task
      */
     private fun configureSchemaCodeGenTasks(project: Project,
-                                                 extension: JaxbExtension,
-                                                 jaxbTask: Task) {
+                                            extension: JaxbExtension,
+                                            jaxbTask: Task) {
         extension.schemaGen.all { javaToSchema: JavaToSchema ->
-            project.tasks.maybeCreate(javaToSchema.taskName, JavaToSchemaTask::class.java).apply {
+            project.tasks.register<JavaToSchemaTask>(javaToSchema.taskName) {
                 description = "Generate Schema for " + javaToSchema.name
                 group = JaxbExtension.JAXB_TASK_GROUP
                 provideOutputDir(javaToSchema.outputDirProvider)
