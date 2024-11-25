@@ -52,7 +52,7 @@ public class Main {
             Marshaller marshaller = jc.createMarshaller();
             marshaller.setSchema(schema);
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT ,
-                   new Boolean(true));
+                   Boolean.TRUE);
             System.out.println( "unmarshalling from \"" + INPUT_XML_FILE + "\"..." );
             Object po = unmarshaller.unmarshal(new File(INPUT_XML_FILE));
             PurchaseOrderType pot = (PurchaseOrderType)((JAXBElement)po).getValue();

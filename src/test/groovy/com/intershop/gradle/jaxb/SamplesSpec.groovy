@@ -18,19 +18,26 @@ package com.intershop.gradle.jaxb
 
 import com.intershop.gradle.test.AbstractIntegrationGroovySpec
 
-import static org.gradle.testkit.runner.TaskOutcome.SUCCESS as SUCCESS
-import static org.gradle.testkit.runner.TaskOutcome.UP_TO_DATE as UP_TO_DATE
+import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
+import static org.gradle.testkit.runner.TaskOutcome.UP_TO_DATE
 
 class SamplesSpec extends AbstractIntegrationGroovySpec {
 
     private String DEPENDENCIES = """
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
-                implementation("org.glassfish.jaxb:jaxb-runtime:3.0.0")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("org.glassfish.jaxb:jaxb-runtime:4.0.5")
             }
     """.stripIndent()
 
-    def 'Test multithread execution - xjc'() {
+    private String TASK_JAVA_COMPILE_CONFIGURATION = """
+            tasks.withType(JavaCompile) {
+                options.compilerArgs += ['-Xlint:deprecation']
+                options.compilerArgs += ['-Xlint:unchecked']
+            }
+    """.stripIndent()
+
+    def 'Test multithreading execution - xjc'() {
         given:
         copyResources('samples/catalog-resolver', 'test01')
         copyResources('samples/create-marshal', 'test02')
@@ -74,8 +81,10 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                 }
             }
             
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
+            
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
             }
 
             repositories {
@@ -117,7 +126,7 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
         gradleVersion << supportedGradleVersions
     }
 
-    def 'Test multithread execution - xjc with debug'() {
+    def 'Test multithreading execution - xjc with debug'() {
         given:
         copyResources('samples/catalog-resolver', 'test01')
         copyResources('samples/create-marshal', 'test02')
@@ -160,9 +169,11 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
 
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
             }
             
             repositories {
@@ -223,9 +234,11 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
 
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
             }
             
             repositories {
@@ -263,8 +276,6 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                 id 'java'
                 id 'com.intershop.gradle.jaxb'
             }
-            
-            buildDir =  file('target')
 
             jaxb {
                 javaGen {
@@ -275,9 +286,11 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
 
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
             }
             
             repositories {
@@ -297,10 +310,10 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
         result.task(':jaxbJavaGenTest').outcome == SUCCESS
         result.task(':compileJava').outcome == SUCCESS
 
-        fileExists('target/generated/jaxb/java/test/generated/Foo.java')
-        fileExists('target/generated/jaxb/java/test/generated/ObjectFactory.java')
-        fileExists('target/classes/java/main/generated/Foo.class')
-        fileExists('target/classes/java/main/generated/ObjectFactory.class')
+        fileExists('build/generated/jaxb/java/test/generated/Foo.java')
+        fileExists('build/generated/jaxb/java/test/generated/ObjectFactory.java')
+        fileExists('build/classes/java/main/generated/Foo.class')
+        fileExists('build/classes/java/main/generated/ObjectFactory.class')
 
         where:
         gradleVersion << supportedGradleVersions
@@ -324,6 +337,8 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
 
             ${DEPENDENCIES}
 
@@ -369,6 +384,8 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
 
             ${DEPENDENCIES}
 
@@ -419,6 +436,8 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                 }
             }
             
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
+            
             ${DEPENDENCIES}
 
             repositories {
@@ -465,6 +484,8 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             ${DEPENDENCIES}
 
@@ -514,6 +535,8 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             ${DEPENDENCIES}
 
@@ -565,6 +588,8 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
 
             ${DEPENDENCIES}
 
@@ -619,6 +644,8 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                 }
             }
             
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
+            
             ${DEPENDENCIES}
 
             repositories {
@@ -669,6 +696,8 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             ${DEPENDENCIES}
 
@@ -729,6 +758,8 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                     }
                 }
             }
+            
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             ${DEPENDENCIES}
 
@@ -919,8 +950,10 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                 }
             }
             
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
+            
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
             }
 
             repositories {
@@ -973,8 +1006,10 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                 }
             }
             
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
+            
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
             }
 
             repositories {
@@ -1030,8 +1065,10 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                 }
             }
             
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
+            
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
             }
 
             repositories {
@@ -1084,8 +1121,10 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
                 }
             }
             
+            ${TASK_JAVA_COMPILE_CONFIGURATION}
+            
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.0")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
             }
 
             repositories {
@@ -1160,10 +1199,5 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
     private boolean fileExists(String path) {
         File f = new File(testProjectDir, path)
         return f.isFile() && f.exists()
-    }
-
-    private boolean dirExists(String path) {
-        File f = new File(testProjectDir, path)
-        return f.isDirectory() && f.exists()
     }
 }

@@ -95,16 +95,16 @@ jaxb {
 If the JavaBasePlugin is applied to the project, generated java sources will be added to the specified source set. Per default the main source set is used.
 
 IMPORTANT: This plugin uses the following dependencies: +
-   **&nbsp;&nbsp;&nbsp;&nbsp;com.sun.xml.bind:jaxb-xjc:3.0.1** +
-   **&nbsp;&nbsp;&nbsp;&nbsp;com.sun.xml.bind:jaxb-jxc:3.0.1** +
-   **&nbsp;&nbsp;&nbsp;&nbsp;com.sun.xml.bind:jaxb-impl:3.0.1** +
-   **&nbsp;&nbsp;&nbsp;&nbsp;com.sun.xml.bind:jaxb-core:3.0.1** +
-   **&nbsp;&nbsp;&nbsp;&nbsp;org.glassfish.jaxb:jaxb-runtime:3.0.1** +
-   **&nbsp;&nbsp;&nbsp;&nbsp;jakarta.xml.bind:jakarta.xml.bind-api:3.0.1** +
-   **&nbsp;&nbsp;&nbsp;&nbsp;jakarta.activation:jakarta.activation-api:2.0.1** +
+   **&nbsp;&nbsp;&nbsp;&nbsp;com.sun.xml.bind:jaxb-xjc:4.0.5** +
+   **&nbsp;&nbsp;&nbsp;&nbsp;com.sun.xml.bind:jaxb-jxc:4.0.5** +
+   **&nbsp;&nbsp;&nbsp;&nbsp;com.sun.xml.bind:jaxb-impl:4.0.5** +
+   **&nbsp;&nbsp;&nbsp;&nbsp;com.sun.xml.bind:jaxb-core:4.0.5** +
+   **&nbsp;&nbsp;&nbsp;&nbsp;org.glassfish.jaxb:jaxb-runtime:4.0.5** +
+   **&nbsp;&nbsp;&nbsp;&nbsp;jakarta.xml.bind:jakarta.xml.bind-api:4.0.2** +
+   **&nbsp;&nbsp;&nbsp;&nbsp;jakarta.activation:jakarta.activation-api:2.1.3** +
 
-It is possible to overwrite the project dependency configuration 'jaxb', if you want use an other version of JAXB.
-It is also possible to add additional dependencies to the configured "jaxb" with the configuration "jaxbext".
+These dependencies are pre-defined by the plugin in the configuration `jaxb`, which will be passed to the argument `-classpath` of JAXB tools (`xjc` for `javaGen` and `schemagen` for `schemaGen`). If you want to use another version of JAXB in the code/schema generation process, you can overwrite configuration `jaxb` in your `project.dependencies`.
+Moreover, you can add additional dependencies to `-classpath` of JAXB tools with the configuration `jaxbext`, e.g., in order to use JAXB `-extension` like `-Xequals`, `-Xcopyable`, etc.
 
 == Tasks
 The JAXB Gradle plugin adds one task `jaxb` to the project. This task depends on all other plugin task. It is a task added for each configuration in schemaGen and javaGen.
@@ -244,6 +244,10 @@ jaxb {
     }
 }
 ----
+
+== Contribute
+
+See link:https://github.com/IntershopCommunicationsAG/.github/blob/main/CONTRIBUTE.asciidoc[here] for details.
 
 == License
 
