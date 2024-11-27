@@ -1157,6 +1157,45 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
         gradleVersion << supportedGradleVersions
     }
 
+    def "the plugin supports configuration cache"() {
+        given:
+        copyResources('samples/inline-customize')
+
+        buildFile << """
+        plugins {
+            id 'java'
+            id 'com.intershop.gradle.jaxb'
+        }
+
+        jaxb {
+            javaGen {
+                test {
+                    schema = file('po.xsd')
+                }
+            }
+        }
+
+        ${DEPENDENCIES}
+
+        repositories {
+            mavenCentral()
+        }
+        """
+
+        when:
+        getPreparedGradleRunner()
+            .withArguments('--configuration-cache', 'jaxb')
+            .build()
+
+        and:
+        def result = getPreparedGradleRunner()
+            .withArguments('--configuration-cache', 'jaxb')
+            .build()
+
+        then:
+        result.output.contains('Reusing configuration cache.')
+    }
+
     private boolean fileExists(String path) {
         File f = new File(testProjectDir, path)
         return f.isFile() && f.exists()

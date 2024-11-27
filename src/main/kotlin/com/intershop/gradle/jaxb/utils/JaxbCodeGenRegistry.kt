@@ -19,4 +19,12 @@ package com.intershop.gradle.jaxb.utils
 import org.gradle.api.services.BuildService
 import org.gradle.api.services.BuildServiceParameters
 
+/**
+ * Prevents interference issues between --configuration-cache, gradle parallelism and ant tasks.
+ * See JaxbPlugin for maxParallelism of this BuildService.
+ * To reproduce issues:
+ *   - run this plugin on a project with multiple generation tasks
+ *   - raise the maxParallelism of this BuildService to 2 or more
+ *   - run gradle with --configuration-cache
+ */
 abstract class JaxbCodeGenRegistry: BuildService<BuildServiceParameters.None>
