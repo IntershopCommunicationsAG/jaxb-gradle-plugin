@@ -27,12 +27,15 @@ import org.gradle.api.file.FileCollection
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Classpath
 import org.gradle.api.tasks.CompileClasspath
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 import org.gradle.kotlin.dsl.withGroovyBuilder
 import java.io.File
@@ -42,6 +45,7 @@ import javax.inject.Inject
  * This task generates a schema file from
  * existing sources.
  */
+@CacheableTask
 abstract class JavaToSchemaTask @Inject constructor(
     objectFactory: ObjectFactory):DefaultTask() {
 
@@ -79,6 +83,7 @@ abstract class JavaToSchemaTask @Inject constructor(
      * @property inputDir
      */
     @get:InputDirectory
+    @get:PathSensitive(PathSensitivity.RELATIVE)
     var inputDir: File
         get() = inputDirProperty.get().asFile
         set(value) = inputDirProperty.set(value)

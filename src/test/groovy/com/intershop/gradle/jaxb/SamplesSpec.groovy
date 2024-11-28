@@ -15,11 +15,13 @@
  */
 package com.intershop.gradle.jaxb
 
-
 import com.intershop.gradle.test.AbstractIntegrationGroovySpec
 
+import static org.gradle.testkit.runner.TaskOutcome.FROM_CACHE
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
+import static org.gradle.testkit.runner.TaskOutcome.SUCCESS as SUCCESS
 import static org.gradle.testkit.runner.TaskOutcome.UP_TO_DATE
+import static org.gradle.testkit.runner.TaskOutcome.UP_TO_DATE as UP_TO_DATE
 
 class SamplesSpec extends AbstractIntegrationGroovySpec {
 
@@ -1194,6 +1196,96 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
 
         then:
         result.output.contains('Reusing configuration cache.')
+    }
+
+    def 'JavaToSchema supports the gradle build cache'() {
+        given:
+        copyResources('samples/character-escape')
+
+        buildFile << """
+            plugins {
+                id 'java'
+                id 'com.intershop.gradle.jaxb'
+            }
+
+            jaxb {
+                javaGen {
+                    test {
+                        schema = file('simple.xsd')
+                    }
+                }
+            }
+
+            ${DEPENDENCIES}
+            repositories {
+                mavenCentral()
+            }
+        """.stripIndent()
+
+        when:
+        List<String> args = ["clean", "jaxbJavaGenTest", "--build-cache"]
+
+        getPreparedGradleRunner()
+            .withArguments(args)
+            .withGradleVersion(gradleVersion)
+            .build()
+
+        def result = getPreparedGradleRunner()
+            .withArguments(args)
+            .withGradleVersion(gradleVersion)
+            .build()
+
+
+        then:
+        result.task(':jaxbJavaGenTest').outcome == FROM_CACHE
+
+        where:
+        gradleVersion << supportedGradleVersions
+    }
+
+    def 'SchemaToJava supports the gradle build cache'() {
+        given:
+        copyResources('samples/j2s-create-marshal')
+
+        buildFile << """
+            plugins {
+                id 'java'
+                id 'com.intershop.gradle.jaxb'
+            }
+
+            jaxb {
+                schemaGen {
+                    test {
+                        inputDir = file('src')
+                        excludes = [ 'Main.java' ]
+                    }
+                }
+            }
+
+            repositories {
+                mavenCentral()
+            }
+        """.stripIndent()
+
+
+        when:
+        List<String> args = ["clean", "jaxb", "--build-cache"]
+
+        getPreparedGradleRunner()
+            .withArguments(args)
+            .withGradleVersion(gradleVersion)
+            .build()
+
+        def result = getPreparedGradleRunner()
+            .withArguments(args)
+            .withGradleVersion(gradleVersion)
+            .build()
+
+        then:
+        result.task(':jaxbSchemaGenTest').outcome == FROM_CACHE
+
+        where:
+        gradleVersion << supportedGradleVersions
     }
 
     private boolean fileExists(String path) {
