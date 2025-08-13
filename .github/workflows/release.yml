@@ -20,7 +20,7 @@ jobs:
       - name: Setup
         uses: IntershopCommunicationsAG/.github/actions/gradle-plugin-setup@v2
       - name: Release
-        uses: IntershopCommunicationsAG/.github/actions/gradle-plugin-release@v2
+        uses: IntershopCommunicationsAG/.github/actions/gradle-plugin-release@v3
         with:
           signing-file: ${{ secrets.SIGNINGFILE }}
           signing-key-id: ${{ secrets.SIGNINGKEYID }}
