@@ -1,4 +1,5 @@
 import org.asciidoctor.gradle.jvm.AsciidoctorTask
+import io.gitee.pkmer.enums.PublishingType
 
 /*
  * Copyright 2022 Intershop Communications AG.
@@ -43,6 +44,8 @@ plugins {
     id("com.gradle.plugin-publish") version "1.3.0"
 
     id("com.dorongold.task-tree") version "4.0.0"
+
+    id("io.gitee.pkmer.pkmerboot-central-publisher") version "1.1.1"
 }
 
 // release configuration
@@ -211,6 +214,8 @@ tasks {
     }
 }
 
+val stagingRepoDir = project.layout.buildDirectory.dir("stagingRepo")
+
 publishing {
     publications {
         create("intershopMvn", MavenPublication::class.java) {
@@ -224,7 +229,8 @@ publishing {
             artifact(File(buildDir, "docs/asciidoc/docbook/README.xml")) {
                 classifier = "docbook"
             }
-
+        }
+        withType<MavenPublication>().configureEach {
             pom {
                 name.set(project.name)
                 description.set(project.description)
@@ -257,14 +263,26 @@ publishing {
     }
     repositories {
         maven {
-            val releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
-            val snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
-            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
-            credentials {
-                username = sonatypeUsername
-                password = sonatypePassword
-            }
+            name = "LOCAL"
+            url = stagingRepoDir.get().asFile.toURI()
         }
+    }
+}
+
+pkmerBoot {
+    sonatypeMavenCentral{
+        // the same with publishing.repositories.maven.url in the configuration.
+        stagingRepository = stagingRepoDir
+
+        /**
+         * get username and password from
+         * <a href="https://central.sonatype.com/account"> central sonatype account</a>
+         */
+        username = sonatypeUsername
+        password = sonatypePassword
+
+        // Optional the publishingType default value is PublishingType.AUTOMATIC
+        publishingType = PublishingType.USER_MANAGED
     }
 }
 
