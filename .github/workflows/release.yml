@@ -18,9 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup
-        uses: IntershopCommunicationsAG/.github/actions/gradle-plugin-setup@v2
+        uses: IntershopCommunicationsAG/.github/actions/gradle-plugin-setup@v4
       - name: Release
-        uses: IntershopCommunicationsAG/.github/actions/gradle-plugin-release@v3
+        uses: IntershopCommunicationsAG/.github/actions/gradle-plugin-release@v4
         with:
           signing-file: ${{ secrets.SIGNINGFILE }}
           signing-key-id: ${{ secrets.SIGNINGKEYID }}
