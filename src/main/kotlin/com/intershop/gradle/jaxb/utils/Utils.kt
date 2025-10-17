@@ -26,31 +26,31 @@ import kotlin.reflect.KProperty
 /**
  * Provides 'set' functional extension for the Property object.
  */
-operator fun <T> Property<T>.setValue(receiver: Any?, property: KProperty<*>, value: T) = set(value)
+operator fun <T : Any> Property<T>.setValue(receiver: Any?, property: KProperty<*>, value: T) = set(value)
 /**
  * Provides 'get' functional extension for the Property object.
  */
-operator fun <T> Property<T>.getValue(receiver: Any?, property: KProperty<*>): T = get()
+operator fun <T : Any> Property<T>.getValue(receiver: Any?, property: KProperty<*>): T = get()
 
 /**
  * Provides 'set' functional extension for the SetProperty object.
  */
-operator fun <T> SetProperty<T>.setValue(receiver: Any?, property: KProperty<*>, value: Set<T>) = set(value)
+operator fun <T : Any> SetProperty<T>.setValue(receiver: Any?, property: KProperty<*>, value: Set<T>) = set(value)
 /**
  * Provides 'get' functional extension for the SetProperty object.
  */
-operator fun <T> SetProperty<T>.getValue(receiver: Any?, property: KProperty<*>): Set<T> = get()
+operator fun <T : Any> SetProperty<T>.getValue(receiver: Any?, property: KProperty<*>): Set<T> = get()
 
 /**
  * Provides 'set' functional extension for the ListProperty object.
  */
-operator fun <T> ListProperty<T>.setValue(receiver: Any?, property: KProperty<*>, value: List<T>) = set(value)
+operator fun <T : Any> ListProperty<T>.setValue(receiver: Any?, property: KProperty<*>, value: List<T>) = set(value)
 /**
  * Provides 'get' functional extension for the ListProperty object.
  */
-operator fun <T> ListProperty<T>.getValue(receiver: Any?, property: KProperty<*>): List<T> = get()
+operator fun <T : Any> ListProperty<T>.getValue(receiver: Any?, property: KProperty<*>): List<T> = get()
 
 /**
  * Provides functional extension for primitive objects.
  */
-inline fun <reified T> ObjectFactory.property(): Property<T> = property(T::class.java)
+inline fun <reified T : Any> ObjectFactory.property(): Property<T> = property(T::class.java)
