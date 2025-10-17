@@ -211,8 +211,6 @@ tasks {
 
 val stagingRepoDir = project.layout.buildDirectory.dir("stagingRepo")
 
-val stagingRepoDir = project.layout.buildDirectory.dir("stagingRepo")
-
 publishing {
     publications {
         create("intershopMvn", MavenPublication::class.java) {
