@@ -83,7 +83,7 @@ java {
     withJavadocJar()
     withSourcesJar()
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
@@ -97,7 +97,7 @@ testing {
         useSpock()
 
         dependencies {
-            implementation("com.intershop.gradle.test:test-gradle-plugin:6.0.0")
+            implementation("com.intershop.gradle.test:test-gradle-plugin:6.0.1")
             implementation(gradleTestKit())
         }
 
