@@ -1288,6 +1288,151 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
         gradleVersion << supportedGradleVersions
     }
 
+    def 'Test j2s-xmlAdapter - schemagen - change file name'() {
+        given:
+        copyResources('samples/j2s-xmlAdapter')
+
+        buildFile << """
+            plugins {
+                id 'java'
+                id 'com.intershop.gradle.jaxb'
+            }
+
+            jaxb {
+                schemaGen {
+                    test {
+                        javaFiles = fileTree(dir: 'src',
+                                             include: '**/**/*.java',
+                                             excludes: [ 'Main.java', 'shoppingCart/AdapterPurchaseListToHashMap.java'] )
+                        namespaceconfigs = [ '' : 'shoppingCart.xsd' ]
+                    }
+                }
+            }
+
+            repositories {
+                mavenCentral()
+            }
+        """.stripIndent()
+
+        when:
+        List<String> args = ['jaxb', '-s', '-d']
+
+        def result = getPreparedGradleRunner()
+                .withArguments(args)
+                .withGradleVersion(gradleVersion)
+                .build()
+
+        File schemaFile = new File(testProjectDir, 'build/generated/jaxb/schema/test/shoppingCart.xsd')
+
+        then:
+        result.task(':jaxbSchemaGenTest').outcome == SUCCESS
+
+        schemaFile.exists()
+        ! schemaFile.text.contains('name="main"')
+        schemaFile.text.contains('kitchenWorldBasket')
+        schemaFile.text.contains('purchaseList')
+        schemaFile.text.contains('KitchenWorldBasketType')
+        schemaFile.text.contains('PurchaseListType')
+
+        where:
+        gradleVersion << supportedGradleVersions
+    }
+
+    def 'Test j2s-namespaceconfig - schemagen with extended configuration'() {
+        given:
+        copyResources('samples/j2c-namespaceconfig')
+
+        buildFile << """
+            plugins {
+                id 'java'
+                id 'com.intershop.gradle.jaxb'
+            }
+
+            jaxb {
+                schemaGen {
+                    test {
+                        javaFiles = fileTree(dir: 'src',
+                                             include: '**/**/*.java')
+                                             
+                        namespaceconfigs = [ 'example' : 'example.xsd' ]
+                    }
+                }
+            }
+
+            repositories {
+                mavenCentral()
+            }
+        """.stripIndent()
+
+        when:
+        List<String> args = ['jaxb', '-s', '-d']
+
+        def result = getPreparedGradleRunner()
+                .withArguments(args)
+                .withGradleVersion(gradleVersion)
+                .build()
+
+        File schemaFile = new File(testProjectDir, 'build/generated/jaxb/schema/test/example.xsd')
+
+        then:
+        result.task(':jaxbSchemaGenTest').outcome == SUCCESS
+        schemaFile.exists()
+
+        where:
+        gradleVersion << supportedGradleVersions
+    }
+
+    def 'Test j2s-simple'() {
+        given:
+        copyResources('samples/j2s-xmlAdapter')
+
+        buildFile << """
+            plugins {
+                id 'java'
+                id 'com.intershop.gradle.jaxb'
+            }
+
+            jaxb {
+                schemaGen {
+                    test {
+                        javaFiles = fileTree(dir: 'src',
+                                             include: '**/**/*.java',
+                                             excludes: [ 'Main.java', 'shoppingCart/AdapterPurchaseListToHashMap.java'] )
+                    }
+                }
+            }
+            
+            sourceSets {
+                main {
+                    resources {
+                        srcDir(tasks.jaxbSchemaGenTest.outputs)
+                    }
+                }
+            }
+
+            repositories {
+                mavenCentral()
+            }
+        """.stripIndent()
+
+        when:
+        List<String> args = ['jaxb', '-s', '-d']
+
+        def result = getPreparedGradleRunner()
+                .withArguments(args)
+                .withGradleVersion(gradleVersion)
+                .build()
+
+        File schemaFile = new File(testProjectDir, 'build/generated/jaxb/schema/test/schema1.xsd')
+
+        then:
+        result.task(':jaxbSchemaGenTest').outcome == SUCCESS
+        schemaFile.exists()
+
+        where:
+        gradleVersion << supportedGradleVersions
+    }
+
     private boolean fileExists(String path) {
         File f = new File(testProjectDir, path)
         return f.isFile() && f.exists()
