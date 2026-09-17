@@ -23,7 +23,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
 
     private String DEPENDENCIES = """
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
                 implementation("org.glassfish.jaxb:jaxb-runtime:4.0.5")
             }
     """.stripIndent()
@@ -84,7 +84,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
 
             repositories {
@@ -173,7 +173,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
 
             repositories {
@@ -238,7 +238,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
 
             repositories {
@@ -290,7 +290,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
 
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
 
             repositories {
@@ -953,7 +953,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
 
             repositories {
@@ -1009,7 +1009,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
 
             repositories {
@@ -1068,7 +1068,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
 
             repositories {
@@ -1124,7 +1124,7 @@ class SamplesKtsSpec extends AbstractIntegrationKotlinSpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
 
             repositories {

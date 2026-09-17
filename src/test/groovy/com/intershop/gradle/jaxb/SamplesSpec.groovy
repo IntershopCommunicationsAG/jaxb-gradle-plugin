@@ -19,15 +19,13 @@ import com.intershop.gradle.test.AbstractIntegrationGroovySpec
 
 import static org.gradle.testkit.runner.TaskOutcome.FROM_CACHE
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
-import static org.gradle.testkit.runner.TaskOutcome.SUCCESS as SUCCESS
 import static org.gradle.testkit.runner.TaskOutcome.UP_TO_DATE
-import static org.gradle.testkit.runner.TaskOutcome.UP_TO_DATE as UP_TO_DATE
 
 class SamplesSpec extends AbstractIntegrationGroovySpec {
 
     private String DEPENDENCIES = """
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
                 implementation("org.glassfish.jaxb:jaxb-runtime:4.0.5")
             }
     """.stripIndent()
@@ -86,7 +84,7 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
 
             repositories {
@@ -175,7 +173,7 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
 
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
             
             repositories {
@@ -240,7 +238,7 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
 
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
             
             repositories {
@@ -292,7 +290,7 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
 
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
             
             repositories {
@@ -955,7 +953,7 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
 
             repositories {
@@ -1011,7 +1009,7 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
 
             repositories {
@@ -1070,7 +1068,7 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
 
             repositories {
@@ -1126,7 +1124,7 @@ class SamplesSpec extends AbstractIntegrationGroovySpec {
             ${TASK_JAVA_COMPILE_CONFIGURATION}
             
             dependencies {
-                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
+                implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
             }
 
             repositories {
