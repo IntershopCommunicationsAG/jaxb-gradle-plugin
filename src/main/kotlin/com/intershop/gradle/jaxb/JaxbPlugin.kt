@@ -25,7 +25,9 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.artifacts.DependencySet
+import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.plugins.JavaBasePlugin
+import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.provider.Provider
 
@@ -115,6 +117,8 @@ open class JaxbPlugin: Plugin<Project> {
 
                 provideAntTaskClassName(schemaToJava.antTaskClassNameProvider)
 
+                wireClasspaths(project, jaxbClasspathfiles, addjaxbClasspathfiles, classpathfiles)
+
                 project.afterEvaluate {
                     project.plugins.withType(JavaBasePlugin::class.java) {
                         project.extensions.getByType(JavaPluginExtension::class.java).sourceSets.matching {
@@ -153,9 +157,34 @@ open class JaxbPlugin: Plugin<Project> {
                 provideNamespaceconfigs(javaToSchema.namespaceconfigsProvider)
                 provideEpisode(javaToSchema.episodeProvider)
                 provideAntTaskClassName(javaToSchema.antTaskClassNameProvider)
+                wireClasspaths(project, jaxbClasspathfiles, addjaxbClasspathfiles, classpathfiles)
                 usesService(jaxbCodeGenRegistryProvider)
                 jaxbTask.dependsOn(this)
             }
+        }
+    }
+
+    /*
+     * Wires the classpath inputs of a code generation task at configuration time. The tasks must not
+     * resolve the configurations themselves, because that would happen during input snapshotting in the
+     * execution phase, where accessing Project is deprecated in Gradle 9 and fails in Gradle 10.
+     *
+     * @param project                   current project
+     * @param jaxbClasspathfiles        classpath of the jaxb configuration
+     * @param addjaxbClasspathfiles     classpath of the additional jaxb configuration
+     * @param classpathfiles            compile classpath of the project
+     */
+    private fun wireClasspaths(project: Project,
+                               jaxbClasspathfiles: ConfigurableFileCollection,
+                               addjaxbClasspathfiles: ConfigurableFileCollection,
+                               classpathfiles: ConfigurableFileCollection) {
+        jaxbClasspathfiles.from(project.configurations.named(JaxbExtension.JAXB_CONFIGURATION_NAME))
+        addjaxbClasspathfiles.from(project.configurations.named(JaxbExtension.ADD_JAXB_CONFIGURATION_NAME))
+
+        // the compile classpath only exists if the java plugin is applied - it may be applied after this plugin
+        project.plugins.withType(JavaPlugin::class.java) {
+            classpathfiles.from(
+                    project.configurations.named(JavaPlugin.COMPILE_CLASSPATH_CONFIGURATION_NAME))
         }
     }
 
