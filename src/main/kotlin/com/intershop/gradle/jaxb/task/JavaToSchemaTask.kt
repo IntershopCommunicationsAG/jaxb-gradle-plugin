@@ -18,14 +18,12 @@ package com.intershop.gradle.jaxb.task
 
 import com.intershop.gradle.jaxb.utils.getValue
 import com.intershop.gradle.jaxb.utils.setValue
-import com.intershop.gradle.jaxb.extension.JaxbExtension
 import com.intershop.gradle.jaxb.extension.JaxbExtension.Companion.DEFAULT_SCHEMAGEN_TASK_CLASS_NAME
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.Directory
 import org.gradle.api.file.DirectoryProperty
-import org.gradle.api.file.FileCollection
 import org.gradle.api.model.ObjectFactory
-import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Classpath
@@ -169,38 +167,34 @@ abstract class JavaToSchemaTask @Inject constructor(
     /**
      * Classpath files for Java code generation (see Jaxb configuration (JAXB_CONFIGURATION_NAME)).
      *
+     * The plugin wires this at configuration time. The task must not resolve the configuration itself,
+     * because that would happen during input snapshotting in the execution phase, where accessing
+     * {@code Task.project} is deprecated in Gradle 9 and fails in Gradle 10.
+     *
      * @property jaxbClasspathfiles
      */
     @get:Classpath
-    val jaxbClasspathfiles : FileCollection by lazy {
-        val returnFiles = project.files()
-        returnFiles.from(project.configurations.findByName(JaxbExtension.JAXB_CONFIGURATION_NAME))
-        returnFiles
-    }
+    val jaxbClasspathfiles: ConfigurableFileCollection = objectFactory.fileCollection()
 
     /**
      * Additional classpath files for Java code generation (see Jaxb configuration (ADD_JAXB_CONFIGURATION_NAME)).
      *
+     * The plugin wires this at configuration time, see {@link #jaxbClasspathfiles}.
+     *
      * @property addjaxbClasspathfiles
      */
     @get:Classpath
-    val addjaxbClasspathfiles : FileCollection by lazy {
-        val returnFiles = project.files()
-        returnFiles.from(project.configurations.findByName(JaxbExtension.ADD_JAXB_CONFIGURATION_NAME))
-        returnFiles
-    }
+    val addjaxbClasspathfiles: ConfigurableFileCollection = objectFactory.fileCollection()
 
     /**
      * Classpath files for Java code generation.
      *
+     * The plugin wires this at configuration time, see {@link #jaxbClasspathfiles}.
+     *
      * @property classpathfiles
      */
     @get:CompileClasspath
-    val classpathfiles : FileCollection by lazy {
-        val returnFiles = project.files()
-        returnFiles.from(project.configurations.findByName(JavaPlugin.COMPILE_CLASSPATH_CONFIGURATION_NAME))
-        returnFiles
-    }
+    val classpathfiles: ConfigurableFileCollection = objectFactory.fileCollection()
 
     /**
      * This generates a schema files from java
@@ -218,8 +212,8 @@ abstract class JavaToSchemaTask @Inject constructor(
             argMap["episode"] = episode
         }
 
-        if(project.logger.isInfoEnabled) {
-            project.logger.info("Arguments for schema: {}", argMap)
+        if(logger.isInfoEnabled) {
+            logger.info("Arguments for schema: {}", argMap)
         }
 
         val classpath = classpathfiles + jaxbClasspathfiles + addjaxbClasspathfiles
